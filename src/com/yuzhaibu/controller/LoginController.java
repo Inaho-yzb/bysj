@@ -24,8 +24,8 @@ public class LoginController {
 			session.setAttribute("username", username);
 			return "user/profile";
 		}else{
-			request.setAttribute("loginmessage", "ÓÃ»§ÃûÃÜÂë´íÎó");
-			return "user/login";
+			request.setAttribute("loginmessage", "ç”¨æˆ·åå¯†ç é”™è¯¯");
+			return "login";
 		}
 	}
 	
