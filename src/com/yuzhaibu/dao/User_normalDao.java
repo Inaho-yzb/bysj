@@ -11,4 +11,6 @@ public interface User_normalDao {
 	User_normal findByUsername(String username);
 	
 	User_normal findByUsernameAndPwd(String username,String pwd);
+	
+	void updateUser(User_normal usernormal);
 }

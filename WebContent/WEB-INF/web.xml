@@ -37,7 +37,7 @@
 		</init-param>
 	</filter>
 	<filter-mapping>
-		<filter-name>enccodingFilter</filter-name>
+		<filter-name>encodingFilter</filter-name>
 		<url-pattern>*.do</url-pattern>
 	</filter-mapping>
 	

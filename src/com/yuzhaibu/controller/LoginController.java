@@ -10,19 +10,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.yuzhaibu.service.User_normalService;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/login")
 public class LoginController {
 	
 	@Resource
 	private User_normalService user_normalService;
 	
-	@RequestMapping("/login")
+	@RequestMapping("/toLogin")
+	public String toLogin(){
+		return "login";
+	}
+	
+	
+	
+	@RequestMapping("/checkLogin")
 	public String login(String username,String pwd,HttpSession session,HttpServletRequest request){
 		boolean status = user_normalService.findUserByUsernameAndPwd(username, pwd);
 		
 		if(status){
 			session.setAttribute("username", username);
-			return "user/profile";
+			return "redirect:../user/toProfile.do";
 		}else{
 			request.setAttribute("loginmessage", "用户名密码错误");
 			return "login";

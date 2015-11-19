@@ -15,6 +15,7 @@ public class User_normalServiceImpl implements User_normalService {
 	private User_normalDao user_normalDao;
 	
 	
+	
 	@Override
 	public boolean findUserByUsernameAndPwd(String username,String pwd) {
 		User_normal user = user_normalDao.findByUsernameAndPwd(username, pwd); 
@@ -24,6 +25,21 @@ public class User_normalServiceImpl implements User_normalService {
 		}
 		
 		return false;
+	}
+
+
+	@Override
+	public User_normal findUserByUsername(String username) {		
+		User_normal user = user_normalDao.findByUsername(username);
+		
+		return user;
+	}
+
+
+	@Override
+	public void updateUser(User_normal usernormal) {
+		user_normalDao.updateUser(usernormal);
+		
 	}
 	
 }

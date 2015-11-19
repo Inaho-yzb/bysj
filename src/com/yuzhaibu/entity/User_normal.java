@@ -2,7 +2,11 @@ package com.yuzhaibu.entity;
 
 import java.sql.Timestamp;
 
+import org.springframework.stereotype.Repository;
+
+@Repository
 public class User_normal {
+	
 	
 	private int id;
 	private String username;
@@ -17,6 +21,8 @@ public class User_normal {
 	private String cardimg;
 	private int levexp;
 	private Timestamp creatime;
+	private String headimg;
+	
 	public int getId() {
 		return id;
 	}
@@ -94,6 +100,12 @@ public class User_normal {
 	}
 	public void setCreatime(Timestamp creatime) {
 		this.creatime = creatime;
+	}
+	public String getHeadimg() {
+		return headimg;
+	}
+	public void setHeadimg(String headimg) {
+		this.headimg = headimg;
 	}
 	
 }

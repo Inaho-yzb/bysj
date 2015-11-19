@@ -16,10 +16,8 @@ public class DaoTest {
 		ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
 		User_normalDao dao = ctx.getBean(User_normalDao.class);
 		
-		List<User_normal> list = dao.findAll();
-		for(User_normal user:list){
-			System.out.println(user.getNickname());
-		}
+		User_normal user = dao.findByUsername("wangkewei");
+		System.out.println(user.toString());
 	}
 
 }

@@ -12,7 +12,11 @@
     	select * from user_normal where username=#{username}
     </select>
     
-    <select id="findByUsernameAndPwd" parameterType="String">
-    	select * from user_normal where username=#{username},pwd=#{pwd}
+    <select id="findByUsernameAndPwd" parameterType="String" resultType="com.yuzhaibu.entity.User_normal">
+    	select * from user_normal where username=#{0} and pwd=#{1}
     </select>  
+    
+    <update id="updateUser" parameterType="com.yuzhaibu.entity.User_normal">
+    	update user_normal set nickname=#{nickname},mobile=#{mobile},qq=#{qq},school=#{school},userclass=#{userclass} where username=#{username}
+    </update>
  </mapper>  

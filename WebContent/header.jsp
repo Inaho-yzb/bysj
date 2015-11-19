@@ -1,0 +1,68 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE>
+<html>
+<head lang="zh-CN">
+<title>个人主页</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="../js/jquery.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<link href="../css/bootstrap.min.css" rel="stylesheet" media="screen">
+<script src="../js/javascript.js"></script>
+
+<link href="../css/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+	<div class="header">
+		<div class="navbar-custop">
+			<div class="container">
+				<nav class="navbar navbar-default navbar-custom">
+					<ul class="nav navbar-nav">
+						<li><a href="login.jsp">登录</a></li>
+						<li><a href="#">免费注册</a></li>
+					</ul>
+
+					<ul class="nav navbar-nav" style="float: right">
+						<li><a href="#">我的物品</a></li>
+						<li><a href="#"><span class="glyphicon glyphicon-heart">
+							</span> 收藏夹</a></li>
+						<li><a href="#">联系客服</a></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+
+		<div class="navbar-custop2">
+			<div class="container">
+
+
+				<nav class="navbar navbar-default navbar-custom navbar-custom2">
+					<ul class="nav navbar-nav">
+						<li><a href="index.html">首页</a></li>
+						<li><a href="1.html">随便逛逛</a></li>
+						<li><a href="2.html">低价商品</a></li>
+						<li><a href="3.html">热门物品</a></li>
+					</ul>
+
+
+					<form id="indexsearch" class="navbar-form navbar-right">
+						<div class="form-group">
+							<input type="text" class="form-control" placeholder="搜跳蚤">
+						</div>
+						<button type="submit" class="btn btn-default">
+							<span class="glyphicon glyphicon-search searchbtn"> </span>
+						</button>
+					</form>
+
+				</nav>
+
+
+
+			</div>
+		</div>
+	</div>
