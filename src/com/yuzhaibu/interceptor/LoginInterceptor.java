@@ -23,6 +23,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 
 	}
 
+	//拦截跳转到登录界面
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object arg2) throws Exception {
 		HttpSession session = request.getSession();

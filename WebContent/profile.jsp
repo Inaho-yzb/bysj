@@ -103,7 +103,7 @@
 													学院：<input type="text" name="school" value="${usernormal.school}" />
 												</div>
 												<div class="modal-body-input">
-													班级：<input type="text" name="class" value="${usernormal.userclass}" />
+													班级：<input type="text" name="userclass" value="${usernormal.userclass}" />
 												</div>
 												
 												
@@ -127,72 +127,53 @@
 
 					</div>
 					<div class="tab-pane fade" id="items">
-
+					
+					<c:forEach items="${items}" var="item">
 						<div class="panel panel-default put-items">
 							<div class="panel-body">
 								<div class="col-md-2">
-									<a href=""><img class="itemlist-pic" src="images/mob3.jpg"></a>
+									<a href=""><img class="itemlist-pic" src="${item.itemmainimg}"></a>
 									<div>
-										<a href="">iphone5s</a>
+										<a href="">${item.itemname}</a>
 									</div>
-									<div>出售中</div>
+									<div>
+										<c:choose>
+											<c:when test="${item.sellstatus==0 }">出售中</c:when>
+											<c:when test="${item.sellstatus==1 }">被预订</c:when>
+											<c:when test="${item.sellstatus==2 }">已售出</c:when>
+										</c:choose>
+									</div>
 								</div>
 								<div class="col-md-8">
-									<div class="col-md-4">详情介绍详情介绍详情介绍详情介绍详情介绍详情介绍</div>
+									<div class="col-md-4">${item.discreption}</div>
 									<div class="col-md-4">
-										<p>原价：￥5000</p>
-										<p>出售价：￥500</p>
-										<p>浏览次数：1000</p>
+										<p>原价：￥${item.originprice }</p>
+										<p>出售价：￥${item.sellprice}</p>
+										<p>浏览次数：${item.viewtime}</p>
 										<p>发布时间：</p>
-										<p>2015-11-11 19:20:30</p>
+										<p>${item.itemcreatime}</p>
 									</div>
 									<div class="col-md-4">
-										<p>交易地点：台州学院</p>
-										<p>卖家：王科威</p>
-										<p>认证状态:已认证</p>
+										<p>交易地点：${item.tradeposition}</p>
+										<p>卖家：${usernormal.nickname}</p>
+										<p>认证状态:<c:choose>
+								<c:when test="${usernormal.authen==0 }">未认证</c:when>
+								<c:when test="${usernormal.authen==1 }">审核中</c:when>
+								<c:when test="${usernormal.authen==2 }">已认证</c:when>
+							</c:choose></p>
 										<p>留言：0</p>
 										<p>收藏：0</p>
 									</div>
 								</div>
 								<div class="col-md-2">
-									<a class="btn btn-primary">修改</a> <a
+									<a href="" class="btn btn-primary">修改</a> <a href=""
 										class="btn btn-danger btndelete">删除</a>
 								</div>
 							</div>
 						</div>
+						</c:forEach>
 
-						<div class="panel panel-default put-items">
-							<div class="panel-body">
-								<div class="col-md-2">
-									<a href=""><img class="itemlist-pic" src="images/mob3.jpg"></a>
-									<div class="">
-										<a href="">iphone5s</a>
-									</div>
-									<div>已出售</div>
-								</div>
-								<div class="col-md-8">
-									<div class="col-md-4">详情介绍详情介绍详情介绍详情介绍详情介绍详情介绍</div>
-									<div class="col-md-4">
-										<p>原价：￥5000</p>
-										<p>出售价：￥500</p>
-										<p>浏览次数：1000</p>
-										<p>发布时间：</p>
-										<p>2015-11-11 19:20:30</p>
-									</div>
-									<div class="col-md-4">
-										<p>交易地点：台州学院</p>
-										<p>卖家：王科威</p>
-										<p>认证状态:已认证</p>
-										<p>留言：0</p>
-										<p>收藏：0</p>
-									</div>
-								</div>
-								<div class="col-md-2">
-									<a class="btn btn-primary">修改</a> <a
-										class="btn btn-danger btndelete">删除</a>
-								</div>
-							</div>
-						</div>
+						
 
 						<div class="put-items">
 							<ul class="pagination">
@@ -207,29 +188,44 @@
 						</div>
 
 					</div>
+					
 					<div class="tab-pane fade" id="favitems">
+						
+						<c:forEach items="${favs}" var="fav">
 						<div class="panel panel-default put-items">
 							<div class="panel-body">
 								<div class="col-md-2">
-									<a href=""><img class="itemlist-pic" src="images/mob3.jpg"></a>
+									<a href=""><img class="itemlist-pic" src="${fav.item.itemmainimg}"></a>
 									<div class="">
-										<a href="">iphone5s</a>
+										<a href="">${fav.item.itemname}</a>
 									</div>
-									<div>出售中</div>
+									<div>
+										<c:choose>
+											<c:when test="${fav.item.sellstatus==0 }">出售中</c:when>
+											<c:when test="${fav.item.sellstatus==1 }">被预订</c:when>
+											<c:when test="${fav.item.sellstatus==2 }">已售出</c:when>
+										</c:choose>
+									</div>
 								</div>
 								<div class="col-md-8">
-									<div class="col-md-4">详情介绍详情介绍详情介绍详情介绍详情介绍详情介绍</div>
+									<div class="col-md-4">${fav.item.discreption}</div>
 									<div class="col-md-4">
-										<p>原价：￥5000</p>
-										<p>出售价：￥500</p>
-										<p>浏览次数：1000</p>
+										<p>原价：￥${fav.item.originprice}</p>
+										<p>出售价：￥${fav.item.sellprice}</p>
+										<p>浏览次数：${fav.item.viewtime}</p>
 										<p>发布时间：</p>
-										<p>2015-11-11 19:20:30</p>
+										<p>${fav.item.itemcreatime }</p>
 									</div>
 									<div class="col-md-4">
-										<p>交易地点：台州学院</p>
-										<p>卖家：王科威</p>
-										<p>认证状态:已认证</p>
+										<p>交易地点：${fav.item.tradeposition}</p>
+										<p>卖家：${fav.sellernickname }</p>
+										<p>认证状态:
+											<c:choose>
+								<c:when test="${fav.sellerauthen==0 }">未认证</c:when>
+								<c:when test="${fav.sellerauthen==1 }">审核中</c:when>
+								<c:when test="${fav.sellerauthen==2 }">已认证</c:when>
+							</c:choose>
+										</p>
 										<p>留言：0</p>
 										<p>收藏：0</p>
 									</div>
@@ -240,6 +236,7 @@
 
 							</div>
 						</div>
+						</c:forEach>
 
 						<div class="put-items">
 							<ul class="pagination">
@@ -254,15 +251,17 @@
 						</div>
 					</div>
 					<div class="tab-pane fade" id="message">
+					
+						<c:forEach items="${messages}" var="message">
 						<div class="panel panel-default profile-message">
 							<div class="panel-body">
 								<div class="col-md-2">
-									商品：iPhone5s <img class="itemlist-pic" src="images/mob3.jpg">
+									商品：${message.mes_itemname } <img class="itemlist-pic" src="${message.mes_itemmainimg}">
 								</div>
 
 								<div class="col-md-8">
-									<h4>username:</h4>
-									<p>dsfadfasdfasdfasdfadf</p>
+									<h4>${message.mes_levusername}:</h4>
+									<p>${message.mes_content}</p>
 								</div>
 								<div class="col-md-2 profile-message-opr">
 									<div class="badge bkcl-red">未读</div>
@@ -271,42 +270,8 @@
 								</div>
 							</div>
 						</div>
+						</c:forEach>
 
-						<div class="panel panel-default profile-message">
-							<div class="panel-body">
-								<div class="col-md-2">
-									商品：iPhone5s <img class="itemlist-pic" src="images/mob3.jpg">
-								</div>
-
-								<div class="col-md-8">
-									<h4>username:</h4>
-									<p>dsfadfasdfasdfasdfadf</p>
-								</div>
-								<div class="col-md-2 profile-message-opr">
-									<div class="badge bkcl-red">未读</div>
-									<button type="button"
-										class="btn btn-info profile-message-checkbtn">查看</button>
-								</div>
-							</div>
-						</div>
-
-						<div class="panel panel-default profile-message">
-							<div class="panel-body">
-								<div class="col-md-2">
-									商品：iPhone5s <img class="itemlist-pic" src="images/mob3.jpg">
-								</div>
-
-								<div class="col-md-8">
-									<h4>username:</h4>
-									<p>dsfadfasdfasdfasdfadf</p>
-								</div>
-								<div class="col-md-2 profile-message-opr">
-									<div class="badge bkcl-red">未读</div>
-									<button type="button"
-										class="btn btn-info profile-message-checkbtn">查看</button>
-								</div>
-							</div>
-						</div>
 
 						<div class="profile-message">
 							<ul class="pagination">
@@ -323,10 +288,18 @@
 					</div>
 					<div class="tab-pane fade" id="authen">
 						<div class="profile-authen">
-							<!--  <div>您已经认证！</div> -->
-
+							<c:choose>
+							<c:when test="${usernormal.authen==2 }">
+								<div>您已经认证！</div>
+							</c:when>
+							<c:when test="${usernormal.authen==0 }">
 							<a href="" class="btn btn-primary btn-lg">身份证认证</a> <a href=""
 								class="btn btn-primary btn-lg">学生证认证</a>
+							</c:when>
+							<c:otherwise>
+								<div>审核中</div>
+							</c:otherwise>
+							</c:choose>
 						</div>
 					</div>
 				</div>

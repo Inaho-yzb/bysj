@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 public class User_normal {
 	
 	
-	private int id;
+	private int usernormal_id;
 	private String username;
 	private String pwd;
 	private String nickname;
@@ -20,15 +20,10 @@ public class User_normal {
 	private String cardid;
 	private String cardimg;
 	private int levexp;
-	private Timestamp creatime;
+	private Timestamp usernormalcreatime;
 	private String headimg;
 	
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
+	
 	public String getUsername() {
 		return username;
 	}
@@ -95,17 +90,24 @@ public class User_normal {
 	public void setLevexp(int levexp) {
 		this.levexp = levexp;
 	}
-	public Timestamp getCreatime() {
-		return creatime;
-	}
-	public void setCreatime(Timestamp creatime) {
-		this.creatime = creatime;
-	}
+	
 	public String getHeadimg() {
 		return headimg;
 	}
 	public void setHeadimg(String headimg) {
 		this.headimg = headimg;
+	}
+	public Timestamp getUsernormalcreatime() {
+		return usernormalcreatime;
+	}
+	public void setUsernormalcreatime(Timestamp usernormalcreatime) {
+		this.usernormalcreatime = usernormalcreatime;
+	}
+	public int getUsernormal_id() {
+		return usernormal_id;
+	}
+	public void setUsernormal_id(int usernormal_id) {
+		this.usernormal_id = usernormal_id;
 	}
 	
 }

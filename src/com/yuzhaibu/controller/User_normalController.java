@@ -1,18 +1,22 @@
 package com.yuzhaibu.controller;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.yuzhaibu.entity.Fav;
+import com.yuzhaibu.entity.Item;
+import com.yuzhaibu.entity.Message;
 import com.yuzhaibu.entity.User_normal;
+import com.yuzhaibu.service.ItemService;
+import com.yuzhaibu.service.MessageService;
 import com.yuzhaibu.service.User_normalService;
 
 @Controller
@@ -28,32 +32,48 @@ public class User_normalController implements Serializable {
 	private User_normalService user_normalService;
 	
 	@Resource
+	private MessageService messageService;
+	
+	@Resource
 	private User_normal usernormal;
+	
+	@Resource
+	private ItemService itemService;
 	
 	@RequestMapping("/toProfile")
 	public String toProfile(HttpSession session,ModelMap model){
 		String username = (String) session.getAttribute("username");
-		System.out.println(username);
+		
+		
 		usernormal = user_normalService.findUserByUsername(username);
+		List<Item> items = itemService.findItemByUserId(usernormal.getUsernormal_id());
+		List<Fav> favs = itemService.findFavItemByUserId(usernormal.getUsernormal_id());
+		List<Message> messages = messageService.findAllNotReadMessageByUserId(usernormal.getUsernormal_id());
+		
 		int exp = (usernormal.getLevexp()/1000+1)*1000;
+		
 		model.addAttribute("usernormal",usernormal);
-		model.put("nextexp", exp);						
+		model.put("nextexp", exp);
+		model.addAttribute("items",items);
+		model.addAttribute("favs",favs);
+		model.addAttribute("messages",messages);
+		
 		return "profile";
 	}
 	
 	@RequestMapping("/editUsernormalProfile")
-	public String editUernormalProfile(HttpServletRequest request,HttpSession session){
+	public String editUernormalProfile(User_normal user,HttpServletRequest request,HttpSession session){
 		
-		usernormal.setUsername((String) session.getAttribute("username"));
-		usernormal.setNickname((String) request.getParameter("nickname"));
-		usernormal.setMobile((String)request.getParameter("mobile"));
-		usernormal.setQq((String) request.getParameter("qq"));
-		usernormal.setSchool((String) request.getParameter("school"));
-		usernormal.setUserclass((String) request.getParameter("class"));
+		user.setUsername((String) session.getAttribute("username"));
+//		usernormal.setNickname((String) request.getParameter("nickname"));
+//		usernormal.setMobile((String)request.getParameter("mobile"));
+//		usernormal.setQq((String) request.getParameter("qq"));
+//		usernormal.setSchool((String) request.getParameter("school"));
+//		usernormal.setUserclass((String) request.getParameter("class"));
 		
-		System.out.println(usernormal.getSchool());
+		
 				
-		user_normalService.updateUser(usernormal);
+		user_normalService.updateUser(user);
 		
 		return "redirect:toProfile.do";
 	}
