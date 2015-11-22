@@ -71,5 +71,12 @@ public class User_normalController implements Serializable {
 		
 		return "redirect:toProfile.do";
 	}
+	
+	@RequestMapping("/quit")
+	public String quit(HttpSession session){
+		session.setAttribute("username", null);
+		
+		return "redirect:../index.html";
+	}
 
 }

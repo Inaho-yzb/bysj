@@ -37,6 +37,10 @@ h2 {
 	color: #09F;
 }
 
+.color-red{
+	color:red;
+}
+
 .green { color: #3C3; }
 .gray { color: #999; }
 
@@ -161,7 +165,7 @@ h2 {
 .templatemo-create-account {
 	background-color: #fff;
 	border: none;
-	max-width: 500px;	
+	max-width: 580px;	
 }
 .templatemo-create-account label { font-weight: 400; }
 .templatemo-create-account input[type='checkbox'] {

@@ -56,4 +56,16 @@
 		select itemid,itemmainimg,itemname FROM item where sellerid = #{userid} and sellstatus=0 order by viewtime desc limit 0,4;
 	</select>
 	
+	<select id="findItemListFatherItemByFatherId" parameterType="int" resultType="com.yuzhaibu.entity.Item">
+		select * from item i,itemclass it where it.itemclass_fatherid=#{fid} and i.itemclassid=it.itemclass_id and sellstatus!=2 order by viewtime limit 0,8;
+	</select>
+	
+	<select id="findFavCountByItemId" parameterType="int" resultType="int">
+		SELECT COUNT(*) from fav where item_id=#{itemid}
+	</select>
+	
+	<select id="findItemListByClassId" parameterType="int" resultType="com.yuzhaibu.entity.Item">
+		select * from item where itemclassid=#{id} and sellstatus!=2 order by viewtime limit 0,8;
+	</select>
+	
 </mapper>

@@ -16,12 +16,12 @@
 						<c:forEach items="${fatherClass}" var="fc">
 							<li class="navlist-li">
 								<div class="navlist-li-div">
-									<img src="images/${fc.itemclass_id}.png"><a href="#">${fc.itemclass_name }</a>
+									<img src="images/${fc.itemclass_id}.png"><a href="itemlist.html?fid=${fc.itemclass_id}">${fc.itemclass_name }</a>
 									<span class="navlist-li-div-span"> <c:forEach
 											items="${childClass}" var="cc">
 											<c:if test="${cc.key==fc.itemclass_id}">
 												<c:forEach items="${cc.value}" var="ccn">
-													<a href="#">${ccn.itemclass_name}</a>
+													<a href="itemlist.html?id=${ccn.itemclass_id }">${ccn.itemclass_name}</a>
 												</c:forEach>
 											</c:if>
 										</c:forEach>
@@ -94,7 +94,7 @@
 			<div class="container">
 				<div class="floorhd-1">
 					<h4>
-						<a href="">${fcl.itemclass_name}</a>
+						<a href="itemlist.html?fid=${fcl.itemclass_id}">${fcl.itemclass_name}</a>
 					</h4>
 				</div>
 				<c:forEach items="${itemList}" var="iteml">

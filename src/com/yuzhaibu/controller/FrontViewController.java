@@ -83,5 +83,42 @@ public class FrontViewController {
 		
 		return "item";
 	}
+	
+	@RequestMapping("itemlist")
+	public String toItemList(HttpServletRequest request,HttpSession session,ModelMap model){
+		String username = (String) session.getAttribute("username");
+		if(username!=null){
+			model.addAttribute("username",username);
+		}
+		
+		if(request.getParameter("fid")!=null&&request.getParameter("id")==null){
+			int fid = Integer.valueOf(request.getParameter("fid"));
+			
+			List<Item> itemlist = itemService.findItemListFatherItemByFatherId(fid);
+			List<ItemClass> itemChildClassList = itemClassService.findChildItemClassListByFatherId(fid);
+			ItemClass fatherItemClass = itemClassService.findItemClassById(fid);						
+			
+			model.addAttribute("itemlist",itemlist);
+			model.addAttribute("itemChildClassList",itemChildClassList);
+			model.addAttribute("navFatherItemClass",fatherItemClass);
+			
+		}else if(request.getParameter("fid")==null&&request.getParameter("id")!=null){
+			int id = Integer.valueOf(request.getParameter("id"));
+			
+			ItemClass childItemClass = itemClassService.findItemClassById(id);
+			int fid = childItemClass.getItemclass_fatherid();
+			ItemClass fatherItemClass = itemClassService.findItemClassById(fid);
+			
+			List<ItemClass> itemChildClassList = itemClassService.findChildItemClassListByFatherId(fid);
+			List<Item> itemList = itemService.findItemListByClassId(id);
+			
+			model.addAttribute("itemChildClassList",itemChildClassList);
+			model.addAttribute("navChildItemClass",childItemClass);
+			model.addAttribute("navFatherItemClass",fatherItemClass);
+			model.addAttribute("itemlist",itemList);
+		}
+		
+		return "itemlist";
+	}
 
 }

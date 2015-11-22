@@ -30,6 +30,7 @@
 						</c:when>
 						<c:otherwise>
 							<li><a href="${pageContext.request.contextPath}/user/toProfile.do">${username }</a></li>
+							<li><a href="${pageContext.request.contextPath}/user/quit.do">登出</a></li>
 						</c:otherwise>
 						</c:choose>
 						

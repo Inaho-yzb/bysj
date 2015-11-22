@@ -20,5 +20,10 @@ public interface User_normalService {
 	 **/
 	void updateUser(User_normal usernormal);
 	
+	/**
+	 * 通过物品id查找物品发布者信息
+	 * @param itemid
+	 * @return
+	 */
 	User_normal findUserByItemid(int itemid);
 }

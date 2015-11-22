@@ -15,6 +15,12 @@
 		select i1.itemclass_id,i1.itemclass_name,i1.itemclass_fatherid,i2.itemclass_name as fatherclass from itemclass i1,itemclass i2 where i2.itemclass_id=i1.itemclass_fatherid and i1.itemclass_id=#{classid};
 	</select>
 	
+	<select id="findChildItemClassListByFatherId" parameterType="int" resultType="com.yuzhaibu.entity.ItemClass">
+		SELECT * from itemclass where itemclass_fatherid = #{fid};
+	</select>
 	
+	<select id="findItemClassById" parameterType="int" resultType="com.yuzhaibu.entity.ItemClass">
+		select * from itemclass where itemclass_id = #{id};
+	</select>
 	
 </mapper>

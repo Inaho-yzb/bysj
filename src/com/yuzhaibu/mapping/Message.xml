@@ -12,4 +12,8 @@
 	<select id="findInitItemMessageByItemId" parameterType="int" resultType="com.yuzhaibu.entity.Message">
 		select mes_id,mes_itemid,itemname as mes_itemname,itemmainimg as mes_itemmmainimg,mes_levuserid,u.username as mes_levusername,u.headimg as mes_levuserheadpic,mes_content FROM item i,message m,user_normal u WHERE m.mes_itemid=#{itemid} and i.itemid =#{itemid} and u.usernormal_id=m.mes_levuserid limit 0,5;
 	</select>
+	
+	<select id="findMesCountByItemId" parameterType="int" resultType="int">
+		SELECT COUNT(*) from message where mes_itemid= #{itemid};
+	</select>
 </mapper>

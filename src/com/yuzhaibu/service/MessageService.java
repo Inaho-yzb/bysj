@@ -13,6 +13,11 @@ public interface MessageService {
 	 */
 	List<Message> findAllNotReadMessageByUserId(int userid);
 	
+	/**
+	 * 物品详情页留言
+	 * @param itemid
+	 * @return
+	 */
 	List<Message> findInitItemMessageByItemId(int itemid);
 	
 }

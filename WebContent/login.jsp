@@ -12,7 +12,10 @@
 	<link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css">
 	<link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css">
 	<link href="../css/bootstrap-theme.min.css" rel="stylesheet" type="text/css">
-	<link href="../css/templatemo_style.css" rel="stylesheet" type="text/css">	
+	<link href="../css/templatemo_style.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="../js/jquery.js"></script>
+	<script type="text/javascript" src="../js/jquery.cookie.js"></script>
+	<script type="text/javascript" src="../js/login.js"></script>	
 </head>
 <body class="templatemo-bg-gray">
 	<div class="container">
@@ -42,7 +45,7 @@
 		          <div class="col-md-12">
 	             	<div class="checkbox control-wrapper">
 	                	<label>
-	                  		<input type="checkbox"> 记住用户名
+	                  		<input type="checkbox" name="check" id="check"> 记住用户名
                 		</label>
 	              	</div>
 		          </div>
@@ -58,12 +61,12 @@
 		        <hr>
 		        <div class="form-group">
 		        	<div class="col-md-12">
-		        		 <a href="index.html">返回主页</a>       		
+		        		 <a href="${pageContext.request.contextPath}/index.html">返回主页</a>       		
 		        	</div>
 		        </div>
 		      </form>
 		      <div class="text-center">
-		      	<a href="create-account.html" class="templatemo-create-new">创建新用户 <i class="fa fa-arrow-circle-o-right"></i></a>	
+		      	<a href="toRegistered.do" class="templatemo-create-new">创建新用户 <i class="fa fa-arrow-circle-o-right"></i></a>	
 		      </div>
 		</div>
 	</div>

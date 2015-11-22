@@ -21,5 +21,10 @@ public interface User_normalDao {
 	 **/
 	void updateUser(User_normal usernormal);
 	
+	/**
+	 * 通过id查找
+	 * @param itemid
+	 * @return
+	 */
 	User_normal findByItemId(int itemid);
 }

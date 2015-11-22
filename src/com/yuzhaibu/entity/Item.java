@@ -22,6 +22,8 @@ public class Item {
 	private int itemclassid;
 	private User_normal usernormal;
 	private ItemClass itemClass;
+	private int favcount;
+	private int mescount;
 	
 	public String getItemname() {
 		return itemname;
@@ -119,6 +121,18 @@ public class Item {
 	}
 	public void setItemClass(ItemClass itemClass) {
 		this.itemClass = itemClass;
+	}
+	public int getFavcount() {
+		return favcount;
+	}
+	public void setFavcount(int favcount) {
+		this.favcount = favcount;
+	}
+	public int getMescount() {
+		return mescount;
+	}
+	public void setMescount(int mescount) {
+		this.mescount = mescount;
 	}
 	
 }

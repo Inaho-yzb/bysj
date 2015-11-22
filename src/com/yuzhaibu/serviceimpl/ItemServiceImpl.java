@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.yuzhaibu.dao.ItemClassDao;
 import com.yuzhaibu.dao.ItemDao;
+import com.yuzhaibu.dao.MessageDao;
 import com.yuzhaibu.entity.Fav;
 import com.yuzhaibu.entity.Item;
 import com.yuzhaibu.entity.ItemClass;
@@ -23,6 +24,9 @@ public class ItemServiceImpl implements ItemService {
 	
 	@Resource
 	private ItemClassDao itemClassDao;
+	
+	@Resource
+	private MessageDao messageDao;
 	
 	@Resource
 	private Item item;
@@ -73,6 +77,32 @@ public class ItemServiceImpl implements ItemService {
 	public List<Item> findOtherItemByUserId(int userid) {
 		List<Item> item = itemDao.findOtherItemByUserId(userid);
 		return item;
+	}
+
+	@Override
+	public List<Item> findItemListFatherItemByFatherId(int fid) {
+		List<Item> items = itemDao.findItemListFatherItemByFatherId(fid);
+		for(Item item:items){
+			int mescount = messageDao.findMesCountByItemId(item.getItemid());
+			int favcount = itemDao.findFavCountByItemId(item.getItemid());
+			
+			item.setMescount(mescount);
+			item.setFavcount(favcount);
+		}
+		return items;
+	}
+
+	@Override
+	public List<Item> findItemListByClassId(int id) {
+		List<Item> itemList = itemDao.findItemListByClassId(id);
+		for(Item item:itemList){
+			int mescount = messageDao.findMesCountByItemId(item.getItemid());
+			int favcount = itemDao.findFavCountByItemId(item.getItemid());
+			
+			item.setMescount(mescount);
+			item.setFavcount(favcount);
+		}
+		return itemList;
 	}
 
 }

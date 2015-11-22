@@ -40,4 +40,19 @@ public class ItemClassServiceImpl implements ItemClassService {
 		return childClass;
 	}
 
+	@Override
+	public List<ItemClass> findChildItemClassListByFatherId(int fid) {
+		List<ItemClass> itemClassList = itemClassDao.findChildItemClassListByFatherId(fid);
+		
+		return itemClassList;
+		
+	}
+
+	@Override
+	public ItemClass findItemClassById(int id) {
+		ItemClass itemClass = itemClassDao.findItemClassById(id);
+		
+		return itemClass;
+	}
+
 }

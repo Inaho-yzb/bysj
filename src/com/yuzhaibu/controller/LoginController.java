@@ -17,8 +17,11 @@ public class LoginController {
 	private User_normalService user_normalService;
 	
 	@RequestMapping("/toLogin")
-	public String toLogin(){
-		return "login";
+	public String toLogin(HttpSession session){
+		if(session.getAttribute("username")==null){
+			return "login";
+		}
+		return "redirect:../user/toProfile.do";
 	}
 	
 	
@@ -34,6 +37,11 @@ public class LoginController {
 			request.setAttribute("loginmessage", "用户名密码错误");
 			return "login";
 		}
+	}
+	
+	@RequestMapping("/toRegistered")
+	public String toRegistered(){
+		return "registered";
 	}
 	
 }
