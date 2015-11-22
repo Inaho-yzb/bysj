@@ -11,6 +11,7 @@ public class Message {
 	private String mes_itemmainimg;
 	private int mes_levuserid;
 	private String mes_levusername;
+	private String mes_levuserheadpic;
 	private int mes_touserid;
 	private int mes_tousername;
 	private String mes_content;
@@ -75,5 +76,11 @@ public class Message {
 	}
 	public void setMes_content(String mes_content) {
 		this.mes_content = mes_content;
+	}
+	public String getMes_levuserheadpic() {
+		return mes_levuserheadpic;
+	}
+	public void setMes_levuserheadpic(String mes_levuserheadpic) {
+		this.mes_levuserheadpic = mes_levuserheadpic;
 	}
 }

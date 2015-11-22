@@ -41,9 +41,9 @@ public class User_normalController implements Serializable {
 	private ItemService itemService;
 	
 	@RequestMapping("/toProfile")
-	public String toProfile(HttpSession session,ModelMap model){
+	public String toProfile(HttpSession session,ModelMap model,HttpServletRequest request){
 		String username = (String) session.getAttribute("username");
-		
+		String tag = request.getParameter("tag");
 		
 		usernormal = user_normalService.findUserByUsername(username);
 		List<Item> items = itemService.findItemByUserId(usernormal.getUsernormal_id());
@@ -57,6 +57,7 @@ public class User_normalController implements Serializable {
 		model.addAttribute("items",items);
 		model.addAttribute("favs",favs);
 		model.addAttribute("messages",messages);
+		model.put("tag", tag);
 		
 		return "profile";
 	}
@@ -64,14 +65,7 @@ public class User_normalController implements Serializable {
 	@RequestMapping("/editUsernormalProfile")
 	public String editUernormalProfile(User_normal user,HttpServletRequest request,HttpSession session){
 		
-		user.setUsername((String) session.getAttribute("username"));
-//		usernormal.setNickname((String) request.getParameter("nickname"));
-//		usernormal.setMobile((String)request.getParameter("mobile"));
-//		usernormal.setQq((String) request.getParameter("qq"));
-//		usernormal.setSchool((String) request.getParameter("school"));
-//		usernormal.setUserclass((String) request.getParameter("class"));
-		
-		
+		user.setUsername((String) session.getAttribute("username"));				
 				
 		user_normalService.updateUser(user);
 		

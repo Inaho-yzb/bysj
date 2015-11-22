@@ -23,13 +23,21 @@
 			<div class="container">
 				<nav class="navbar navbar-default navbar-custom">
 					<ul class="nav navbar-nav">
-						<li><a href="login/toLogin.do">登录</a></li>
-						<li><a href="#">免费注册</a></li>
+						<c:choose>
+						<c:when test="${empty username}">
+							<li><a href="login/toLogin.do">登录</a></li>
+							<li><a href="#">免费注册</a></li>
+						</c:when>
+						<c:otherwise>
+							<li><a href="${pageContext.request.contextPath}/user/toProfile.do">${username }</a></li>
+						</c:otherwise>
+						</c:choose>
+						
 					</ul>
 
 					<ul class="nav navbar-nav" style="float: right">
-						<li><a href="#">我的物品</a></li>
-						<li><a href="#"><span class="glyphicon glyphicon-heart">
+						<li><a href="${pageContext.request.contextPath}/user/toProfile.do?tag=myitems">我的物品</a></li>
+						<li><a href="${pageContext.request.contextPath}/user/toProfile.do?tag=favitems"><span class="glyphicon glyphicon-heart">
 							</span> 收藏夹</a></li>
 						<li><a href="#">联系客服</a></li>
 					</ul>

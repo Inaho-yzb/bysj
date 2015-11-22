@@ -20,4 +20,5 @@ public interface User_normalService {
 	 **/
 	void updateUser(User_normal usernormal);
 	
+	User_normal findUserByItemid(int itemid);
 }

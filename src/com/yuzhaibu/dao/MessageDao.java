@@ -8,4 +8,6 @@ public interface MessageDao {
 
 	List<Message> findAllNotReadMessage(int userid);
 	
+	List<Message> findInitItemMessageByItemId(int itemid);
+	
 }

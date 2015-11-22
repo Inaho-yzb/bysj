@@ -13,4 +13,6 @@ public interface MessageService {
 	 */
 	List<Message> findAllNotReadMessageByUserId(int userid);
 	
+	List<Message> findInitItemMessageByItemId(int itemid);
+	
 }

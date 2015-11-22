@@ -17,4 +17,11 @@ public interface ItemDao {
 	 **/
 	List<Fav> findFavItemByUserId(int userid);
 	
+	
+	List<Item> findIndexItemByClassId(int classid);
+	
+	Item findItemByItemId(int itemId);
+	
+	List<Item> findOtherItemByUserId(int userid);
+	
 }

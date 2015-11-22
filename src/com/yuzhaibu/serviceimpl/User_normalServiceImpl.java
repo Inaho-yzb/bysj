@@ -41,5 +41,14 @@ public class User_normalServiceImpl implements User_normalService {
 		user_normalDao.updateUser(usernormal);
 		
 	}
+
+
+	@Override
+	public User_normal findUserByItemid(int itemid) {
+		User_normal user = user_normalDao.findByItemId(itemid);
+		return user;
+	}
+	
+	
 	
 }

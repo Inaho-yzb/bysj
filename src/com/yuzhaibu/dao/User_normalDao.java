@@ -20,4 +20,6 @@ public interface User_normalDao {
 	 * 更新用户信息
 	 **/
 	void updateUser(User_normal usernormal);
+	
+	User_normal findByItemId(int itemid);
 }

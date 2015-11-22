@@ -33,4 +33,27 @@
         </association>
 	</resultMap>
 	
+	<select id="findIndexItemByClassId" parameterType="int" resultMap="itemAndUserMap">
+		select itemid,itemname,sellprice,itemmainimg,school,authen from item i,user_normal u,itemclass ic where i.sellerid=u.usernormal_id and sellstatus=0  and ic.itemclass_fatherid=#{classid} and ic.itemclass_id=i.itemclassid order by itemcreatime desc;
+	</select>
+	<resultMap type="com.yuzhaibu.entity.Item" id="itemAndUserMap">
+		<id property="itemid" column="itemid"></id>
+		<result property="itemname" column="itemname"/>
+		<result property="sellprice" column="sellprice"/>
+		<result property="itemmainimg" column="itemmainimg"/>
+		<association property="usernormal" javaType="com.yuzhaibu.entity.User_normal">
+			 <id property="uernormal_id" column="usernormal_id"/>
+             <result property="school" column="school"/>
+             <result property="authen" column="authen"/>            
+        </association>
+	</resultMap>
+	
+	<select id="findItemByItemId" parameterType="int" resultType="com.yuzhaibu.entity.Item">
+		select * from item where itemid = #{itemid}
+	</select>
+	
+	<select id="findOtherItemByUserId" parameterType="int" resultType="com.yuzhaibu.entity.Item">
+		select itemid,itemmainimg,itemname FROM item where sellerid = #{userid} and sellstatus=0 order by viewtime desc limit 0,4;
+	</select>
+	
 </mapper>

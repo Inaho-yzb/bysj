@@ -55,4 +55,17 @@
 		<url-pattern>*.do</url-pattern>
 	</filter-mapping>
 	
+	<filter>
+		<filter-name>encodingFilter2</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encodingFilter2</filter-name>
+		<url-pattern>*.html</url-pattern>
+	</filter-mapping>
+	
 </web-app>

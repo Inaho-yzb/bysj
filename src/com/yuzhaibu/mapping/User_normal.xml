@@ -19,4 +19,8 @@
     <update id="updateUser" parameterType="com.yuzhaibu.entity.User_normal">
     	update user_normal set nickname=#{nickname},mobile=#{mobile},qq=#{qq},school=#{school},userclass=#{userclass} where username=#{username}
     </update>
+    
+    <select id="findByItemId" parameterType="int" resultType="com.yuzhaibu.entity.User_normal">
+    	select * from user_normal u,item i where u.usernormal_id = i.sellerid and i.itemid=#{itemid}
+    </select>
  </mapper>  

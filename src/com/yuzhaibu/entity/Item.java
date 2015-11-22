@@ -20,7 +20,8 @@ public class Item {
 	private String itemmainimg;
 	private int sellstatus;
 	private int itemclassid;
-	
+	private User_normal usernormal;
+	private ItemClass itemClass;
 	
 	public String getItemname() {
 		return itemname;
@@ -106,6 +107,18 @@ public class Item {
 	}
 	public void setItemclassid(int itemclassid) {
 		this.itemclassid = itemclassid;
+	}
+	public User_normal getUsernormal() {
+		return usernormal;
+	}
+	public void setUsernormal(User_normal usernormal) {
+		this.usernormal = usernormal;
+	}
+	public ItemClass getItemClass() {
+		return itemClass;
+	}
+	public void setItemClass(ItemClass itemClass) {
+		this.itemClass = itemClass;
 	}
 	
 }

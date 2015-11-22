@@ -23,4 +23,10 @@ public class MessageServiceImpl implements MessageService {
 		return messages;
 	}
 
+	@Override
+	public List<Message> findInitItemMessageByItemId(int itemid) {
+		List<Message> messages= messageDao.findInitItemMessageByItemId(itemid);
+		return messages;
+	}
+
 }

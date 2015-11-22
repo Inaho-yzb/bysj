@@ -42,15 +42,15 @@
 
 			<div class="profile-tab">
 				<ul id="myTab" class="nav nav-tabs">
-					<li class="active"><a href="#profile-doc" data-toggle="tab">
+					<li class=<c:if test="${empty tag}">"active"</c:if>><a href="#profile-doc" data-toggle="tab">
 							个人资料 </a></li>
-					<li><a href="#items" data-toggle="tab">已发布商品</a></li>
-					<li><a href="#favitems" data-toggle="tab">我的收藏</a></li>
+					<li class=<c:if test="${tag=='myitems'}">"active"</c:if>><a href="#items" data-toggle="tab" >已发布商品</a></li>
+					<li class=<c:if test="${tag=='favitems'}">"active"</c:if>><a href="#favitems" data-toggle="tab">我的收藏</a></li>
 					<li><a href="#message" data-toggle="tab">消息列表</a></li>
 					<li><a href="#authen" data-toggle="tab">认证</a></li>
 				</ul>
 				<div id="myTabContent" class="tab-content">
-					<div class="tab-pane fade in active" id="profile-doc">
+					<div class=<c:choose><c:when test="${empty tag}">"tab-pane fade in active"</c:when><c:otherwise>"tab-pane fade"</c:otherwise></c:choose> id="profile-doc">
 						<div class="profile-doc">
 							<h3>帐号信息</h3>
 
@@ -126,15 +126,15 @@
 						</div>
 
 					</div>
-					<div class="tab-pane fade" id="items">
+					<div class=<c:choose><c:when test="${tag=='myitems'}">"tab-pane fade in active"</c:when><c:otherwise>"tab-pane fade"</c:otherwise></c:choose> id="items">
 					
 					<c:forEach items="${items}" var="item">
 						<div class="panel panel-default put-items">
 							<div class="panel-body">
 								<div class="col-md-2">
-									<a href=""><img class="itemlist-pic" src="${item.itemmainimg}"></a>
+									<a href="${pageContext.request.contextPath}/item.html?id=${item.itemid }"><img class="itemlist-pic" src="${item.itemmainimg}"></a>
 									<div>
-										<a href="">${item.itemname}</a>
+										<a href="${pageContext.request.contextPath}/item.html?id=${item.itemid }">${item.itemname}</a>
 									</div>
 									<div>
 										<c:choose>
@@ -189,15 +189,15 @@
 
 					</div>
 					
-					<div class="tab-pane fade" id="favitems">
+					<div class=<c:choose><c:when test="${tag=='favitems'}">"tab-pane fade in active"</c:when><c:otherwise>"tab-pane fade"</c:otherwise></c:choose> id="favitems">
 						
 						<c:forEach items="${favs}" var="fav">
 						<div class="panel panel-default put-items">
 							<div class="panel-body">
 								<div class="col-md-2">
-									<a href=""><img class="itemlist-pic" src="${fav.item.itemmainimg}"></a>
+									<a href="${pageContext.request.contextPath}/item.html?id=${fav.item.itemid }"><img class="itemlist-pic" src="${fav.item.itemmainimg}"></a>
 									<div class="">
-										<a href="">${fav.item.itemname}</a>
+										<a href="${pageContext.request.contextPath}/item.html?id=${fav.item.itemid }">${fav.item.itemname}</a>
 									</div>
 									<div>
 										<c:choose>
@@ -265,8 +265,8 @@
 								</div>
 								<div class="col-md-2 profile-message-opr">
 									<div class="badge bkcl-red">未读</div>
-									<button type="button"
-										class="btn btn-info profile-message-checkbtn">查看</button>
+									<a type="button" href="${pageContext.request.contextPath}/item.html?id=${message.mes_itemid }"
+										class="btn btn-info profile-message-checkbtn">查看</a>
 								</div>
 							</div>
 						</div>
