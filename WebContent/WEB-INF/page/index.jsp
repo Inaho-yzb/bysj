@@ -16,12 +16,12 @@
 						<c:forEach items="${fatherClass}" var="fc">
 							<li class="navlist-li">
 								<div class="navlist-li-div">
-									<img src="images/${fc.itemclass_id}.png"><a href="itemlist.html?fid=${fc.itemclass_id}">${fc.itemclass_name }</a>
+									<img src="images/${fc.itemclass_id}.png"><a href="itemlist.htm?fid=${fc.itemclass_id}">${fc.itemclass_name }</a>
 									<span class="navlist-li-div-span"> <c:forEach
 											items="${childClass}" var="cc">
 											<c:if test="${cc.key==fc.itemclass_id}">
 												<c:forEach items="${cc.value}" var="ccn">
-													<a href="itemlist.html?id=${ccn.itemclass_id }">${ccn.itemclass_name}</a>
+													<a href="itemlist.htm?id=${ccn.itemclass_id }">${ccn.itemclass_name}</a>
 												</c:forEach>
 											</c:if>
 										</c:forEach>
@@ -94,7 +94,7 @@
 			<div class="container">
 				<div class="floorhd-1">
 					<h4>
-						<a href="itemlist.html?fid=${fcl.itemclass_id}">${fcl.itemclass_name}</a>
+						<a href="itemlist.htm?fid=${fcl.itemclass_id}">${fcl.itemclass_name}</a>
 					</h4>
 				</div>
 				<c:forEach items="${itemList}" var="iteml">
@@ -104,11 +104,11 @@
 							<c:forEach items="${iteml.value}" var="itm">
 								<div class="col-md-2">
 									<div class="thumbnail proshow-row-col-pic">
-										<a href="item.html?id=${itm.itemid}"><img src="${itm.itemmainimg}"></a>
+										<a href="item.htm?id=${itm.itemid}"><img src="${itm.itemmainimg}"></a>
 									</div>
 									<div class="proshow-entity">
 										<div class="simp-proname">
-											<a href="item.html?id=${itm.itemid}">${itm.itemname}</a> <span class="simp-proname-price">￥${itm.sellprice}</span>
+											<a href="item.htm?id=${itm.itemid}">${itm.itemname}</a> <span class="simp-proname-price">￥${itm.sellprice}</span>
 										</div>
 										<div class="simp-prointro">
 											<span>${itm.usernormal.school}</span> <span

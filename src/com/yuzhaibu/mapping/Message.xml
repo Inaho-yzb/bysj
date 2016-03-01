@@ -16,4 +16,9 @@
 	<select id="findMesCountByItemId" parameterType="int" resultType="int">
 		SELECT COUNT(*) from message where mes_itemid= #{itemid};
 	</select>
+	
+	<update id="checkMesById" parameterType="int">
+		update message set mes_status = 1 where mes_id = #{id};
+	</update>
+	
 </mapper>

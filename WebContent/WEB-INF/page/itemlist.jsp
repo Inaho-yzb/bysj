@@ -8,17 +8,17 @@
 	<div class="container bkcl-white pnv">
 		<div class="position-nav">
 			<ol class="breadcrumb bkcl-white">
-				<li><a href="index.html">首页</a></li>
-				<li><a href="itemlist.html?fid=${navFatherItemClass.itemclass_id}">${navFatherItemClass.itemclass_name}</a></li>
+				<li><a href="index.htm">首页</a></li>
+				<li><a href="itemlist.htm?fid=${navFatherItemClass.itemclass_id}">${navFatherItemClass.itemclass_name}</a></li>
 				<c:if test="${!empty navChildItemClass}">
-					<li><a href="itemlist.html?id=${navChildItemClass.itemclass_id}">${navChildItemClass.itemclass_name}</a></li>
+					<li><a href="itemlist.htm?id=${navChildItemClass.itemclass_id}">${navChildItemClass.itemclass_name}</a></li>
 				</c:if>
 			</ol>
 		</div>
 		<div class="col-md-3">
 			<div class="panel panel-default itemclass">
 				<div class="panel-body">
-					<c:forEach items="${itemChildClassList}" var="itemChildClass"><span><a href="itemlist.html?id=${itemChildClass.itemclass_id}">${itemChildClass.itemclass_name}</a></span> </c:forEach>
+					<c:forEach items="${itemChildClassList}" var="itemChildClass"><span><a href="itemlist.htm?id=${itemChildClass.itemclass_id}">${itemChildClass.itemclass_name}</a></span> </c:forEach>
 					
 				</div>
 			</div>
@@ -53,7 +53,7 @@
 						<div class="col-md-8">
 							<div class="itemlist-detail">
 								<div class="itemlist-title">
-									<a href="item.html?id=${item.itemid}">${item.itemname }</a>
+									<a href="item.htm?id=${item.itemid}">${item.itemname }</a>
 								</div>
 								<div class="font-red itemlist-price">
 									<span>￥</span>${item.sellprice }

@@ -1,10 +1,11 @@
 package com.yuzhaibu.entity;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class Fav {
-
+	
 	private int favid;
 	private Item item;
 	private int sellerauthen;

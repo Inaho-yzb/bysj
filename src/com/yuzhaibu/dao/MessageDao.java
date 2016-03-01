@@ -26,5 +26,12 @@ public interface MessageDao {
 	 * @return
 	 */
 	int findMesCountByItemId(int itemid);
+
+	/**
+	 * 用户查看未读消息
+	 * @param id
+	 * @return
+	 */
+	Integer checkMesById(Integer id);
 	
 }

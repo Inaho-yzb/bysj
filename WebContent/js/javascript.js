@@ -27,3 +27,4 @@ $(function(){
         });
 });
 
+var appServer = window.location.host;

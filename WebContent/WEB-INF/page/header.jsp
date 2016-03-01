@@ -25,20 +25,20 @@
 					<ul class="nav navbar-nav">
 						<c:choose>
 						<c:when test="${empty username}">
-							<li><a href="login/toLogin.do">登录</a></li>
+							<li><a href="login/toLogin.htm">登录</a></li>
 							<li><a href="#">免费注册</a></li>
 						</c:when>
 						<c:otherwise>
-							<li><a href="${pageContext.request.contextPath}/user/toProfile.do">${username }</a></li>
-							<li><a href="${pageContext.request.contextPath}/user/quit.do">登出</a></li>
+							<li><a href="${pageContext.request.contextPath}/user/toProfile.htm">${username }</a></li>
+							<li><a href="${pageContext.request.contextPath}/user/quit.htm">登出</a></li>
 						</c:otherwise>
 						</c:choose>
 						
 					</ul>
 
 					<ul class="nav navbar-nav" style="float: right">
-						<li><a href="${pageContext.request.contextPath}/user/toProfile.do?tag=myitems">我的物品</a></li>
-						<li><a href="${pageContext.request.contextPath}/user/toProfile.do?tag=favitems"><span class="glyphicon glyphicon-heart">
+						<li><a href="${pageContext.request.contextPath}/user/toProfile.htm?tag=myitems">我的物品</a></li>
+						<li><a href="${pageContext.request.contextPath}/user/toProfile.htm?tag=favitems"><span class="glyphicon glyphicon-heart">
 							</span> 收藏夹</a></li>
 						<li><a href="#">联系客服</a></li>
 					</ul>
@@ -52,10 +52,10 @@
 
 				<nav class="navbar navbar-default navbar-custom navbar-custom2">
 					<ul class="nav navbar-nav">
-						<li><a href="${pageContext.request.contextPath}/index.html">首页</a></li>
-						<li><a href="1.html">随便逛逛</a></li>
-						<li><a href="2.html">低价商品</a></li>
-						<li><a href="3.html">热门物品</a></li>
+						<li><a href="${pageContext.request.contextPath}/index.htm">首页</a></li>
+						<li><a href="1.htm">随便逛逛</a></li>
+						<li><a href="2.htm">低价商品</a></li>
+						<li><a href="3.htm">热门物品</a></li>
 					</ul>
 
 

@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,8 +22,7 @@ import com.yuzhaibu.service.MessageService;
 import com.yuzhaibu.service.User_normalService;
 
 @Controller
-public class FrontViewController {
-
+public class FrontViewController extends BaseController {
 	@Resource
 	private User_normal usernormal;
 
@@ -75,7 +75,6 @@ public class FrontViewController {
 		List<Message> messages = messageService.findInitItemMessageByItemId(itemid);
 		
 		List<Item> otherItem = itemService.findOtherItemByUserId(user.getUsernormal_id());
-		System.out.println(otherItem.size());
 		
 		model.addAttribute("item",item);
 		model.addAttribute("messages",messages);

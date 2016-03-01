@@ -82,7 +82,7 @@
 			          <div class="col-md-12">
 			            <input value="创建用户" class="btn btn-info" id="submitbtn">
 			            <a href="toLogin.do" class="pull-right">前往登录</a><br/>
-			            <a href="../index.html" class="pull-right">返回首页</a>
+			            <a href="../index.htm" class="pull-right">返回首页</a>
 			          </div>
 			        </div>	
 				</div>				    	

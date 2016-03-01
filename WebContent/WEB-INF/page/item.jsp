@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%@include file="header.jsp"%>
 
@@ -11,7 +12,7 @@
 		<div class="col-md-12 bkcl-white">
 			<div class="position-nav">
 				<ol class="breadcrumb bkcl-white">
-					<li><a href="index.html">首页</a></li>
+					<li><a href="index.htm">首页</a></li>
 					<li><a href="#">${item.itemClass.fatherclass}</a></li>
 					<li class="active">${item.itemClass.itemclass_name }</li>
 				</ol>
@@ -29,7 +30,7 @@
 						<script src="js/itempic.js"></script>
 						<SCRIPT src="js/lib.js"></SCRIPT>
 						<SCRIPT src="js/picshow.js"></SCRIPT>
-						<div class="jqzoom" id="spec-n1" onClick="window.open('')">
+						<div class="jqzoom" id="spec-n1">
 							<IMG height="350" src="images/img04.jpg" jqimg="images/img04.jpg"
 								width="350">
 						</div>
@@ -122,7 +123,7 @@
 								<c:if test="${!empty item.usernormal.qq}">QQ：${item.usernormal.qq}</c:if>
 							</div>
 							<div class="item-pad">
-								<span class="label label-info">发布时间</span>${item.itemcreatime }
+								<span class="label label-info">发布时间</span> <fmt:formatDate value="${item.itemcreatime}" pattern="yyyy-MM-dd  HH:mm:ss" />
 							</div>
 						</div>
 					</div>
@@ -147,10 +148,8 @@
 				<div class="comment">
 					<div class="Input_Box">
 						<textarea class="Input_text"></textarea>
-						<div class="faceDiv"></div>
 						<div class="Input_Foot">
-							<a class="imgBtn" href="javascript:void(0);"></a><a
-								class="postBtn">确定</a>
+						<a class="postBtn">确定</a>
 						</div>
 					</div>
 				</div>
@@ -161,8 +160,7 @@
 						<div class="comment-detail">
 						<img class="comment-hdpic img-circle" src="${mes.mes_levuserheadpic}">
 						<div class="comment-user">
-							<span><a href="#">${mes.mes_levusername }</a></span> <span
-								class="comment-repeat"><a href="javascript:;">回复</a></span>
+							<span><a href="#">${mes.mes_levusername }</a></span>
 						</div>
 						<div class="comment-content">${mes.mes_content}</div>
 					</div>
@@ -207,12 +205,12 @@
 							<div class="col-md-12">
 								<c:forEach items="${otherItem }" var="otherit">
 								<div class="col-md-6">
-									<a href="item.html?id=${otherit.itemid }" class="thumbnail"> <img src="${otherit.itemmainimg }"
+									<a href="item.htm?id=${otherit.itemid }" class="thumbnail"> <img src="${otherit.itemmainimg }"
 										alt="通用的占位符缩略图">
 									</a>
 									<div class="caption text-center">
 										<p>
-											<a href="item.html?id=${otherit.itemid }">${otherit.itemname }</a>
+											<a href="item.htm?id=${otherit.itemid }">${otherit.itemname }</a>
 										</p>
 									</div>
 								</div>

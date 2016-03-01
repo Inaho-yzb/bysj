@@ -2,10 +2,12 @@ package com.yuzhaibu.entity;
 
 import java.sql.Timestamp;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class Item {
+	
 	private int itemid;
 	private String itemname;
 	private int sellprice;

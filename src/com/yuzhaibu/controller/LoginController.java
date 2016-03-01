@@ -11,7 +11,7 @@ import com.yuzhaibu.service.User_normalService;
 
 @Controller
 @RequestMapping("/login")
-public class LoginController {
+public class LoginController extends BaseController {
 	
 	@Resource
 	private User_normalService user_normalService;
@@ -21,7 +21,7 @@ public class LoginController {
 		if(session.getAttribute("username")==null){
 			return "login";
 		}
-		return "redirect:../user/toProfile.do";
+		return "redirect:../user/toProfile.htm";
 	}
 	
 	
@@ -32,7 +32,7 @@ public class LoginController {
 		
 		if(status){
 			session.setAttribute("username", username);
-			return "redirect:../user/toProfile.do";
+			return "redirect:../user/toProfile.htm";
 		}else{
 			request.setAttribute("loginmessage", "用户名密码错误");
 			return "login";

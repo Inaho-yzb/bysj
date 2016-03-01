@@ -30,7 +30,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 		String username = (String) session.getAttribute("username");
 		
 		if(username == null){
-			response.sendRedirect("../login/toLogin.do");			
+			response.sendRedirect("../login/toLogin.htm");			
 			return false;
 		}else{
 			return true;

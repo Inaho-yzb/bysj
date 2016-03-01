@@ -1,5 +1,5 @@
 body {
-	font-family: "Microsoft YaHei", "ºÚÌå", "ÎÄÈªæäÕýºÚ";
+	font-family: "Microsoft YaHei", "é»‘ä½“";
 	background-color:#F5F5F5;
 }
 
@@ -572,7 +572,7 @@ a{
 	padding-top: 12px;
 }
 
-/*ÆÀÂÛ*/
+/*ï¿½ï¿½ï¿½ï¿½*/
 .comment-header{
 	margin-bottom:10px;
 	
@@ -613,7 +613,7 @@ a{
     outline: none;     
     border: 0px solid #fff;     
     resize: none;     
-    font: 13px "Î¢ÈíÑÅºÚ", Arial, Helvetica, sans-serif;     
+    font: 13px "Î¢ï¿½ï¿½ï¿½Åºï¿½", Arial, Helvetica, sans-serif;     
     -moz-border-radius: 5px;     
     -webkit-border-radius: 5px;     
     border-radius: 5px;     
@@ -647,7 +647,7 @@ a{
 }     
 .postBtn {     
     float: right;     
-    font: 13px "Î¢ÈíÑÅºÚ", Arial, Helvetica, sans-serif;     
+    font: 13px "Î¢ï¿½ï¿½ï¿½Åºï¿½", Arial, Helvetica, sans-serif;     
     color: #808080;     
     padding: 9px 20px 7px 20px;     
     border-left: 1px solid #ccc;     
@@ -765,7 +765,7 @@ a{
 }
 
 
-/*ÁÐ±íÒ³*/
+/*ï¿½Ð±ï¿½Ò³*/
 .itemclass{
 	margin-top:20px;
 }
@@ -842,7 +842,7 @@ a{
 }
 
 
-/*¸öÈËÒ³Ãæ*/
+/*ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½*/
 .prof-first{
 	margin-top:20px;
 	margin-bottom:20px;

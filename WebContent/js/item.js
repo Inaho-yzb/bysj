@@ -36,11 +36,6 @@ $(function(){
 			});
 		});	
 		
-		$(".comment-repeat a").click(function(){
-			var username = $(this).parent().siblings()[0].children[0].text;
-			$(".Input_text").val("@"+username+"  ");
-			$(".Input_text").val("@"+username+"  ");
-		});
 		
 });
 

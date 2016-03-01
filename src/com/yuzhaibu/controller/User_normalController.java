@@ -10,6 +10,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yuzhaibu.entity.Fav;
 import com.yuzhaibu.entity.Item;
@@ -18,10 +20,11 @@ import com.yuzhaibu.entity.User_normal;
 import com.yuzhaibu.service.ItemService;
 import com.yuzhaibu.service.MessageService;
 import com.yuzhaibu.service.User_normalService;
+import com.yuzhaibu.util.AjaxResult;
 
 @Controller
 @RequestMapping("/user")
-public class User_normalController implements Serializable {
+public class User_normalController extends BaseController implements Serializable {
 
 	/**
 	 * 
@@ -69,14 +72,30 @@ public class User_normalController implements Serializable {
 				
 		user_normalService.updateUser(user);
 		
-		return "redirect:toProfile.do";
+		return "redirect:toProfile.htm";
 	}
 	
 	@RequestMapping("/quit")
 	public String quit(HttpSession session){
 		session.setAttribute("username", null);
+		return "redirect:../index.htm";
+	}
+	
+	@RequestMapping(value="/ajaxCheckMes",method=RequestMethod.POST)
+	@ResponseBody
+	public AjaxResult ajaxCheckMes(HttpSession session,HttpServletRequest request){
+		AjaxResult result = new AjaxResult();
 		
-		return "redirect:../index.html";
+		String username = (String) session.getAttribute("username");
+		
+		if(username!=null){
+			Integer id = Integer.valueOf(request.getParameter("id"));
+			messageService.checkMesById(id);
+			result.setErrorCode(0);
+		}else{
+			result.setErrorCode(1);
+		}
+		return result;
 	}
 
 }

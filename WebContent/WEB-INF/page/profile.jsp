@@ -60,7 +60,7 @@
 						</div>
 
 						<div class="profile-doc">
-							<h3>帐号信息</h3>
+							<h3>个人信息</h3>
 						</div>
 						<div class="profile-doc-detail">
 							<div>昵称：${usernormal.nickname}</div>
@@ -87,7 +87,7 @@
 												aria-hidden="true">×</button>
 											<h4 class="modal-title" id="myModalLabel">修改信息</h4>
 										</div>
-										<form action="editUsernormalProfile.do" method="post">
+										<form action="editUsernormalProfile.htm" method="post">
 											<div class="modal-body">
 
 												<div class="modal-body-input">
@@ -132,9 +132,9 @@
 						<div class="panel panel-default put-items">
 							<div class="panel-body">
 								<div class="col-md-2">
-									<a href="${pageContext.request.contextPath}/item.html?id=${item.itemid }"><img class="itemlist-pic" src="${item.itemmainimg}"></a>
+									<a href="${pageContext.request.contextPath}/item.htm?id=${item.itemid }"><img class="itemlist-pic" src="${item.itemmainimg}"></a>
 									<div>
-										<a href="${pageContext.request.contextPath}/item.html?id=${item.itemid }">${item.itemname}</a>
+										<a href="${pageContext.request.contextPath}/item.htm?id=${item.itemid }">${item.itemname}</a>
 									</div>
 									<div>
 										<c:choose>
@@ -195,9 +195,9 @@
 						<div class="panel panel-default put-items">
 							<div class="panel-body">
 								<div class="col-md-2">
-									<a href="${pageContext.request.contextPath}/item.html?id=${fav.item.itemid }"><img class="itemlist-pic" src="${fav.item.itemmainimg}"></a>
+									<a href="${pageContext.request.contextPath}/item.htm?id=${fav.item.itemid }"><img class="itemlist-pic" src="${fav.item.itemmainimg}"></a>
 									<div class="">
-										<a href="${pageContext.request.contextPath}/item.html?id=${fav.item.itemid }">${fav.item.itemname}</a>
+										<a href="${pageContext.request.contextPath}/item.htm?id=${fav.item.itemid }">${fav.item.itemname}</a>
 									</div>
 									<div>
 										<c:choose>
@@ -265,11 +265,11 @@
 								</div>
 								<div class="col-md-2 profile-message-opr">
 									<div class="badge bkcl-red">未读</div>
-									<a type="button" href="${pageContext.request.contextPath}/item.html?id=${message.mes_itemid }"
+									<a type="button"  onclick="checkMes(${message.mes_id},${message.mes_itemid})"
 										class="btn btn-info profile-message-checkbtn">查看</a>
 								</div>
 							</div>
-						</div>
+						</div> 
 						</c:forEach>
 
 

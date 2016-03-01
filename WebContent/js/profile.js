@@ -11,4 +11,22 @@ $(function(){
 		    }
 		});
 	});
+	
 });
+
+function checkMes(id,itemid){
+	$.ajax({
+		url:"/user/ajaxCheckMes.htm",
+		dataType:"json",
+		type:"POST",
+		data:{"id":id},
+		success:function(res){
+			result = res;
+			if(res.errorCode==0){
+				location.href ="/item.htm?id="+itemid;
+			}else if(res.errorCode==1){
+				alert("请求错误！");
+			}
+		}
+	});
+}

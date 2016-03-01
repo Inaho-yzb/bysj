@@ -19,5 +19,7 @@ public interface MessageService {
 	 * @return
 	 */
 	List<Message> findInitItemMessageByItemId(int itemid);
+
+	Integer checkMesById(Integer id);
 	
 }

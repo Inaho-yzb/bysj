@@ -20,11 +20,11 @@
 	<bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="location">
-			<value>classpath:db.properties</value>
+			<value>/WEB-INF/config/db.properties</value>
 		</property>
 	</bean>
-	
-	
+
+
 
 	<bean id="ds" class="org.apache.tomcat.dbcp.dbcp.BasicDataSource">
 		<property name="url">
@@ -40,15 +40,15 @@
 			<value>${password}</value>
 		</property>
 	</bean>
-	
-	
-	
+
+
+
 	<!-- sqlSessionFactory -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="ds"></property>
-		<property name="mapperLocations" value="classpath:com/yuzhaibu/mapping/*.xml"></property>
+		<property name="mapperLocations" value="classpath*:com/yuzhaibu/mapping/*.xml"></property>
 	</bean>
-	
+
 	<!-- DAO接口所在包名，Spring会自动查找其下的类 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.yuzhaibu.dao"></property>
@@ -56,28 +56,44 @@
 	</bean>
 
 
+
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+
+		<property name="messageConverters">
+			<list>
+				<bean
+					class="org.springframework.http.converter.StringHttpMessageConverter" />
+				<bean
+					class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" />
+			</list>
+		</property>
+
+	</bean>
+
+
+
 	<!-- 开启扫描注解 -->
 	<context:component-scan base-package="com.yuzhaibu"></context:component-scan>
-	
-	<!-- 开启RequestMapping注解 -->
-	<mvc:annotation-driven></mvc:annotation-driven>
-	
+
+
 	<!-- 请求转发 -->
-	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix">
-			<value>/</value>
+			<value>/WEB-INF/page/</value>
 		</property>
 		<property name="suffix">
 			<value>.jsp</value>
 		</property>
 	</bean>
-	
+
 	<!-- 前台登录拦截器 -->
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<!--所有/user下的操作在未登录的情况下拦截  -->
-			<mvc:mapping path="/user/**"/>
-			<bean class="com.yuzhaibu.interceptor.LoginInterceptor"></bean>			
+			<!--所有/user下的操作在未登录的情况下拦截 -->
+			<mvc:mapping path="/user/**" />
+			<bean class="com.yuzhaibu.interceptor.LoginInterceptor"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>
 </beans>

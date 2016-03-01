@@ -29,4 +29,9 @@ public class MessageServiceImpl implements MessageService {
 		return messages;
 	}
 
+	@Override
+	public Integer checkMesById(Integer id) {
+		return messageDao.checkMesById(id);
+	}
+
 }

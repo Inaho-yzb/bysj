@@ -6,6 +6,8 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.logging.Log;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import com.yuzhaibu.dao.ItemClassDao;
@@ -43,7 +45,6 @@ public class ItemClassServiceImpl implements ItemClassService {
 	@Override
 	public List<ItemClass> findChildItemClassListByFatherId(int fid) {
 		List<ItemClass> itemClassList = itemClassDao.findChildItemClassListByFatherId(fid);
-		
 		return itemClassList;
 		
 	}
