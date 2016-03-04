@@ -1,5 +1,6 @@
 package com.yuzhaibu.entity;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 
 @Repository

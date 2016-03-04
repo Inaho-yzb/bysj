@@ -9,7 +9,7 @@ import com.yuzhaibu.entity.User_normal;
 import com.yuzhaibu.service.User_normalService;
 
 @Service
-public class User_normalServiceImpl implements User_normalService {
+public class User_normalServiceImpl extends BaseManager implements User_normalService {
 	
 	@Resource
 	private User_normalDao user_normalDao;

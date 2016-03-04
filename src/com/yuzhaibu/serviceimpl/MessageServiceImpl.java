@@ -11,7 +11,7 @@ import com.yuzhaibu.entity.Message;
 import com.yuzhaibu.service.MessageService;
 
 @Service
-public class MessageServiceImpl implements MessageService {
+public class MessageServiceImpl extends BaseManager implements MessageService {
 	
 	@Resource
 	private MessageDao messageDao;

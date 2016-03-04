@@ -63,19 +63,14 @@
 
 				<div class="col-md-3 col-cus">
 					<div class="row bkcl-gray">
-						<div class="col-md-6 product-launch">
-							<div class="bkcl-white fb-laun">
+						<div class="col-md-12 product-launch">
+							<div class="bkcl-blue fb-laun">
 								<a href="#"> <span>发布闲置</span>
 								</a>
 
 							</div>
 						</div>
-
-						<div class="col-md-6 product-launch">
-							<div class="bkcl-white fb-laun">
-								<a href="#">发布需求</a>
-							</div>
-						</div>
+						
 					</div>
 
 					<div class="row">

@@ -17,7 +17,7 @@ import com.yuzhaibu.entity.ItemClass;
 import com.yuzhaibu.service.ItemService;
 
 @Service
-public class ItemServiceImpl implements ItemService {
+public class ItemServiceImpl extends BaseManager implements ItemService {
 	
 	@Resource
 	private ItemDao itemDao;

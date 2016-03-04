@@ -6,6 +6,7 @@ import com.yuzhaibu.entity.ItemClass;
 
 public interface ItemClassDao {
 
+	
 	/**
 	 * 查找所有父类
 	 * @return
