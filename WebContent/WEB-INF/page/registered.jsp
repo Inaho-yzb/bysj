@@ -21,12 +21,12 @@
 	<h1 class="margin-bottom-15">注册新用户</h1>
 	<div class="container">
 		<div class="col-md-12">			
-			<form class="form-horizontal templatemo-create-account templatemo-container" role="form" action="#" method="post">
+			<form class="form-horizontal templatemo-create-account templatemo-container" role="form" action="${pageContext.request.contextPath}/login/reg.htm" method="post">
 				<div class="form-inner">
 					<div class="form-group">
 			          <div class="col-md-12">		          	
 			            <label for="username" class="control-label">用户名</label>
-			            <input type="text" class="form-control" id="username" placeholder="20个字以内，不能含有符号，可以包含“_” “.”">
+			            <input type="text" class="form-control" id="username" name="username" placeholder="6-20字，不能含有符号，可以包含“_” “.”">
 			            <label class="color-red" id="username-mes"></label>		            		            		            
 			          </div>  
 			                  
@@ -35,7 +35,7 @@
 			        <div class="form-group">
 			        	<div class="col-md-12">		          	
 			            <label for="nickname" class="control-label">昵称</label>
-			            <input type="text" class="form-control" id="nickname" placeholder="20个字以内">		
+			            <input type="text" class="form-control" id="nickname" name="nickname" placeholder="20个字以内">		
 			            <label class="color-red" id="nickname-mes"></label>	            		            		            
 			          </div>     
 			        </div>
@@ -43,7 +43,7 @@
 			        <div class="form-group">
 			          <div class="col-md-6">
 			            <label for="password" class="control-label">密码</label>
-			            <input type="password" class="form-control" id="pwd" placeholder="8-15个字符，只能包含数字和英文">
+			            <input type="password" class="form-control" id="pwd" name="pwd" placeholder="8-15个字符，只能包含数字和英文">
 			            <label class="color-red" id="pwd-mes"></label>	
 			          </div>
 			          <div class="col-md-6">
@@ -56,7 +56,7 @@
 			        <div class="form-group">
 			          <div class="col-md-12">		          	
 			            <label for="username" class="control-label">Email</label>
-			            <input type="email" class="form-control" id="email" placeholder="abcd@email.com">	
+			            <input type="email" class="form-control" id="email" name="email" placeholder="abcd@email.com">	
 			            <label class="color-red" id="email-mes"></label>		            		            		            
 			          </div>              
 			        </div>			

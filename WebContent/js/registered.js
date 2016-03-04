@@ -7,6 +7,8 @@ $(function(){
 	$("#username").blur(function(){
 		if($("#username").val()==""){
 			$("#username-mes").html("用户名不能为空！");
+		}else if($("username").val().length()<6||$("#username").val().length()>20||$("#username").val().match("[a-zA-Z0-9_.]{6-20}")==null){
+			$("#username-mes").html("用户名格式不正确！");
 		}else{
 			$("#username-mes").html("");
 			status1=true;

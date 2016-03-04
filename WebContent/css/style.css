@@ -262,8 +262,8 @@ a{
 .floorhd-1,.floorhd-2 {
 	color: #323a45;
 	font-size: 18px;
-	height: 18px;
-	line-height: 18px;
+	height: 30px;
+	line-height: 30px;
 	padding-left: 3px;
 	background-color: #BBB392;
 	position: relative;
@@ -276,7 +276,7 @@ a{
 
 .floorhd-1 h4,.floorhd-2 h4 {
 	padding-left: 9px;
-	line-height: 18px;
+	line-height: 30px;
 	background: #F5F5F5;
 }
 

@@ -1,6 +1,7 @@
 package com.yuzhaibu.controller;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -42,6 +43,16 @@ public class LoginController extends BaseController {
 	@RequestMapping("/toRegistered")
 	public String toRegistered(){
 		return "registered";
+	}
+	
+	@RequestMapping("/reg")
+	public String reg(HttpServletRequest request){
+		String username = request.getParameter("username");
+		String nickname = request.getParameter("nickname");
+		String pwd = request.getParameter("pwd");
+		String email = request.getParameter("email");
+		String gender = request.getParameter("gender");
+		return null;
 	}
 	
 }
