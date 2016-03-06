@@ -35,7 +35,7 @@
 			        <div class="form-group">
 			        	<div class="col-md-12">		          	
 			            <label for="nickname" class="control-label">昵称</label>
-			            <input type="text" class="form-control" id="nickname" name="nickname" placeholder="20个字以内">		
+			            <input type="text" class="form-control" id="nickname" name="nickname" placeholder="6-20字，不能含有符号，可以包含“_” “.”, 不能与用户名相同！">		
 			            <label class="color-red" id="nickname-mes"></label>	            		            		            
 			          </div>     
 			        </div>
@@ -60,18 +60,6 @@
 			            <label class="color-red" id="email-mes"></label>		            		            		            
 			          </div>              
 			        </div>			
-			        <div class="form-group">
-			          
-			          <div class="col-md-6 templatemo-radio-group">
-			          	<label class="control-label">性别：</label>
-			          	<label class="radio-inline">
-		          			<input type="radio" name="gender" id="genderm" value="option1" checked="true"> 男
-		          		</label>
-		          		<label class="radio-inline">
-		          			<input type="radio" name="gender" id="genderfm" value="option2"> 女
-		          		</label>
-			          </div>             
-			        </div>
 			        
 			        <div class="form-group">
 			          <div class="col-md-12">

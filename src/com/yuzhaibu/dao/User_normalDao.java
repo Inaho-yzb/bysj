@@ -27,4 +27,11 @@ public interface User_normalDao {
 	 * @return
 	 */
 	User_normal findByItemId(int itemid);
+
+	/**
+	 * 注册用户
+	 * @param user
+	 * @return
+	 */
+	Integer regUser(User_normal user);
 }

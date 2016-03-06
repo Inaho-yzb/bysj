@@ -1,71 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>  
     <!DOCTYPE mapper  
       PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
-          "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
-          
+          "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="com.yuzhaibu.dao.ItemDao">
-	
-	<select id="findItemByUserId" parameterType="int" resultType="com.yuzhaibu.entity.Item">
-		select * from item where sellerid=#{sellerid} limit 0,5;
-	</select>
-	
-	<select id="findFavItemByUserId" parameterType="int" resultMap="favResultMap">
-		select itemid,itemname,sellprice,originprice,color,tradeposition,sellerid,discreption,itemmainimg,viewtime,itemcreatime,sellstatus,u.nickname as sellernickname,u.authen as sellerauthen,favid from item i,fav f,user_normal u where itemid=item_id and setfavuserid=#{userid} and usernormal_id=i.sellerid limit 0,5;
-	</select>
-	
+
 	<resultMap type="com.yuzhaibu.entity.Fav" id="favResultMap">
 		<id property="favid" column="favid"></id>
-		<result property="sellerauthen" column="sellerauthen"/>
-		<result property="sellernickname" column="sellernickname"/>
+		<result property="sellerauthen" column="sellerauthen" />
+		<result property="sellernickname" column="sellernickname" />
 		<association property="item" javaType="com.yuzhaibu.entity.Item">
-             <id property="itemid" column="itemid"/>
-             <result property="itemname" column="itemname"/>
-             <result property="sellprice" column="sellprice"/>
-             <result property="originprice" column="originprice"/>
-             <result property="color" column="color"/>
-             <result property="tradeposition" column="tradeposition"/>
-             <result property="sellerid" column="sellerid"/>
-             <result property="discreption" column="discreption"/>
-             <result property="itemmainimg" column="itemmainimg"/>
-             <result property="itemcreatime" column="itemcreatime"/>
-             <result property="viewtime" column="viewtime"/>
-             <result property="sellstatus" column="sellstatus"/>
-        </association>
+			<id property="itemid" column="itemid" />
+			<result property="itemname" column="itemname" />
+			<result property="sellprice" column="sellprice" />
+			<result property="originprice" column="originprice" />
+			<result property="color" column="color" />
+			<result property="tradeposition" column="tradeposition" />
+			<result property="sellerid" column="sellerid" />
+			<result property="discreption" column="discreption" />
+			<result property="itemmainimg" column="itemmainimg" />
+			<result property="itemcreatime" column="itemcreatime" />
+			<result property="viewtime" column="viewtime" />
+			<result property="sellstatus" column="sellstatus" />
+		</association>
 	</resultMap>
-	
-	<select id="findIndexItemByClassId" parameterType="int" resultMap="itemAndUserMap">
-		select itemid,itemname,sellprice,itemmainimg,school,authen from item i,user_normal u,itemclass ic where i.sellerid=u.usernormal_id and sellstatus=0  and ic.itemclass_fatherid=#{classid} and ic.itemclass_id=i.itemclassid order by itemcreatime desc;
-	</select>
 	<resultMap type="com.yuzhaibu.entity.Item" id="itemAndUserMap">
 		<id property="itemid" column="itemid"></id>
-		<result property="itemname" column="itemname"/>
-		<result property="sellprice" column="sellprice"/>
-		<result property="itemmainimg" column="itemmainimg"/>
+		<result property="itemname" column="itemname" />
+		<result property="sellprice" column="sellprice" />
+		<result property="itemmainimg" column="itemmainimg" />
 		<association property="usernormal" javaType="com.yuzhaibu.entity.User_normal">
-			 <id property="uernormal_id" column="usernormal_id"/>
-             <result property="school" column="school"/>
-             <result property="authen" column="authen"/>            
-        </association>
+			<id property="uernormal_id" column="usernormal_id" />
+			<result property="school" column="school" />
+			<result property="authen" column="authen" />
+		</association>
 	</resultMap>
-	
-	<select id="findItemByItemId" parameterType="int" resultType="com.yuzhaibu.entity.Item">
+
+	<select id="findItemByUserId" parameterType="int"
+		resultType="com.yuzhaibu.entity.Item">
+		select * from item where sellerid=#{sellerid} limit 0,5;
+	</select>
+
+	<select id="findFavItemByUserId" parameterType="int" resultMap="favResultMap">
+		select
+		itemid,itemname,sellprice,originprice,color,tradeposition,sellerid,discreption,itemmainimg,viewtime,itemcreatime,sellstatus,u.nickname
+		as sellernickname,u.authen as sellerauthen,favid from item i,fav
+		f,user_normal u where itemid=item_id and setfavuserid=#{userid} and
+		usernormal_id=i.sellerid limit 0,5;
+	</select>
+
+
+
+	<select id="findIndexItemByClassId" parameterType="int"
+		resultMap="itemAndUserMap">
+		select itemid,itemname,sellprice,itemmainimg,school,authen
+		from item i,user_normal u,itemclass ic where
+		i.sellerid=u.usernormal_id and sellstatus=0 and
+		ic.itemclass_fatherid=#{classid} and ic.itemclass_id=i.itemclassid
+		order by itemcreatime desc;
+	</select>
+
+
+	<select id="findItemByItemId" parameterType="int"
+		resultType="com.yuzhaibu.entity.Item">
 		select * from item where itemid = #{itemid}
 	</select>
-	
-	<select id="findOtherItemByUserId" parameterType="int" resultType="com.yuzhaibu.entity.Item">
-		select itemid,itemmainimg,itemname FROM item where sellerid = #{userid} and sellstatus=0 order by viewtime desc limit 0,4;
+
+	<select id="findOtherItemByUserId" parameterType="int"
+		resultType="com.yuzhaibu.entity.Item">
+		select itemid,itemmainimg,itemname FROM item where sellerid
+		= #{userid} and sellstatus=0 order by viewtime desc limit 0,4;
 	</select>
-	
-	<select id="findItemListFatherItemByFatherId" parameterType="int" resultType="com.yuzhaibu.entity.Item">
-		select * from item i,itemclass it where it.itemclass_fatherid=#{fid} and i.itemclassid=it.itemclass_id and sellstatus!=2 order by viewtime limit 0,8;
+
+	<select id="findItemListFatherItemByFatherId" parameterType="int"
+		resultType="com.yuzhaibu.entity.Item">
+		select * from item i,itemclass it where
+		it.itemclass_fatherid=#{fid} and i.itemclassid=it.itemclass_id and
+		sellstatus!=2 order by viewtime limit 0,8;
 	</select>
-	
-	<select id="findFavCountByItemId" parameterType="int" resultType="int">
+
+	<select id="findFavCountByItemId" parameterType="int"
+		resultType="int">
 		SELECT COUNT(*) from fav where item_id=#{itemid}
 	</select>
-	
-	<select id="findItemListByClassId" parameterType="int" resultType="com.yuzhaibu.entity.Item">
-		select * from item where itemclassid=#{id} and sellstatus!=2 order by viewtime limit 0,8;
+
+	<select id="findItemListByClassId" parameterType="int"
+		resultType="com.yuzhaibu.entity.Item">
+		select * from item where itemclassid=#{id} and
+		sellstatus!=2 order by viewtime limit 0,8;
 	</select>
-	
+
 </mapper>

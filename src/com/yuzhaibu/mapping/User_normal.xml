@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>  
     <!DOCTYPE mapper  
       PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
-          "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
-          
+          "http://mybatis.org/dtd/mybatis-3-mapper.dtd">        
 <mapper namespace="com.yuzhaibu.dao.User_normalDao">  
     <select id="findAll" resultType="com.yuzhaibu.entity.User_normal">
     	select * from user_normal
@@ -23,4 +22,8 @@
     <select id="findByItemId" parameterType="int" resultType="com.yuzhaibu.entity.User_normal">
     	select * from user_normal u,item i where u.usernormal_id = i.sellerid and i.itemid=#{itemid}
     </select>
+    
+    <insert id="regUser" parameterType="com.yuzhaibu.entity.User_normal">
+    	insert into user_normal(username,pwd,email,nickname,authen,levexp,usernormalcreatime) values(#{username},#{pwd},#{email},#{nickname},0,0,now())
+    </insert>
  </mapper>  

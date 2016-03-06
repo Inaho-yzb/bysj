@@ -31,7 +31,6 @@ public class User_normalServiceImpl extends BaseManager implements User_normalSe
 	@Override
 	public User_normal findUserByUsername(String username) {		
 		User_normal user = user_normalDao.findByUsername(username);
-		
 		return user;
 	}
 
@@ -47,6 +46,12 @@ public class User_normalServiceImpl extends BaseManager implements User_normalSe
 	public User_normal findUserByItemid(int itemid) {
 		User_normal user = user_normalDao.findByItemId(itemid);
 		return user;
+	}
+
+
+	@Override
+	public Integer regUser(User_normal user) {
+		return user_normalDao.regUser(user);
 	}
 	
 	

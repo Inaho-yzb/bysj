@@ -26,4 +26,11 @@ public interface User_normalService {
 	 * @return
 	 */
 	User_normal findUserByItemid(int itemid);
+
+	/**
+	 * 注册用户
+	 * @param user
+	 * @return
+	 */
+	Integer regUser(User_normal user);
 }

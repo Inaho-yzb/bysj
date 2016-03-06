@@ -12,6 +12,7 @@ public class User_normal {
 	private String username;
 	private String pwd;
 	private String nickname;
+	private String email;
 	private String mobile;
 	private String qq;
 	private String school;
@@ -108,6 +109,12 @@ public class User_normal {
 	}
 	public void setUsernormal_id(int usernormal_id) {
 		this.usernormal_id = usernormal_id;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 }

@@ -26,7 +26,7 @@
 						<c:choose>
 						<c:when test="${empty username}">
 							<li><a href="login/toLogin.htm">登录</a></li>
-							<li><a href="#">免费注册</a></li>
+							<li><a href="login/toRegistered.htm">免费注册</a></li>
 						</c:when>
 						<c:otherwise>
 							<li><a href="${pageContext.request.contextPath}/user/toProfile.htm">${username }</a></li>
