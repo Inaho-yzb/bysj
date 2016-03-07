@@ -36,7 +36,7 @@
 					<div>
 						当前经验：${usernormal.levexp }/${nextexp}
 					</div>
-					<a href="" class="btn btn-info profile-putitems">发布商品</a>
+					<a href="releasepro.htm" class="btn btn-info profile-putitems">发布商品</a>
 				</div>
 			</div>
 

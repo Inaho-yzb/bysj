@@ -12,9 +12,10 @@
 <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet" media="screen">
 <script src="${pageContext.request.contextPath}/js/javascript.js"></script>
+<script src="${pageContext.request.contextPath}/js/bopspop.js"></script>
 
 <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
-
+<link href="${pageContext.request.contextPath}/css/popstyle.css" rel="stylesheet">
 </head>
 
 <body>

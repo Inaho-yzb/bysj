@@ -1,7 +1,6 @@
 package com.yuzhaibu.controller;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.io.Serializable;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -20,8 +19,12 @@ import com.yuzhaibu.util.StringUtils;
 
 @Controller
 @RequestMapping("/login")
-public class LoginController extends BaseController {
+public class LoginController implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1824613938168248847L;
 	@Resource
 	private User_normalService user_normalService;
 	
@@ -110,6 +113,18 @@ public class LoginController extends BaseController {
 			model.addAttribute("errorMes","注册失败，请稍候再试！");
 			return "loginerror";
 		}
+	}
+	
+	@RequestMapping(value=("/ajaxchecklogin"),method=RequestMethod.GET)
+	@ResponseBody
+	public AjaxResult ajaxchecklogin(HttpSession session){
+		AjaxResult result = new AjaxResult();
+		if(session.getAttribute("username")==null){
+			result.setErrorCode(1);
+		}else{
+			result.setErrorCode(0);
+		}
+		return result;
 	}
 	
 }

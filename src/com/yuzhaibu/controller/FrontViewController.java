@@ -1,5 +1,6 @@
 package com.yuzhaibu.controller;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -22,7 +23,12 @@ import com.yuzhaibu.service.MessageService;
 import com.yuzhaibu.service.User_normalService;
 
 @Controller
-public class FrontViewController extends BaseController {
+public class FrontViewController implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5514339438975665140L;
+
 	@Resource
 	private User_normal usernormal;
 

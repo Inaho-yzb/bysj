@@ -1,0 +1,129 @@
+.mask
+{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    overflow: scroll;
+    filter: alpha(opacity=50);
+    -moz-opacity: 0.5;
+    opacity: 0.5;
+    z-index: 900;
+    overflow: auto;
+    top: 0px;
+    right: 0px;
+}
+
+.popall{
+	border-radius:5px;
+	box-shadow: 1px 1px 50px rgba(0,0,0,.3);
+	position:fixed;
+	z-index:999;
+	font-family:微软雅黑,黑体;
+	overflow:hidden;
+}
+
+.popcloseDialog{
+	position: absolute;
+    top: 10px;
+    right: 10px;
+	cursor:pointer;	
+    width: 16px;
+    height: 16px;
+	background: url(../images/frontview/icon-pop.png) no-repeat 0 -40px;
+}
+
+.pop-icon{
+	width: 30px;
+    height: 30px;
+    background: url(../images/frontview/icon-pop.png) no-repeat;
+    display: inline-block;
+	vertical-align:top;
+	margin-right:5px;
+	margin-bottom:30px;
+}
+
+.poptitle h4{
+	text-align:center;
+	line-height:15px;
+	line-height: 0px;
+	margin-top: 20px;
+	margin-bottom:20px;
+}
+
+.popcontent{
+	text-align: center;
+	word-wrap: break-word;
+	border-top:1px solid #eee;
+	border-bottom:1px solid #eee;
+}
+
+.popbtnok{
+	color:#fff;
+	border-color: #4898d5;
+    background-color: #2e8ded;
+	
+}
+
+.popbtn{
+	height: 28px;
+    line-height: 28px;
+	text-align:center;
+    margin: 0 6px;
+    padding: 0 15px;
+    border-radius: 2px;
+    font-weight: 400;
+    cursor: pointer;
+    text-decoration: none;
+	display:block;
+	float:right;
+	margin-top:10px;
+	margin-bottom:10px;
+}
+
+.popbtn:hover{
+	opacity: 0.9;
+    text-decoration: none;
+}
+
+.popbtncancel{
+	border: 1px #dedede solid;
+    background-color: #f1f1f1;
+    color: #333;
+}
+
+.popinput{
+	display:block;
+	width: 220px;
+    height: 30px;
+	margin-top: 2%;
+    line-height: 30px;
+    padding: 0 5px;
+    border: 1px solid #ccc;
+    box-shadow: 1px 1px 5px rgba(0,0,0,.1) inset;
+    color: #333;
+	margin-left:auto;
+	margin-right:auto;
+	margin-bottom:10px;
+}
+
+.pop-con-text{
+	font-size: 20px;
+    line-height: 30px;
+    word-break: break-all;
+	display:inline-block;
+	vertical-align:top;
+}
+
+.popcontent span{
+	margin-top:10%;
+}
+
+#nttext{
+	display:block;
+	margin-top: 15px;
+}
+
+.pop-select{
+	margin-bottom:10px;
+}

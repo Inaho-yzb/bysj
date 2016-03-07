@@ -65,7 +65,7 @@
 					<div class="row bkcl-gray">
 						<div class="col-md-12 product-launch">
 							<div class="bkcl-blue fb-laun">
-								<a href="#"> <span>发布闲置</span>
+								<a href="javascript:void(0)" id="releasebtn"> <span>发布闲置</span>
 								</a>
 
 							</div>
