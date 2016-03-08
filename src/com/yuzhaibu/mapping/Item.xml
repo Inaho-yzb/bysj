@@ -89,5 +89,10 @@
 		select * from item where itemclassid=#{id} and
 		sellstatus!=2 order by viewtime limit 0,8;
 	</select>
+	
+	<insert id="insertNewItem" parameterType="java.util.Map">
+		insert into item
+		
+	</insert>
 
 </mapper>

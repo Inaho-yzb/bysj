@@ -56,4 +56,9 @@ public class ItemClassServiceImpl extends BaseManager implements ItemClassServic
 		return itemClass;
 	}
 
+	@Override
+	public List<ItemClass> findAllChildClass() {
+		return itemClassDao.finAllChildClass();
+	}
+
 }

@@ -1,5 +1,6 @@
 package com.yuzhaibu.controller;
 
+import java.awt.event.ItemListener;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -7,7 +8,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
@@ -26,13 +30,17 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.yuzhaibu.entity.Fav;
 import com.yuzhaibu.entity.Item;
+import com.yuzhaibu.entity.ItemClass;
 import com.yuzhaibu.entity.Message;
 import com.yuzhaibu.entity.User_normal;
+import com.yuzhaibu.service.ItemClassService;
 import com.yuzhaibu.service.ItemService;
 import com.yuzhaibu.service.MessageService;
 import com.yuzhaibu.service.User_normalService;
 import com.yuzhaibu.util.AjaxResult;
+import com.yuzhaibu.util.DateUtils;
 
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 @Controller
@@ -55,6 +63,9 @@ public class User_normalController implements Serializable {
 
 	@Resource
 	private ItemService itemService;
+	
+	@Resource
+	private ItemClassService itemClassService;
 
 	@RequestMapping("/toProfile")
 	public String toProfile(HttpSession session, ModelMap model, HttpServletRequest request) {
@@ -112,78 +123,47 @@ public class User_normalController implements Serializable {
 	}
 
 	@RequestMapping(value = ("/releasepro"))
-	public String toReleasePro(HttpServletRequest request, HttpSession session) {
+	public String toReleasePro(HttpServletRequest request,ModelMap map) {
+		List<ItemClass> itemClassList =  itemClassService.findAllChildClass();
+		map.put("itemClassList", itemClassList);
 		return "releasepro";
 	}
 
-	@RequestMapping(value=("/uploaditemimg"))
-	public AjaxResult uploadFile(HttpServletRequest req, HttpServletResponse resp){
+	@RequestMapping(value=("/uploaditem"),method=RequestMethod.POST)
+	@ResponseBody
+	public AjaxResult uploadItem(HttpServletRequest req, HttpServletResponse resp,HttpSession session){
 		AjaxResult result = new AjaxResult();
-		/*
-		 * //防止中文乱码，与页面字符集一致 req.setCharacterEncoding("UTF-8");
-		 */
-		// 得到上传文件的保存目录，将上传的文件存放于WEB-INF目录下，不允许外界直接访问，保证上传文件的安全
-		String savePath = req.getServletContext().getRealPath("/uploads/itemimages");
-		// this.getServletContext().getRealPath("/WEB-INF/upload");
-		// 创建保存目录的文件
-		File saveFile = new File(savePath);
-		// 判断保存目录文件是否存在,不存在则创建一个文件夹
-		if (!saveFile.exists()) {
-			System.out.println("文件目录创建中。。。");
-			saveFile.mkdir();
-		}
+		 
 		// 消息提示
 		// 将req转换成Spring的request
 		MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest) req;
 		// 获取上传文件
-		List<MultipartFile> list = multipartHttpServletRequest.getFiles("file");
-		// 获取普通输入项的数据
-		String map = multipartHttpServletRequest.getParameter("username");
-		System.out.println(map);
-		List<String> fileNameList = new ArrayList<String>();
-		for (MultipartFile multipartFile : list) {
-			if (!multipartFile.isEmpty()) {
-				// 得到上传的文件名称
-				String fileName = multipartFile.getOriginalFilename();
-				System.out.println("文件名是：" + fileName);
-				if (fileName == null || fileName.trim().equals("")) {
-					fileNameList.add(fileName);
-					continue;
-				}
-				try{
-				// 获取item中的上传输入流
-				BufferedInputStream bis = new BufferedInputStream(multipartFile.getInputStream());
-				// 创建一个文件输出流
-				BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(savePath + "\\" + fileName));
-				// 创建一个缓冲区
-				byte[] buffer = new byte[1024 * 8];
-				// 循环将缓冲输入流读入到缓冲区当中
-				while (true) {
-					// 循环将缓冲输入流读入到缓冲区当中
-					int length = bis.read(buffer);
-					// 判断是否读取到文件末尾
-					if (length == -1) {
-						break;
-					}
-					// 使用BufferedOutputStream缓冲输出流将缓冲区的数据写入到指定的目录(savePath +
-					// "\\" + filename)当中
-					bos.write(buffer, 0, length);
-				}
-				// 关闭输入流
-				bis.close();
-				// 关闭输出流
-				bos.close();
-				
-				result.setErrorCode(0);
-				String resStr = JSONObject.fromObject(fileNameList).toString();
-				result.setResultStr(resStr);
-				}catch(Exception e){
-					result.setErrorCode(1);
-					e.printStackTrace();
-				}
-			}
-		}
+		List<MultipartFile> list = multipartHttpServletRequest.getFiles("uploadfile");
 		
+		String date = DateUtils.dateToStrLong(new Date(), "yyyyMMdd");
+		// 得到上传文件的保存目录，将上传的文件存放于WEB-INF目录下，不允许外界直接访问，保证上传文件的安全
+		String savePath = req.getServletContext().getRealPath("/uploads/itemimages/"+date);
+		
+		String itemname = multipartHttpServletRequest.getParameter("itemname");
+		String sellprice = multipartHttpServletRequest.getParameter("sellprice");
+		String originprice = multipartHttpServletRequest.getParameter("originprice");
+		String bargain = multipartHttpServletRequest.getParameter("bargain");
+		String color = multipartHttpServletRequest.getParameter("color");
+		String tradeposition = multipartHttpServletRequest.getParameter("tradeposition");
+		String discreption = multipartHttpServletRequest.getParameter("description");
+		String username = (String) session.getAttribute("username");
+		Map map = new HashMap();
+		map.put("images", list);
+		map.put("itemname",itemname);
+		map.put("sellprice", sellprice);
+		map.put("originprice",originprice);
+		map.put("bargain",bargain);
+		map.put("color", color);
+		map.put("tradeposition",tradeposition);
+		map.put("discreption", discreption);
+		map.put("username", username);
+		
+		itemService.uploadItem(map,savePath);
 		return result;
 	}
 

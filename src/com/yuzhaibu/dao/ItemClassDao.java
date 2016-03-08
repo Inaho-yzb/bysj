@@ -40,5 +40,11 @@ public interface ItemClassDao {
 	 * @return
 	 */
 	ItemClass findItemClassById(int id);
+
+	/**
+	 * 查找所有子类
+	 * @return
+	 */
+	List<ItemClass> finAllChildClass();
 	
 }

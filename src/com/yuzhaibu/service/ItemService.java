@@ -53,4 +53,6 @@ public interface ItemService {
 	 * @return
 	 */
 	List<Item> findItemListByClassId(int id);
+
+	Integer uploadItem(Map map,String savePath);
 }

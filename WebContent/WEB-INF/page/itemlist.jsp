@@ -18,7 +18,11 @@
 		<div class="col-md-3">
 			<div class="panel panel-default itemclass">
 				<div class="panel-body">
-					<c:forEach items="${itemChildClassList}" var="itemChildClass"><span><a href="itemlist.htm?id=${itemChildClass.itemclass_id}">${itemChildClass.itemclass_name}</a></span> </c:forEach>
+					<c:forEach items="${itemChildClassList}" var="itemChildClass">
+						<span><a href="itemlist.htm?id=${itemChildClass.itemclass_id}">
+							${itemChildClass.itemclass_name}</a>
+						</span> 
+					</c:forEach>
 					
 				</div>
 			</div>

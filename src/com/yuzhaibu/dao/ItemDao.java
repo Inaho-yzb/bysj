@@ -1,6 +1,7 @@
 package com.yuzhaibu.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.yuzhaibu.entity.Fav;
 import com.yuzhaibu.entity.Item;
@@ -58,5 +59,8 @@ public interface ItemDao {
 	 * @return
 	 */
 	List<Item> findItemListByClassId(int id);
+
+	
+	Integer insertNewItem(Map map);	
 	
 }

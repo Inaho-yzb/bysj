@@ -34,4 +34,6 @@ public interface User_normalDao {
 	 * @return
 	 */
 	Integer regUser(User_normal user);
+
+	Integer findUserIdByUsername(String username);
 }

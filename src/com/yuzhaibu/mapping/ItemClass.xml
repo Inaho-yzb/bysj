@@ -23,4 +23,8 @@
 		select * from itemclass where itemclass_id = #{id};
 	</select>
 	
+	<select id="finAllChildClass" resultType="com.yuzhaibu.entity.ItemClass">
+		select * from itemclass where itemclass_fatherid !=0;
+	</select>
+	
 </mapper>

@@ -26,4 +26,8 @@
     <insert id="regUser" parameterType="com.yuzhaibu.entity.User_normal">
     	insert into user_normal(username,pwd,email,nickname,authen,levexp,usernormalcreatime) values(#{username},#{pwd},#{email},#{nickname},0,0,now())
     </insert>
+    
+    <select id="findUserIdByUsername" parameterType="String" resultType="int">
+    	select id from user_normal where username = #{username}
+    </select>
  </mapper>  

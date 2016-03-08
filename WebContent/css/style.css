@@ -23,6 +23,10 @@ a{
 	background:#f00;
 }
 
+.color-red{
+	color:#f00;
+}
+
 .pad-lf-clr{
 	padding-left:0;
 }
