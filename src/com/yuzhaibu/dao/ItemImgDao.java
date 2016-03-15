@@ -4,6 +4,6 @@ import java.util.Map;
 
 public interface ItemImgDao {
 
-	void insertNewImg(Map imgMap);
+	int insertNewImg(Map imgMap);
 	
 }

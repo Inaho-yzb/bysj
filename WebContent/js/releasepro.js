@@ -81,7 +81,8 @@ function ajaxSubmit() {
 			bargain:$("input[type=radio][checked]").val(),
 			color:$("#itemuse").val(),
 			tradeposition: $("#itemtradeposition").val(),
-			description:$("#itemdescription").val()
+			description:$("#itemdescription").val(),
+			itemclassid:$("#itemclass").val()
 		},
 		// 上传完成后, 返回json, text
 		dataType : 'json',

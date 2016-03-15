@@ -145,13 +145,15 @@ public class User_normalController implements Serializable {
 		String savePath = req.getServletContext().getRealPath("/uploads/itemimages/"+date);
 		
 		String itemname = multipartHttpServletRequest.getParameter("itemname");
-		String sellprice = multipartHttpServletRequest.getParameter("sellprice");
-		String originprice = multipartHttpServletRequest.getParameter("originprice");
-		String bargain = multipartHttpServletRequest.getParameter("bargain");
+		Double sellprice = Double.valueOf(multipartHttpServletRequest.getParameter("sellprice"));
+		Double originprice = Double.valueOf(multipartHttpServletRequest.getParameter("originprice"));
+		Integer bargain = Integer.valueOf(multipartHttpServletRequest.getParameter("bargain"));
 		String color = multipartHttpServletRequest.getParameter("color");
 		String tradeposition = multipartHttpServletRequest.getParameter("tradeposition");
 		String discreption = multipartHttpServletRequest.getParameter("description");
 		String username = (String) session.getAttribute("username");
+		Integer itemclassid = Integer.valueOf(multipartHttpServletRequest.getParameter("itemclassid"));
+		
 		Map map = new HashMap();
 		map.put("images", list);
 		map.put("itemname",itemname);
@@ -162,6 +164,7 @@ public class User_normalController implements Serializable {
 		map.put("tradeposition",tradeposition);
 		map.put("discreption", discreption);
 		map.put("username", username);
+		map.put("itemclassid", itemclassid);
 		
 		itemService.uploadItem(map,savePath);
 		return result;

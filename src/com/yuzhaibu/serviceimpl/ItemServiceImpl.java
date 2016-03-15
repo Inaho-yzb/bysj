@@ -177,6 +177,8 @@ public class ItemServiceImpl extends BaseManager implements ItemService {
 		Map imgMap = new HashMap();
 		imgMap.put("id", id);
 		imgMap.put("fileNameList", fileNameList);
+		
+		//TODO
 		itemImgDao.insertNewImg(imgMap);
 		
 		return id;
