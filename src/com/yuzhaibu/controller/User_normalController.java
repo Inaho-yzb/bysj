@@ -154,19 +154,34 @@ public class User_normalController implements Serializable {
 		String username = (String) session.getAttribute("username");
 		Integer itemclassid = Integer.valueOf(multipartHttpServletRequest.getParameter("itemclassid"));
 		
+		if(itemname.length()>15 || tradeposition.length()>150 || discreption.length()>150){
+			result.setErrorCode(1);
+			result.setErrorMes("请输入正确的表单信息！");
+			return result;
+		}
+		
+		Item item = new Item();
+		
 		Map map = new HashMap();
 		map.put("images", list);
-		map.put("itemname",itemname);
-		map.put("sellprice", sellprice);
-		map.put("originprice",originprice);
-		map.put("bargain",bargain);
-		map.put("color", color);
-		map.put("tradeposition",tradeposition);
-		map.put("discreption", discreption);
-		map.put("username", username);
-		map.put("itemclassid", itemclassid);
+		item.setItemname(itemname);
+		item.setSellprice(sellprice);
+		item.setOriginprice(originprice);
+		item.setBargain(bargain);
+		item.setColor(color);
+		item.setTradeposition(tradeposition);
+		item.setDiscreption(discreption);
+		item.setUsername(username);
+		item.setItemclassid(itemclassid);
+		map.put("item", item);
 		
-		itemService.uploadItem(map,savePath);
+		Integer itemid = itemService.uploadItem(map,savePath);
+		if(itemid!=-1){
+			result.setErrorCode(0);
+			result.setResultStr(String.valueOf(itemid));
+		}else{
+			result.setErrorCode(1);
+		}
 		return result;
 	}
 

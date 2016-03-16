@@ -89,10 +89,12 @@
 		select * from item where itemclassid=#{id} and
 		sellstatus!=2 order by viewtime limit 0,8;
 	</select>
-	
-	<insert id="insertNewItem" parameterType="java.util.Map">
-		insert into item (itemname,sellprice,originprice,color,tradeposition,sellerid,itemcreatetime,bargain,discreption,sellstatus,itemclassid)
+
+	<insert id="insertNewItem" parameterType="com.yuzhaibu.entity.Item" useGeneratedKeys="true" keyProperty="itemid">
+		insert into item
+		(itemname,sellprice,originprice,color,tradeposition,sellerid,itemcreatime,bargain,discreption,sellstatus,itemclassid)
 		values(#{itemname},#{sellprice},#{originprice},#{color},#{tradeposition},#{sellerid},now(),#{bargain},#{discreption},0,#{itemclassid})
 	</insert>
+
 
 </mapper>

@@ -28,6 +28,6 @@
     </insert>
     
     <select id="findUserIdByUsername" parameterType="String" resultType="int">
-    	select id from user_normal where username = #{username}
+    	select usernormal_id from user_normal where username = #{username}
     </select>
  </mapper>  

@@ -4,7 +4,9 @@ $(function() {
 		var value = $("#itemname").val();
 		if (value == "") {
 			$("#itemnameerror").text("商品名不能为空！");
-		} else {
+		} else if(value.length>15){
+			$("#itemnameerror").text("商品名不能超过15个字！");
+		}else {
 			$("#itemnameerror").text("");
 		}
 	});
@@ -35,7 +37,9 @@ $(function() {
 		var value = $("#itemtradeposition").val();
 		if (value == "") {
 			$("#itemtradepositionerror").text("请填写交易地点！");
-		} else {
+		}else if(value.length>50){
+			$("#itemtradepositionerror").text("交易地点不能大于50 个字！");
+		}else {
 			$("#itemtradepositionerror").text("");
 		}
 	});
@@ -46,6 +50,15 @@ $(function() {
 			$("#itemclasserror").text("请选择物品类别！");
 		}else{
 			$("#itemtradepositionerror").text("");
+		}
+	});
+	
+	$("#itemdescription").blur(function(){
+		var value = $("#itemdescription").val();
+		if(value.length!="" && value.length>150){
+			$("#itemdescriptionerror").text("描述的文字不能超过150个！");
+		}else{
+			$("#itemdescriptionerror").text("");
 		}
 	});
 
@@ -91,7 +104,14 @@ function ajaxSubmit() {
 		},
 		// 上传之后回调
 		onComplate : function(data) {
-			alert(data);
+			console.log(data.errorCode);
+			if(data.errorCode!=0){
+				alert(data.errorMes);
+				return false;
+			}else{
+				alert("发布成功！");
+				location.href ="/item.htm?id="+data.resultStr;	
+			}
 		}
 	});
 	$("input[name=uploadfile]").upload("ajaxSubmit")

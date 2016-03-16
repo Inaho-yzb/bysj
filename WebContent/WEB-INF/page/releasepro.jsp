@@ -129,6 +129,7 @@
 					<tr>
 						<th>物品描述：</th>
 						<td><textarea class="form-control" placeholder="请输入物品描述" id="itemdescription"></textarea></td>
+						<td width="150px"><span id="itemdescriptionerror" class="color-red"></span></td>
 					</tr>
 					<tr>
 						<th>物品图片：</th>

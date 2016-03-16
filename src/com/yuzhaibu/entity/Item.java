@@ -8,41 +8,49 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class Item {
 	
-	private int itemid;
+	private Integer itemid;
 	private String itemname;
-	private int sellprice;
-	private int originprice;
+	private Double sellprice;
+	private Double originprice;
 	private String color;
 	private String tradeposition;
-	private int sellerid;
-	private int bargain;
+	private Integer sellerid;
+	private Integer bargain;
 	private String discreption;
 	private Timestamp itemcreatime;
-	private int viewtime;
+	private Integer viewtime;
 	private String itemmainimg;
-	private int sellstatus;
-	private int itemclassid;
+	private Integer sellstatus;
+	private Integer itemclassid;
 	private User_normal usernormal;
 	private ItemClass itemClass;
-	private int favcount;
-	private int mescount;
+	private Integer favcount;
+	private Integer mescount;
+	private Integer userid;
+	private String username;
 	
+	public Integer getItemid() {
+		return itemid;
+	}
+	public void setItemid(Integer itemid) {
+		this.itemid = itemid;
+	}
 	public String getItemname() {
 		return itemname;
 	}
 	public void setItemname(String itemname) {
 		this.itemname = itemname;
 	}
-	public int getSellprice() {
+	public Double getSellprice() {
 		return sellprice;
 	}
-	public void setSellprice(int sellprice) {
+	public void setSellprice(Double sellprice) {
 		this.sellprice = sellprice;
 	}
-	public int getOriginprice() {
+	public Double getOriginprice() {
 		return originprice;
 	}
-	public void setOriginprice(int originprice) {
+	public void setOriginprice(Double originprice) {
 		this.originprice = originprice;
 	}
 	public String getColor() {
@@ -57,16 +65,16 @@ public class Item {
 	public void setTradeposition(String tradeposition) {
 		this.tradeposition = tradeposition;
 	}
-	public int getSellerid() {
+	public Integer getSellerid() {
 		return sellerid;
 	}
-	public void setSellerid(int sellerid) {
+	public void setSellerid(Integer sellerid) {
 		this.sellerid = sellerid;
 	}
-	public int getBargain() {
+	public Integer getBargain() {
 		return bargain;
 	}
-	public void setBargain(int bargain) {
+	public void setBargain(Integer bargain) {
 		this.bargain = bargain;
 	}
 	public String getDiscreption() {
@@ -75,41 +83,34 @@ public class Item {
 	public void setDiscreption(String discreption) {
 		this.discreption = discreption;
 	}
-	
-	public String getItemmainimg() {
-		return itemmainimg;
-	}
-	public void setItemmainimg(String itemmainimg) {
-		this.itemmainimg = itemmainimg;
-	}
-	public int getViewtime() {
-		return viewtime;
-	}
-	public void setViewtime(int viewtime) {
-		this.viewtime = viewtime;
-	}
-	public int getSellstatus() {
-		return sellstatus;
-	}
-	public void setSellstatus(int sellstatus) {
-		this.sellstatus = sellstatus;
-	}
 	public Timestamp getItemcreatime() {
 		return itemcreatime;
 	}
 	public void setItemcreatime(Timestamp itemcreatime) {
 		this.itemcreatime = itemcreatime;
 	}
-	public int getItemid() {
-		return itemid;
+	public Integer getViewtime() {
+		return viewtime;
 	}
-	public void setItemid(int itemid) {
-		this.itemid = itemid;
+	public void setViewtime(Integer viewtime) {
+		this.viewtime = viewtime;
 	}
-	public int getItemclassid() {
+	public String getItemmainimg() {
+		return itemmainimg;
+	}
+	public void setItemmainimg(String itemmainimg) {
+		this.itemmainimg = itemmainimg;
+	}
+	public Integer getSellstatus() {
+		return sellstatus;
+	}
+	public void setSellstatus(Integer sellstatus) {
+		this.sellstatus = sellstatus;
+	}
+	public Integer getItemclassid() {
 		return itemclassid;
 	}
-	public void setItemclassid(int itemclassid) {
+	public void setItemclassid(Integer itemclassid) {
 		this.itemclassid = itemclassid;
 	}
 	public User_normal getUsernormal() {
@@ -124,17 +125,32 @@ public class Item {
 	public void setItemClass(ItemClass itemClass) {
 		this.itemClass = itemClass;
 	}
-	public int getFavcount() {
+	public Integer getFavcount() {
 		return favcount;
 	}
-	public void setFavcount(int favcount) {
+	public void setFavcount(Integer favcount) {
 		this.favcount = favcount;
 	}
-	public int getMescount() {
+	public Integer getMescount() {
 		return mescount;
 	}
-	public void setMescount(int mescount) {
+	public void setMescount(Integer mescount) {
 		this.mescount = mescount;
 	}
+	public Integer getUserid() {
+		return userid;
+	}
+	public void setUserid(Integer userid) {
+		this.userid = userid;
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	
+	
+	
 	
 }

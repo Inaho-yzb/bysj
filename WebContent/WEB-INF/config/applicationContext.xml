@@ -26,7 +26,7 @@
 
 
 
-	<bean id="ds" class="org.apache.tomcat.dbcp.dbcp.BasicDataSource">
+	<bean id="dataSource" class="org.apache.tomcat.dbcp.dbcp.BasicDataSource">
 		<property name="url">
 			<value>${url}</value>
 		</property>
@@ -41,11 +41,29 @@
 		</property>
 	</bean>
 
-
+	
+	 <!-- jdbc事务管理器 -->  
+    <bean id="transactionManager"  
+        class="org.springframework.jdbc.datasource.DataSourceTransactionManager">  
+        <property name="dataSource">  
+            <ref local="dataSource" />  
+        </property>  
+    </bean>  
+    <!--事务模板 -->  
+    <bean id="transactionTemplate"  
+        class="org.springframework.transaction.support.TransactionTemplate">  
+        <property name="transactionManager">  
+            <ref local="transactionManager" />  
+        </property>  
+        <!--ISOLATION_DEFAULT 表示由使用的数据库决定  -->  
+        <property name="isolationLevelName" value="ISOLATION_DEFAULT"/>  
+        <property name="propagationBehaviorName" value="PROPAGATION_REQUIRED"/>  
+        <!-- <property name="timeout" value="30"/> -->  
+    </bean>  
 
 	<!-- sqlSessionFactory -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="ds"></property>
+		<property name="dataSource" ref="dataSource"></property>
 		<property name="mapperLocations" value="classpath*:com/yuzhaibu/mapping/*.xml"></property>
 	</bean>
 

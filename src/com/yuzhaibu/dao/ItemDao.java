@@ -61,6 +61,6 @@ public interface ItemDao {
 	List<Item> findItemListByClassId(int id);
 
 	
-	Integer insertNewItem(Map map);	
+	Integer insertNewItem(Item item);	
 	
 }
