@@ -8,7 +8,7 @@ public interface User_normalService {
 	/**
 	 * 登录通过用户名密码判断是否成功
 	 **/
-	boolean findUserByUsernameAndPwd(String username,String pwd);
+	User_normal findUserByUsernameAndPwd(String username,String pwd);
 	
 	/**
 	 * 通过用户名查找用户

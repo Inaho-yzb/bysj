@@ -18,7 +18,6 @@ import com.yuzhaibu.util.AjaxResult;
 import com.yuzhaibu.util.StringUtils;
 
 @Controller
-@RequestMapping("/login")
 public class LoginController implements Serializable{
 	
 	/**
@@ -28,9 +27,13 @@ public class LoginController implements Serializable{
 	@Resource
 	private User_normalService user_normalService;
 	
-	@RequestMapping("/toLogin")
-	public String toLogin(HttpSession session){
+	@RequestMapping("/login/toLogin")
+	public String toLogin(HttpSession session,HttpServletRequest request,ModelMap model){
 		if(session.getAttribute("username")==null){
+			String reUrl = request.getParameter("url");
+			if(reUrl!=null){
+				model.put("url", reUrl);
+			}
 			return "login";
 		}
 		return "redirect:../user/toProfile.htm";
@@ -38,12 +41,17 @@ public class LoginController implements Serializable{
 	
 	
 	
-	@RequestMapping("/checkLogin")
+	@RequestMapping("/login/checkLogin")
 	public String login(String username,String pwd,HttpSession session,HttpServletRequest request){
-		boolean status = user_normalService.findUserByUsernameAndPwd(username, pwd);
+		User_normal user = user_normalService.findUserByUsernameAndPwd(username, pwd);
 		
-		if(status){
+		if(user!=null){
 			session.setAttribute("username", username);
+			session.setAttribute("userid", user.getUsernormal_id());
+			String url = request.getParameter("url");
+			if(url!=null){
+				return "redirect:../"+url;
+			}
 			return "redirect:../user/toProfile.htm";
 		}else{
 			request.setAttribute("loginmessage", "用户名密码错误");
@@ -51,12 +59,12 @@ public class LoginController implements Serializable{
 		}
 	}
 	
-	@RequestMapping("/toRegistered")
+	@RequestMapping("/login/toRegistered")
 	public String toRegistered(){
 		return "registered";
 	}
 	
-	@RequestMapping("/ajaxcheckusername")
+	@RequestMapping("/login/ajaxcheckusername")
 	@ResponseBody
 	public AjaxResult checkusername(HttpServletRequest request){
 		AjaxResult result = new AjaxResult();
@@ -73,7 +81,7 @@ public class LoginController implements Serializable{
 		return result;
 	}
 	
-	@RequestMapping(value=("/reg"),method=RequestMethod.POST)
+	@RequestMapping(value=("/login/reg"),method=RequestMethod.POST)
 	public String reg(HttpServletRequest request,ModelMap model,HttpSession session){
 		String username = request.getParameter("username");
 		String nickname = request.getParameter("nickname");
@@ -115,7 +123,7 @@ public class LoginController implements Serializable{
 		}
 	}
 	
-	@RequestMapping(value=("/ajaxchecklogin"),method=RequestMethod.GET)
+	@RequestMapping(value=("/login/ajaxchecklogin"),method=RequestMethod.GET)
 	@ResponseBody
 	public AjaxResult ajaxchecklogin(HttpSession session){
 		AjaxResult result = new AjaxResult();

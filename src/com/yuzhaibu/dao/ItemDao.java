@@ -14,11 +14,6 @@ public interface ItemDao {
 	List<Item> findItemByUserId(int sellerid);
 	
 	/**
-	 * 用户收藏物品列表查询
-	 **/
-	List<Fav> findFavItemByUserId(int userid);
-	
-	/**
 	 * 首页通过父类id查找物品
 	 * @param classid
 	 * @return
@@ -45,13 +40,6 @@ public interface ItemDao {
 	 * @return
 	 */
 	List<Item> findItemListFatherItemByFatherId(int fid);
-	
-	/**
-	 * 收藏数查询
-	 * @param itemid
-	 * @return
-	 */
-	int findFavCountByItemId(int itemid);
 
 	/**
 	 * 通过类id查找物品
@@ -60,7 +48,15 @@ public interface ItemDao {
 	 */
 	List<Item> findItemListByClassId(int id);
 
-	
-	Integer insertNewItem(Item item);	
+	/**
+	 * 发布新物品
+	 * @param item
+	 * @return
+	 */
+	Integer insertNewItem(Item item);
+
+	int updateMainImg(Map mainMap);
+
+	int updateViewTimes(Integer itemid);	
 	
 }

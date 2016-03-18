@@ -12,7 +12,7 @@
     </select>
     
     <select id="findByUsernameAndPwd" parameterType="String" resultType="com.yuzhaibu.entity.User_normal">
-    	select * from user_normal where username=#{0} and pwd=#{1}
+    	select usernormal_id,username from user_normal where username=#{0} and pwd=#{1}
     </select>  
     
     <update id="updateUser" parameterType="com.yuzhaibu.entity.User_normal">
@@ -30,4 +30,10 @@
     <select id="findUserIdByUsername" parameterType="String" resultType="int">
     	select usernormal_id from user_normal where username = #{username}
     </select>
+    
+    <update id="addUserExp" parameterType="java.util.Map">
+    	update user_normal
+    	set levexp = levexp+#{point}
+    	where usernormal_id = #{id}
+    </update>
  </mapper>  

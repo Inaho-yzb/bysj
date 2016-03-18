@@ -135,7 +135,7 @@
 						<th>物品图片：</th>
 						<td>
 							<div>
-								<input type="file" id="inputfile" name="uploadfile"  multiple="multiple">
+								<input type="file" id="inputfile" name="uploadfile"  multiple="multiple" accept=".jpg,.jpeg,.png,.gif">
 								<label id="filelabe"></label>
 							</div>
 						</td>

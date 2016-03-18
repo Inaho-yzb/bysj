@@ -5,25 +5,7 @@
 
 <mapper namespace="com.yuzhaibu.dao.ItemDao">
 
-	<resultMap type="com.yuzhaibu.entity.Fav" id="favResultMap">
-		<id property="favid" column="favid"></id>
-		<result property="sellerauthen" column="sellerauthen" />
-		<result property="sellernickname" column="sellernickname" />
-		<association property="item" javaType="com.yuzhaibu.entity.Item">
-			<id property="itemid" column="itemid" />
-			<result property="itemname" column="itemname" />
-			<result property="sellprice" column="sellprice" />
-			<result property="originprice" column="originprice" />
-			<result property="color" column="color" />
-			<result property="tradeposition" column="tradeposition" />
-			<result property="sellerid" column="sellerid" />
-			<result property="discreption" column="discreption" />
-			<result property="itemmainimg" column="itemmainimg" />
-			<result property="itemcreatime" column="itemcreatime" />
-			<result property="viewtime" column="viewtime" />
-			<result property="sellstatus" column="sellstatus" />
-		</association>
-	</resultMap>
+	
 	<resultMap type="com.yuzhaibu.entity.Item" id="itemAndUserMap">
 		<id property="itemid" column="itemid"></id>
 		<result property="itemname" column="itemname" />
@@ -40,16 +22,6 @@
 		resultType="com.yuzhaibu.entity.Item">
 		select * from item where sellerid=#{sellerid} limit 0,5;
 	</select>
-
-	<select id="findFavItemByUserId" parameterType="int" resultMap="favResultMap">
-		select
-		itemid,itemname,sellprice,originprice,color,tradeposition,sellerid,discreption,itemmainimg,viewtime,itemcreatime,sellstatus,u.nickname
-		as sellernickname,u.authen as sellerauthen,favid from item i,fav
-		f,user_normal u where itemid=item_id and setfavuserid=#{userid} and
-		usernormal_id=i.sellerid limit 0,5;
-	</select>
-
-
 
 	<select id="findIndexItemByClassId" parameterType="int"
 		resultMap="itemAndUserMap">
@@ -79,11 +51,6 @@
 		sellstatus!=2 order by viewtime limit 0,8;
 	</select>
 
-	<select id="findFavCountByItemId" parameterType="int"
-		resultType="int">
-		SELECT COUNT(*) from fav where item_id=#{itemid}
-	</select>
-
 	<select id="findItemListByClassId" parameterType="int"
 		resultType="com.yuzhaibu.entity.Item">
 		select * from item where itemclassid=#{id} and
@@ -95,6 +62,17 @@
 		(itemname,sellprice,originprice,color,tradeposition,sellerid,itemcreatime,bargain,discreption,sellstatus,itemclassid)
 		values(#{itemname},#{sellprice},#{originprice},#{color},#{tradeposition},#{sellerid},now(),#{bargain},#{discreption},0,#{itemclassid})
 	</insert>
-
+	
+	<update id="updateMainImg" parameterType="java.util.Map">
+		update item
+		set itemmainimg = #{mainimg}
+		where itemid = #{id}
+	</update>
+	
+	<update id="updateViewTimes" parameterType="int">
+		update item
+		set viewtime = viewtime+1
+		where itemid = #{itemid}
+	</update>
 
 </mapper>

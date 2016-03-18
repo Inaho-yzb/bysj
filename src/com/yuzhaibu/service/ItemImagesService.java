@@ -1,13 +1,11 @@
-package com.yuzhaibu.dao;
+package com.yuzhaibu.service;
 
 import java.util.List;
-import java.util.Map;
 
 import com.yuzhaibu.entity.ItemImg;
 
-public interface ItemImgDao {
-
-	int insertNewImg(Map imgMap);
+public interface ItemImagesService {
 
 	List<ItemImg> findItemImagesByItemId(int itemid);
+	
 }

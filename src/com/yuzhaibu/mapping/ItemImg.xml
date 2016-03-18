@@ -10,4 +10,8 @@
     </foreach> 
   </insert>
   
+  <select id="findItemImagesByItemId" parameterType="int" resultType="com.yuzhaibu.entity.ItemImg">
+  	select id,imgpath,itemid from itemimg where itemid = #{id}
+  </select>
+  
   </mapper>

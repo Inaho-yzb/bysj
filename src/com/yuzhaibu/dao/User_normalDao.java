@@ -1,6 +1,7 @@
 package com.yuzhaibu.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.yuzhaibu.entity.User_normal;
 
@@ -36,4 +37,6 @@ public interface User_normalDao {
 	Integer regUser(User_normal user);
 
 	Integer findUserIdByUsername(String username);
+
+	int addUserExp(Map map);
 }

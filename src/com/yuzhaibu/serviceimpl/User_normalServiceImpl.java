@@ -17,14 +17,8 @@ public class User_normalServiceImpl extends BaseManager implements User_normalSe
 	
 	
 	@Override
-	public boolean findUserByUsernameAndPwd(String username,String pwd) {
-		User_normal user = user_normalDao.findByUsernameAndPwd(username, pwd); 
-		
-		if(user!=null){
-			return true;
-		}
-		
-		return false;
+	public User_normal findUserByUsernameAndPwd(String username,String pwd) {
+		return user_normalDao.findByUsernameAndPwd(username, pwd); 
 	}
 
 

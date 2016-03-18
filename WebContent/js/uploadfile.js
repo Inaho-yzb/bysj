@@ -33,7 +33,8 @@
             alert("请选择文件");
             return;
         }
-
+        
+        
         if (iframeObj == null) {
 
             var frameName = 'upload_frame_' + (frameCount++);

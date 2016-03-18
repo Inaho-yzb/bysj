@@ -195,30 +195,30 @@
 						<div class="panel panel-default put-items">
 							<div class="panel-body">
 								<div class="col-md-2">
-									<a href="${pageContext.request.contextPath}/item.htm?id=${fav.item.itemid }"><img class="itemlist-pic" src="${fav.item.itemmainimg}"></a>
+									<a href="${pageContext.request.contextPath}/item.htm?id=${fav.itemid }"><img class="itemlist-pic" src="${fav.itemmainimg}"></a>
 									<div class="">
-										<a href="${pageContext.request.contextPath}/item.htm?id=${fav.item.itemid }">${fav.item.itemname}</a>
+										<a href="${pageContext.request.contextPath}/item.htm?id=${fav.itemid }">${fav.itemname}</a>
 									</div>
 									<div>
 										<c:choose>
-											<c:when test="${fav.item.sellstatus==0 }">出售中</c:when>
-											<c:when test="${fav.item.sellstatus==1 }">被预订</c:when>
-											<c:when test="${fav.item.sellstatus==2 }">已售出</c:when>
+											<c:when test="${fav.sellstatus==0 }">出售中</c:when>
+											<c:when test="${fav.sellstatus==1 }">被预订</c:when>
+											<c:when test="${fav.sellstatus==2 }">已售出</c:when>
 										</c:choose>
 									</div>
 								</div>
 								<div class="col-md-8">
-									<div class="col-md-4">${fav.item.discreption}</div>
+									<div class="col-md-4">${fav.discreption}</div>
 									<div class="col-md-4">
-										<p>原价：￥${fav.item.originprice}</p>
-										<p>出售价：￥${fav.item.sellprice}</p>
-										<p>浏览次数：${fav.item.viewtime}</p>
+										<p>原价：￥${fav.originprice}</p>
+										<p>出售价：￥${fav.sellprice}</p>
+										<p>浏览次数：${fav.viewtime}</p>
 										<p>发布时间：</p>
-										<p>${fav.item.itemcreatime }</p>
+										<p>${fav.itemcreatime }</p>
 									</div>
 									<div class="col-md-4">
-										<p>交易地点：${fav.item.tradeposition}</p>
-										<p>卖家：${fav.sellernickname }</p>
+										<p>交易地点：${fav.tradeposition}</p>
+										<p>卖家：${fav.nickname }</p>
 										<p>认证状态:
 											<c:choose>
 								<c:when test="${fav.sellerauthen==0 }">未认证</c:when>

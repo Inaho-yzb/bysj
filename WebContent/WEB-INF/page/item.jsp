@@ -31,7 +31,7 @@
 						<SCRIPT src="js/lib.js"></SCRIPT>
 						<SCRIPT src="js/picshow.js"></SCRIPT>
 						<div class="jqzoom" id="spec-n1">
-							<IMG height="350" src="images/img04.jpg" jqimg="images/img04.jpg"
+							<IMG height="350" src="${itemimages[0].imgpath}" jqimg="${itemimages[0].imgpath}"
 								width="350">
 						</div>
 						<div id="spec-n5">
@@ -40,14 +40,9 @@
 							</div>
 							<div id="spec-list">
 								<ul class="list-h">
-									<li><img src="images/img01.jpg"></li>
-									<li><img src="images/img02.jpg"></li>
-									<li><img src="images/img03.jpg"></li>
-									<li><img src="images/img04.jpg"></li>
-									<li><img src="images/img01.jpg"></li>
-									<li><img src="images/img02.jpg"></li>
-									<li><img src="images/img03.jpg"></li>
-									<li><img src="images/img04.jpg"></li>
+								<c:forEach items="${itemimages}" var="iis">
+									<li><img src="${iis.imgpath}"></li>
+								</c:forEach>	
 								</ul>
 							</div>
 							<div class="control" id="spec-right">
@@ -63,6 +58,7 @@
 						<div class="item-head">
 							<div class="item-title">
 								${item.itemname}
+								<input type="hidden" value="${item.itemid}" id="itemid"/>
 								<c:choose>
 									<c:when test="${item.sellstatus==0 }">
 										<span class="label label-primary item-status">出售中</span>
@@ -85,7 +81,7 @@
 								<c:if test="${item.bargain==1}">可议价</c:if>
 							</div>
 							<div class="addfav">
-								<a>加入收藏</a>
+								<a href="javascript:void(0)" id="addtofav">加入收藏</a>
 							</div>
 							<div class="item-report">
 								<a href="#">举报商品</a>
@@ -102,7 +98,7 @@
 						</div>
 						<div class="item-detail">
 							<div class="item-condition">
-								<span class="label label-info">成 色</span>${item.color}
+								<span class="label label-info">成 色</span>${item.color}成新
 							</div>
 							<div class="item-pad">
 								<span class="label label-info">交易地点</span>${item.tradeposition}

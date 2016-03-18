@@ -8,6 +8,7 @@ $(function(){
 			preload:1,
 			lens:1
 		});
+	   
 		$("#spec-list").jdMarquee({
 			deriction:"left",
 			width:350,
@@ -19,6 +20,7 @@ $(function(){
 			_front:"#spec-right",
 			_back:"#spec-left"
 		});
+		
 		$("#spec-list img").bind("mouseover",function(){
 			var src=$(this).attr("src");
 			$("#spec-n1 img").eq(0).attr({
@@ -36,6 +38,37 @@ $(function(){
 			});
 		});	
 		
-		
+		$("#addtofav").bind("click",function(){
+			$.ajax({
+				url:"ajaxaddtofav.htm",
+				type:"POST",
+				data:{"itemid":$("#itemid").val()},
+				success:function(data){
+					if(data.errorCode==0){
+						hrHuTui.popout({
+							type:"success",
+							title:"加入收藏",
+							content:"添加成功！"
+						});
+					}else if(data.errorCode==1){
+						hrHuTui.popout({
+							type:"error",
+							title:"失败",
+							content:"操作失败"
+						});
+					}else{
+						location.href="login/toLogin.htm?url=item.htm%3Fid="+$("#itemid").val();
+					}
+					
+				},
+				error:function(xhr){
+					hrHuTui.popout({
+						type:"error",
+						title:"失败",
+						content:"操作失败"
+					});
+				}
+			});
+		});
 });
 

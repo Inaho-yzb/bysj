@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.yuzhaibu.entity.Item;
 import com.yuzhaibu.entity.ItemClass;
+import com.yuzhaibu.entity.ItemImg;
 import com.yuzhaibu.entity.Message;
 import com.yuzhaibu.entity.User_normal;
 import com.yuzhaibu.service.ItemClassService;
+import com.yuzhaibu.service.ItemImagesService;
 import com.yuzhaibu.service.ItemService;
 import com.yuzhaibu.service.MessageService;
 import com.yuzhaibu.service.User_normalService;
@@ -43,6 +45,9 @@ public class FrontViewController implements Serializable{
 	
 	@Resource
 	private ItemService itemService;
+	
+	@Resource
+	private ItemImagesService itemImagesService;
 
 	@RequestMapping("index")
 	public String toIndex(HttpSession session, ModelMap model) {
@@ -62,68 +67,6 @@ public class FrontViewController implements Serializable{
 		model.addAttribute("itemList",itemList);
 
 		return "index";
-	}
-	
-	@RequestMapping("item")
-	public String toItem(HttpServletRequest request,ModelMap model,HttpSession session){
-		String username = (String) session.getAttribute("username");
-		if(username!=null){
-			model.addAttribute("username",username);
-		}
-		
-		
-		int itemid = Integer.valueOf(request.getParameter("id"));		
-		Item item = itemService.findItemByItemId(itemid);
-		
-		User_normal user = user_normalService.findUserByItemid(itemid);
-		item.setUsernormal(user);
-		
-		List<Message> messages = messageService.findInitItemMessageByItemId(itemid);
-		
-		List<Item> otherItem = itemService.findOtherItemByUserId(user.getUsernormal_id());
-		
-		model.addAttribute("item",item);
-		model.addAttribute("messages",messages);
-		model.addAttribute("otherItem",otherItem);
-		
-		return "item";
-	}
-	
-	@RequestMapping("itemlist")
-	public String toItemList(HttpServletRequest request,HttpSession session,ModelMap model){
-		String username = (String) session.getAttribute("username");
-		if(username!=null){
-			model.addAttribute("username",username);
-		}
-		
-		if(request.getParameter("fid")!=null&&request.getParameter("id")==null){
-			int fid = Integer.valueOf(request.getParameter("fid"));
-			
-			List<Item> itemlist = itemService.findItemListFatherItemByFatherId(fid);
-			List<ItemClass> itemChildClassList = itemClassService.findChildItemClassListByFatherId(fid);
-			ItemClass fatherItemClass = itemClassService.findItemClassById(fid);						
-			
-			model.addAttribute("itemlist",itemlist);
-			model.addAttribute("itemChildClassList",itemChildClassList);
-			model.addAttribute("navFatherItemClass",fatherItemClass);
-			
-		}else if(request.getParameter("fid")==null&&request.getParameter("id")!=null){
-			int id = Integer.valueOf(request.getParameter("id"));
-			
-			ItemClass childItemClass = itemClassService.findItemClassById(id);
-			int fid = childItemClass.getItemclass_fatherid();
-			ItemClass fatherItemClass = itemClassService.findItemClassById(fid);
-			
-			List<ItemClass> itemChildClassList = itemClassService.findChildItemClassListByFatherId(fid);
-			List<Item> itemList = itemService.findItemListByClassId(id);
-			
-			model.addAttribute("itemChildClassList",itemChildClassList);
-			model.addAttribute("navChildItemClass",childItemClass);
-			model.addAttribute("navFatherItemClass",fatherItemClass);
-			model.addAttribute("itemlist",itemList);
-		}
-		
-		return "itemlist";
 	}
 
 }

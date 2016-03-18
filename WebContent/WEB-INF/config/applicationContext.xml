@@ -118,4 +118,7 @@
 			<bean class="com.yuzhaibu.interceptor.LoginInterceptor"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>
+	
+	
+    
 </beans>

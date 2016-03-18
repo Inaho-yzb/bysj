@@ -54,5 +54,18 @@ public interface ItemService {
 	 */
 	List<Item> findItemListByClassId(int id);
 
+	/**
+	 * 发布商品
+	 * @param map
+	 * @param savePath
+	 * @return
+	 */
 	Integer uploadItem(Map map,String savePath);
+
+	/**
+	 * 增加浏览次数
+	 * @param itemid
+	 * @return
+	 */
+	int updateViewTimes(Integer itemid);
 }

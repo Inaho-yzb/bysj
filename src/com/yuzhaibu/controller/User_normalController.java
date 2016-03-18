@@ -140,6 +140,17 @@ public class User_normalController implements Serializable {
 		// 获取上传文件
 		List<MultipartFile> list = multipartHttpServletRequest.getFiles("uploadfile");
 		
+		for(MultipartFile mf:list){
+			int index = mf.getOriginalFilename().lastIndexOf("."); 
+	        String la = mf.getOriginalFilename().substring(index).toLowerCase();
+	        if(!(".jpg".equals(la)||".gif".equals(la)||".jpeg".equals(la)||".png".equals(la))){ 
+	              result.setErrorCode(2);
+	              result.setErrorMes("请上传图片文件！");
+	              return result;
+	        }
+
+		}
+		
 		String date = DateUtils.dateToStrLong(new Date(), "yyyyMMdd");
 		// 得到上传文件的保存目录，将上传的文件存放于WEB-INF目录下，不允许外界直接访问，保证上传文件的安全
 		String savePath = req.getServletContext().getRealPath("/uploads/itemimages/"+date);
