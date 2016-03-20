@@ -25,4 +25,11 @@ public interface FavDao {
 	 */
 	int findFavCountByItemId(int itemid);
 
+	/**
+	 * 判断是否在收藏中
+	 * @param fav
+	 * @return
+	 */
+	int isInFav(Fav fav);
+
 }

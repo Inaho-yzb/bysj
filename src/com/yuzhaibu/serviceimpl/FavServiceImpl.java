@@ -15,12 +15,21 @@ public class FavServiceImpl implements FavService {
 	private FavDao favDao;
 
 	@Override
-	public int addToFav(Integer itemid, Integer serid) {
+	public Integer addToFav(Integer itemid, Integer serid) {
 		Fav fav = new Fav();
 		fav.setItemid(itemid);
 		fav.setFavUserId(serid);
 		
 		return favDao.addToFav(fav);
+	}
+
+	@Override
+	public Integer isInFav(Integer serid, Integer itemid) {
+		Fav fav = new Fav();
+		fav.setItemid(itemid);
+		fav.setFavUserId(serid);
+		
+		return favDao.isInFav(fav);
 	}
 	
 }

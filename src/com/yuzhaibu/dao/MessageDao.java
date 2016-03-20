@@ -33,5 +33,12 @@ public interface MessageDao {
 	 * @return
 	 */
 	Integer checkMesById(Integer id);
+
+	/**
+	 * 添加消息
+	 * @param mes
+	 * @return
+	 */
+	Integer addMessage(Message mes);
 	
 }

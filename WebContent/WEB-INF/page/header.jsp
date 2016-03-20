@@ -30,7 +30,7 @@
 							<li><a href="login/toRegistered.htm">免费注册</a></li>
 						</c:when>
 						<c:otherwise>
-							<li><a href="${pageContext.request.contextPath}/user/toProfile.htm">${username }</a></li>
+							<li><a href="${pageContext.request.contextPath}/user/toProfile.htm" id="navusername">${username }</a></li>
 							<li><a href="${pageContext.request.contextPath}/user/quit.htm">登出</a></li>
 						</c:otherwise>
 						</c:choose>

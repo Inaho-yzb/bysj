@@ -8,6 +8,14 @@ public interface FavService {
 	 * @param serid
 	 * @return
 	 */
-	int addToFav(Integer itemid, Integer serid);
+	Integer addToFav(Integer itemid, Integer serid);
+
+	/**
+	 * 判断是否已经收藏
+	 * @param serid
+	 * @param itemid
+	 * @return
+	 */
+	Integer isInFav(Integer serid, Integer itemid);
 	
 }

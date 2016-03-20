@@ -1,5 +1,7 @@
 package com.yuzhaibu.entity;
 
+import java.sql.Timestamp;
+
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -16,6 +18,22 @@ public class Message {
 	private int mes_tousername;
 	private String mes_content;
 	private int mes_status;
+	
+	private Timestamp createtime;
+	private Timestamp audittime;
+	
+	public Timestamp getCreatetime() {
+		return createtime;
+	}
+	public void setCreatetime(Timestamp createtime) {
+		this.createtime = createtime;
+	}
+	public Timestamp getAudittime() {
+		return audittime;
+	}
+	public void setAudittime(Timestamp audittime) {
+		this.audittime = audittime;
+	}
 	public int getMes_id() {
 		return mes_id;
 	}

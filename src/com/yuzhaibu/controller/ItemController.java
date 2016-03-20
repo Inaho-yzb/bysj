@@ -22,6 +22,7 @@ import com.yuzhaibu.service.ItemClassService;
 import com.yuzhaibu.service.ItemImagesService;
 import com.yuzhaibu.service.ItemService;
 import com.yuzhaibu.service.MessageService;
+import com.yuzhaibu.service.ReportService;
 import com.yuzhaibu.service.User_normalService;
 import com.yuzhaibu.util.AjaxResult;
 
@@ -49,6 +50,9 @@ public class ItemController {
 	@Resource
 	private FavService favService;
 	
+	@Resource
+	private ReportService reportService;
+	
 	@RequestMapping("item")
 	public String toItem(HttpServletRequest request,ModelMap model,HttpSession session){
 		String username = (String) session.getAttribute("username");
@@ -68,6 +72,15 @@ public class ItemController {
 		List<Item> otherItem = itemService.findOtherItemByUserId(user.getUsernormal_id());
 		
 		List<ItemImg> itemImgList = itemImagesService.findItemImagesByItemId(itemid);
+		
+		Integer userid = (Integer) session.getAttribute("userid");
+		
+		if(userid!=null){
+			Integer inFav = favService.isInFav(userid, itemid);
+			Integer inReport = reportService.isInRep(userid,itemid);
+			model.addAttribute("inFav",inFav);
+			model.addAttribute("inReport",inReport);
+		}
 				
 		itemService.updateViewTimes(itemid);
 		model.addAttribute("item",item);
@@ -122,9 +135,14 @@ public class ItemController {
 			result.setErrorCode(2);
 			return result;
 		}
+		
 		Integer	serid = (Integer) session.getAttribute("userid");
 		Integer itemid = Integer.valueOf(request.getParameter("itemid"));
 		
+		if(favService.isInFav(serid,itemid)!=null){
+			result.setErrorCode(3);
+			return result;
+		}
 		
 		if(favService.addToFav(itemid,serid)>0){
 			result.setErrorCode(0);
@@ -134,4 +152,31 @@ public class ItemController {
 		
 		return result;
 	}
+	
+	@RequestMapping(value=("ajaxreportitem"),method=RequestMethod.POST)
+	public @ResponseBody AjaxResult reportItem(HttpServletRequest request,HttpSession session){
+		AjaxResult result = new AjaxResult();
+		if(session.getAttribute("userid")==null){
+			result.setErrorCode(2);
+			return result;
+		}
+		
+		Integer	userid = (Integer) session.getAttribute("userid");
+		Integer itemid = Integer.valueOf(request.getParameter("itemid"));
+		Integer reasonid = Integer.valueOf(request.getParameter("reasonid"));
+		
+		if(reportService.isInRep(userid,itemid)!=null){
+			result.setErrorCode(3);
+			return result;
+		}
+		
+		if(reportService.addReport(itemid,userid,reasonid)>0){
+			result.setErrorCode(0);
+		}else{
+			result.setErrorCode(1);
+		}
+		
+		return result;
+	}
+	
 }

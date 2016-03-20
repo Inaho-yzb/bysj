@@ -20,6 +20,20 @@ public interface MessageService {
 	 */
 	List<Message> findInitItemMessageByItemId(int itemid);
 
+	/**
+	 * 查看未读
+	 * @param id
+	 * @return
+	 */
 	Integer checkMesById(Integer id);
+
+	/**
+	 * 添加消息
+	 * @param userid
+	 * @param itemid
+	 * @param content
+	 * @return
+	 */
+	Integer addMessage(Integer userid, Integer itemid, String content);
 	
 }

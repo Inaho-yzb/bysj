@@ -22,7 +22,7 @@
 		<result property="sellstatus" column="sellstatus" />
 	</resultMap>
 	
-	<insert id="addToFav" parameterType="com.yuzhaibu.dao.FavDao">
+	<insert id="addToFav" parameterType="com.yuzhaibu.entity.Fav">
 		insert into fav(item_id,setfavuserid)
 		values(#{itemid},#{favUserId})
 	</insert>
@@ -41,13 +41,19 @@
 		viewtime,
 		itemcreatime,
 		sellstatus,
-		u.nickname as sellernickname,u.authen as sellerauthen,favid from item i,fav
+		u.nickname,
+		u.authen as sellerauthen,
+		favid from item i,fav
 		f,user_normal u where itemid=item_id and f.setfavuserid=#{userid} and
 		u.usernormal_id=i.sellerid limit 0,5;
 	</select>
 	
 	<select id="findFavCountByItemId" parameterType="int" resultType="int">
 		SELECT COUNT(*) from fav where item_id=#{itemid}
+	</select>
+	
+	<select id="isInFav" parameterType="com.yuzhaibu.entity.Fav" resultType="int">
+		select favid from fav where item_id = #{itemid} and setfavuserid = #{favUserId}
 	</select>
 	
 </mapper>

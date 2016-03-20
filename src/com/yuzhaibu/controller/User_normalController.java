@@ -44,7 +44,6 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 @Controller
-@RequestMapping("/user")
 public class User_normalController implements Serializable {
 
 	/**
@@ -67,7 +66,7 @@ public class User_normalController implements Serializable {
 	@Resource
 	private ItemClassService itemClassService;
 
-	@RequestMapping("/toProfile")
+	@RequestMapping("/user/toProfile")
 	public String toProfile(HttpSession session, ModelMap model, HttpServletRequest request) {
 		String username = (String) session.getAttribute("username");
 		String tag = request.getParameter("tag");
@@ -89,7 +88,7 @@ public class User_normalController implements Serializable {
 		return "profile";
 	}
 
-	@RequestMapping("/editUsernormalProfile")
+	@RequestMapping("/user/editUsernormalProfile")
 	public String editUernormalProfile(User_normal user, HttpServletRequest request, HttpSession session) {
 
 		user.setUsername((String) session.getAttribute("username"));
@@ -99,13 +98,14 @@ public class User_normalController implements Serializable {
 		return "redirect:toProfile.htm";
 	}
 
-	@RequestMapping("/quit")
+	@RequestMapping("/user/quit")
 	public String quit(HttpSession session) {
 		session.setAttribute("username", null);
+		session.setAttribute("userid", null);
 		return "redirect:../index.htm";
 	}
 
-	@RequestMapping(value = "/ajaxCheckMes", method = RequestMethod.POST)
+	@RequestMapping(value = "/user/ajaxCheckMes", method = RequestMethod.POST)
 	@ResponseBody
 	public AjaxResult ajaxCheckMes(HttpSession session, HttpServletRequest request) {
 		AjaxResult result = new AjaxResult();
@@ -122,14 +122,14 @@ public class User_normalController implements Serializable {
 		return result;
 	}
 
-	@RequestMapping(value = ("/releasepro"))
+	@RequestMapping(value = ("/user/releasepro"))
 	public String toReleasePro(HttpServletRequest request,ModelMap map) {
 		List<ItemClass> itemClassList =  itemClassService.findAllChildClass();
 		map.put("itemClassList", itemClassList);
 		return "releasepro";
 	}
 
-	@RequestMapping(value=("/uploaditem"),method=RequestMethod.POST)
+	@RequestMapping(value=("/user/uploaditem"),method=RequestMethod.POST)
 	@ResponseBody
 	public AjaxResult uploadItem(HttpServletRequest req, HttpServletResponse resp,HttpSession session){
 		AjaxResult result = new AjaxResult();

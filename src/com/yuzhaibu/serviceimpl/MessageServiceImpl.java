@@ -34,4 +34,14 @@ public class MessageServiceImpl extends BaseManager implements MessageService {
 		return messageDao.checkMesById(id);
 	}
 
+	@Override
+	public Integer addMessage(Integer userid, Integer itemid, String content) {
+		Message mes = new Message();
+		mes.setMes_levuserid(userid);
+		mes.setMes_itemid(itemid);
+		mes.setMes_content(content);
+		
+		return messageDao.addMessage(mes);
+	}
+
 }

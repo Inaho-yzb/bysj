@@ -81,10 +81,17 @@
 								<c:if test="${item.bargain==1}">可议价</c:if>
 							</div>
 							<div class="addfav">
-								<a href="javascript:void(0)" id="addtofav">加入收藏</a>
+								<c:choose>
+									<c:when test="${empty inFav}"><a href="javascript:void(0)" id="addtofav">加入收藏</a></c:when>
+									<c:when test="${!empty inFav}"><span>已在收藏中</span></c:when>
+								</c:choose>
+								
 							</div>
 							<div class="item-report">
-								<a href="#">举报商品</a>
+								<c:choose>
+									<c:when test="${empty inReport}"><a href="javascript:void(0)" id="reportitem">举报该物品</a></c:when>
+									<c:when test="${!empty inReport}"><span>您已经举报此物品</span></c:when>
+								</c:choose>
 							</div>
 							<div class="item-price-up">
 								<span>原价:￥</span>${item.originprice}
@@ -140,7 +147,7 @@
 				<div class="comment-header">
 					<span class="label label-danger comspan">留 言</span>
 				</div>
-
+				<c:if test="${!empty username}">
 				<div class="comment">
 					<div class="Input_Box">
 						<textarea class="Input_text"></textarea>
@@ -149,18 +156,20 @@
 						</div>
 					</div>
 				</div>
-
+				</c:if>
 				<div class="comment-body comment-padding">
-					
+					<div id="meslist">
 					<c:forEach items="${messages }" var="mes">
 						<div class="comment-detail">
 						<img class="comment-hdpic img-circle" src="${mes.mes_levuserheadpic}">
 						<div class="comment-user">
-							<span><a href="#">${mes.mes_levusername }</a></span>
+							<span>${mes.mes_levusername }</span>
 						</div>
 						<div class="comment-content">${mes.mes_content}</div>
 					</div>
 					</c:forEach>
+					
+					</div>
 
 					<div class="fy">
 						<ul class="pagination">
@@ -174,8 +183,6 @@
 						</ul>
 					</div>
 				</div>
-
-				<script src="js/comment.js"></script>
 			</div>
 			<div class="col-md-5">
 

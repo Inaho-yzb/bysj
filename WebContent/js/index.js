@@ -16,7 +16,7 @@
 						 title:"请登录！",
 						 content:"请先登录！",
 						 onOk:function(callback){
-							 location.href ="/login/toLogin.htm"; 
+							 location.href ="/login/toLogin.htm?url=user%2Freleasepro.htm"; 
 						 }
 					 });
 				 }
