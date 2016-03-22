@@ -14,7 +14,7 @@
 	</select>
 	
 	<select id="findMesCountByItemId" parameterType="int" resultType="int">
-		SELECT COUNT(*) from message where mes_itemid= #{itemid};
+		SELECT COUNT(*) from message where mes_itemid= #{itemid} and mes_status=1;
 	</select>
 	
 	<update id="checkMesById" parameterType="int">

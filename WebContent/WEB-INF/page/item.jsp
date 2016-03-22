@@ -31,7 +31,7 @@
 						<SCRIPT src="js/lib.js"></SCRIPT>
 						<SCRIPT src="js/picshow.js"></SCRIPT>
 						<div class="jqzoom" id="spec-n1">
-							<IMG height="350" src="${itemimages[0].imgpath}" jqimg="${itemimages[0].imgpath}"
+							<IMG src="${itemimages[0].imgpath}" jqimg="${itemimages[0].imgpath}"
 								width="350">
 						</div>
 						<div id="spec-n5">

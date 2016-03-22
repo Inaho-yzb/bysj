@@ -11,7 +11,7 @@ public interface FavDao {
 	 * @param fav
 	 * @return
 	 */
-	int addToFav(Fav fav);
+	Integer addToFav(Fav fav);
 	
 	/**
 	 * 用户收藏物品列表查询
@@ -23,13 +23,13 @@ public interface FavDao {
 	 * @param itemid
 	 * @return
 	 */
-	int findFavCountByItemId(int itemid);
+	Integer findFavCountByItemId(int itemid);
 
 	/**
 	 * 判断是否在收藏中
 	 * @param fav
 	 * @return
 	 */
-	int isInFav(Fav fav);
+	Integer isInFav(Fav fav);
 
 }

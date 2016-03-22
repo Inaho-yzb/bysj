@@ -48,13 +48,26 @@
 		resultType="com.yuzhaibu.entity.Item">
 		select * from item i,itemclass it where
 		it.itemclass_fatherid=#{fid} and i.itemclassid=it.itemclass_id and
-		sellstatus!=2 order by viewtime limit 0,8;
+		sellstatus!=2 
+		
+		order by viewtime 
+		limit #{index},#{pageSize};
+	</select>
+	
+	<select id="countItemByFatherId" parameterType="int" resultType="int">
+		select count(i.itemid) from item i,itemclass it where it.itemclass_fatherid=#{fid} and i.itemclassid=it.itemclass_id and
+		sellstatus!=2 
 	</select>
 
 	<select id="findItemListByClassId" parameterType="int"
 		resultType="com.yuzhaibu.entity.Item">
 		select * from item where itemclassid=#{id} and
-		sellstatus!=2 order by viewtime limit 0,8;
+		sellstatus!=2 order by viewtime limit #{index},#{pageSize};
+	</select>
+	
+	<select id="countItemById" parameterType="int" resultType="int">
+		select count(itemid) from item where itemclassid = #{id} and
+		sellstatus!=2 
 	</select>
 
 	<insert id="insertNewItem" parameterType="com.yuzhaibu.entity.Item" useGeneratedKeys="true" keyProperty="itemid">

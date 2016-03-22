@@ -1,6 +1,7 @@
 package com.yuzhaibu.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -101,28 +102,54 @@ public class ItemController {
 		if(request.getParameter("fid")!=null&&request.getParameter("id")==null){
 			int fid = Integer.valueOf(request.getParameter("fid"));
 			
-			List<Item> itemlist = itemService.findItemListFatherItemByFatherId(fid);
+			Map map = itemService.findItemListFatherItemByFatherId(fid,0,8);
+			List<Item> itemlist = (List<Item>) map.get("itemlist");
+			Integer count = (Integer) map.get("count");
 			List<ItemClass> itemChildClassList = itemClassService.findChildItemClassListByFatherId(fid);
-			ItemClass fatherItemClass = itemClassService.findItemClassById(fid);						
+			ItemClass fatherItemClass = itemClassService.findItemClassById(fid);
+			Integer pageCount;
+			if(count%8>0){
+				pageCount = count/8+1;
+			}else{
+				pageCount = count/8;
+			}
+			
+			Integer currentPage = 1;
 			
 			model.addAttribute("itemlist",itemlist);
 			model.addAttribute("itemChildClassList",itemChildClassList);
 			model.addAttribute("navFatherItemClass",fatherItemClass);
+			model.addAttribute("count",count);
+			model.addAttribute("pageCount",pageCount);
+			model.addAttribute("currentPage",currentPage);
 			
 		}else if(request.getParameter("fid")==null&&request.getParameter("id")!=null){
-			int id = Integer.valueOf(request.getParameter("id"));
+			Integer id = Integer.valueOf(request.getParameter("id"));
 			
 			ItemClass childItemClass = itemClassService.findItemClassById(id);
-			int fid = childItemClass.getItemclass_fatherid();
+			Integer fid = childItemClass.getItemclass_fatherid();
 			ItemClass fatherItemClass = itemClassService.findItemClassById(fid);
 			
 			List<ItemClass> itemChildClassList = itemClassService.findChildItemClassListByFatherId(fid);
-			List<Item> itemList = itemService.findItemListByClassId(id);
+			Map map = itemService.findItemListByClassId(id,0,8);
+			List<Item> itemList = (List<Item>) map.get("itemList");
+			Integer count = (Integer) map.get("count");
+			Integer pageCount;
+			if(count%8>0){
+				pageCount = count/8+1;
+			}else{
+				pageCount = count/8;
+			}
+			
+			Integer currentPage = 1;
 			
 			model.addAttribute("itemChildClassList",itemChildClassList);
 			model.addAttribute("navChildItemClass",childItemClass);
 			model.addAttribute("navFatherItemClass",fatherItemClass);
 			model.addAttribute("itemlist",itemList);
+			model.addAttribute("count",count);
+			model.addAttribute("pageCount",pageCount);
+			model.addAttribute("currentPage",currentPage);
 		}
 		
 		return "itemlist";

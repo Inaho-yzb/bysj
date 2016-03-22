@@ -73,13 +73,12 @@
 						</div>
 						<div class="col-md-2 pad-lf-clr pad-rt-clr">
 							<div class="itemlist-seller">
-								<a href=""><img class="itemlist-seller-pic img-circle"
-									src="images/qcode.png"></a>
+								<img class="itemlist-seller-pic img-circle"
+									src="images/qcode.png">
 								<div class="itemlist-seller-name">
 									<div>
-										<a href="">username</a>
+										<span style="color:blue">${item.username}</span>
 									</div>
-									<div>*****</div>
 								</div>
 							</div>
 						</div>
@@ -100,7 +99,7 @@
 					<li><a href="#">4</a></li>
 					<li><a href="#">5</a></li>
 					<li><a href="#">&raquo;</a></li>
-					<div class="float-right pagecount">共100页</div>
+					<div class="float-right pagecount">共${currentPage}页</div>
 				</ul>
 			</div>
 		</div>

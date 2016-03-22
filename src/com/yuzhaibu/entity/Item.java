@@ -28,7 +28,21 @@ public class Item {
 	private Integer mescount;
 	private Integer userid;
 	private String username;
+	private Integer index;
+	private Integer pagesize;
 	
+	public Integer getIndex() {
+		return index;
+	}
+	public void setIndex(Integer index) {
+		this.index = index;
+	}
+	public Integer getPagesize() {
+		return pagesize;
+	}
+	public void setPagesize(Integer pagesize) {
+		this.pagesize = pagesize;
+	}
 	public Integer getItemid() {
 		return itemid;
 	}

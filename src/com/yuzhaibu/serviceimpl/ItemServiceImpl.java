@@ -28,6 +28,7 @@ import com.yuzhaibu.dao.User_normalDao;
 import com.yuzhaibu.entity.Fav;
 import com.yuzhaibu.entity.Item;
 import com.yuzhaibu.entity.ItemClass;
+import com.yuzhaibu.entity.User_normal;
 import com.yuzhaibu.service.ItemService;
 import com.yuzhaibu.util.DateUtils;
 import com.yuzhaibu.util.StringUtils;
@@ -60,7 +61,7 @@ public class ItemServiceImpl extends BaseManager implements ItemService {
 	private FavDao favDao;
 
 	@Override
-	public List<Item> findItemByUserId(int sellerid) {
+	public List<Item> findItemByUserId(Integer sellerid) {
 
 		List<Item> items = itemDao.findItemByUserId(sellerid);
 
@@ -69,7 +70,7 @@ public class ItemServiceImpl extends BaseManager implements ItemService {
 	}
 
 	@Override
-	public List<Fav> findFavItemByUserId(int userid) {
+	public List<Fav> findFavItemByUserId(Integer userid) {
 
 		List<Fav> favItems = favDao.findFavItemByUserId(userid);
 
@@ -92,7 +93,7 @@ public class ItemServiceImpl extends BaseManager implements ItemService {
 	}
 
 	@Override
-	public Item findItemByItemId(int itemid) {
+	public Item findItemByItemId(Integer itemid) {
 
 		Item item = itemDao.findItemByItemId(itemid);
 		ItemClass itemClass = itemClassDao.childClassMapper(item.getItemclassid());
@@ -102,35 +103,57 @@ public class ItemServiceImpl extends BaseManager implements ItemService {
 	}
 
 	@Override
-	public List<Item> findOtherItemByUserId(int userid) {
+	public List<Item> findOtherItemByUserId(Integer userid) {
 		List<Item> item = itemDao.findOtherItemByUserId(userid);
 		return item;
 	}
 
 	@Override
-	public List<Item> findItemListFatherItemByFatherId(int fid) {
-		List<Item> items = itemDao.findItemListFatherItemByFatherId(fid);
+	public Map findItemListFatherItemByFatherId(Integer fid,Integer index,Integer pageSize) {
+		Map map = new HashMap();
+		map.put("fid", fid);
+		map.put("index", index);
+		map.put("pageSize", pageSize);
+		List<Item> items = itemDao.findItemListFatherItemByFatherId(map);
+		Integer count = itemDao.countItemByFatherId(fid);
 		for (Item item : items) {
-			int mescount = messageDao.findMesCountByItemId(item.getItemid());
-			int favcount = favDao.findFavCountByItemId(item.getItemid());
-
+			Integer mescount = messageDao.findMesCountByItemId(item.getItemid());
+			Integer favcount = favDao.findFavCountByItemId(item.getItemid());
+			User_normal user= user_normalDao.findByItemId(item.getItemid());
+			
 			item.setMescount(mescount);
 			item.setFavcount(favcount);
+			item.setUserid(user.getUsernormal_id());
+			item.setUsername(user.getUsername());
 		}
-		return items;
+		Map resMap = new HashMap();
+		resMap.put("itemList", items);
+		resMap.put("count", count);
+		return resMap;
 	}
 
 	@Override
-	public List<Item> findItemListByClassId(int id) {
-		List<Item> itemList = itemDao.findItemListByClassId(id);
+	public Map findItemListByClassId(Integer id,Integer index,Integer pageSize) {
+		Map map = new HashMap();
+		map.put("id", id);
+		map.put("index", index);
+		map.put("pageSize", pageSize);
+		List<Item> itemList = itemDao.findItemListByClassId(map);
+		Integer count = itemDao.countItemById(id);
 		for (Item item : itemList) {
-			int mescount = messageDao.findMesCountByItemId(item.getItemid());
-			int favcount = favDao.findFavCountByItemId(item.getItemid());
+			Integer mescount = messageDao.findMesCountByItemId(item.getItemid());
+			Integer favcount = favDao.findFavCountByItemId(item.getItemid());
+			User_normal user= user_normalDao.findByItemId(item.getItemid());
 
 			item.setMescount(mescount);
 			item.setFavcount(favcount);
+			item.setUserid(user.getUsernormal_id());
+			item.setUsername(user.getUsername());
 		}
-		return itemList;
+		Map resMap = new HashMap();
+		resMap.put("itemList", itemList);
+		resMap.put("count", count);
+		return resMap;
 	}
 
 	@Override
@@ -220,7 +243,7 @@ public class ItemServiceImpl extends BaseManager implements ItemService {
 	}
 
 	@Override
-	public int updateViewTimes(Integer itemid) {
+	public Integer updateViewTimes(Integer itemid) {
 		return itemDao.updateViewTimes(itemid);
 	}
 

@@ -25,7 +25,7 @@ public interface MessageDao {
 	 * @param itemid
 	 * @return
 	 */
-	int findMesCountByItemId(int itemid);
+	Integer findMesCountByItemId(int itemid);
 
 	/**
 	 * 用户查看未读消息
