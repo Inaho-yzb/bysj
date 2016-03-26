@@ -174,11 +174,10 @@
 					<div class="fy">
 						<ul class="pagination">
 							<li><a href="#">&laquo;</a></li>
+							<c:forEach items="${page.pageList}" var="p">
+								<li><a href="#" >p</a></li>
+							</c:forEach>
 							<li class="active"><a href="#">1</a></li>
-							<li class="#"><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">4</a></li>
-							<li><a href="#">5</a></li>
 							<li><a href="#">&raquo;</a></li>
 						</ul>
 					</div>

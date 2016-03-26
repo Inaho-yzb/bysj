@@ -26,6 +26,8 @@ import com.yuzhaibu.service.MessageService;
 import com.yuzhaibu.service.ReportService;
 import com.yuzhaibu.service.User_normalService;
 import com.yuzhaibu.util.AjaxResult;
+import com.yuzhaibu.util.Page;
+import com.yuzhaibu.util.StringUtils;
 
 @Controller
 public class ItemController {
@@ -102,18 +104,27 @@ public class ItemController {
 		if(request.getParameter("fid")!=null&&request.getParameter("id")==null){
 			Integer fid = Integer.valueOf(request.getParameter("fid"));
 			Integer pageSize = 8;
-			Map map = itemService.findItemListFatherItemByFatherId(fid,0,pageSize);
+			String pa = request.getParameter("pa");
+			Integer index;
+			if(!StringUtils.isBlank(pa)){
+				index = Integer.valueOf(pa);
+			}else{
+				index = Integer.valueOf(pa);
+			}
+			
+			Map map = itemService.findItemListFatherItemByFatherId(fid,index,pageSize);
 			List<Item> itemlist = (List<Item>) map.get("itemlist");
 			Integer count = (Integer) map.get("count");
 			List<ItemClass> itemChildClassList = itemClassService.findChildItemClassListByFatherId(fid);
 			ItemClass fatherItemClass = itemClassService.findItemClassById(fid);
 			Integer pageCount;
-			
 			Integer currentPage = 1;
+			Page page = new Page(count,pageSize,currentPage);
 			
 			model.addAttribute("itemlist",itemlist);
 			model.addAttribute("itemChildClassList",itemChildClassList);
 			model.addAttribute("navFatherItemClass",fatherItemClass);
+			model.addAttribute("page",page);
 			
 		}else if(request.getParameter("fid")==null&&request.getParameter("id")!=null){
 			Integer id = Integer.valueOf(request.getParameter("id"));
@@ -121,18 +132,26 @@ public class ItemController {
 			ItemClass childItemClass = itemClassService.findItemClassById(id);
 			Integer fid = childItemClass.getItemclass_fatherid();
 			ItemClass fatherItemClass = itemClassService.findItemClassById(fid);
+			String pa = request.getParameter("pa");
+			Integer index;
+			if(!StringUtils.isBlank(pa)){
+				index = Integer.valueOf(pa);
+			}else{
+				index = Integer.valueOf(pa);
+			}
 			
 			List<ItemClass> itemChildClassList = itemClassService.findChildItemClassListByFatherId(fid);
-			Map map = itemService.findItemListByClassId(id,0,pageSize);
+			Map map = itemService.findItemListByClassId(id,index,pageSize);
 			List<Item> itemList = (List<Item>) map.get("itemList");
 			Integer count = (Integer) map.get("count");
 			
 			Integer currentPage = 1;
-			
+			Page page = new Page(count,pageSize,currentPage);
 			model.addAttribute("itemChildClassList",itemChildClassList);
 			model.addAttribute("navChildItemClass",childItemClass);
 			model.addAttribute("navFatherItemClass",fatherItemClass);
 			model.addAttribute("itemlist",itemList);
+			model.addAttribute("page",page);
 		}
 		
 		return "itemlist";

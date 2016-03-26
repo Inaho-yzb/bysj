@@ -44,12 +44,11 @@
 		= #{userid} and sellstatus=0 order by viewtime desc limit 0,4;
 	</select>
 
-	<select id="findItemListFatherItemByFatherId" parameterType="int"
+	<select id="findItemListFatherItemByFatherId" parameterType="java.util.Map"
 		resultType="com.yuzhaibu.entity.Item">
 		select * from item i,itemclass it where
 		it.itemclass_fatherid=#{fid} and i.itemclassid=it.itemclass_id and
-		sellstatus!=2 
-		
+		sellstatus!=2 		
 		order by viewtime 
 		limit #{index},#{pageSize};
 	</select>

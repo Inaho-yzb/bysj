@@ -93,13 +93,19 @@
 			<div class="float-right pagi">
 				<ul class="pagination">
 					<li><a href="#">&laquo;</a></li>
-					<li><a href="#">1</a></li>
-					<li><a href="#">2</a></li>
-					<li><a href="#">3</a></li>
-					<li><a href="#">4</a></li>
-					<li><a href="#">5</a></li>
+					<c:forEach items="${page.pageList}" var="p">
+						<c:choose>
+							<c:when test="${page.currentPage}==${p}">
+								<li><a href="#">${p}</a></li>
+							</c:when>
+							<c:otherwise>
+								<li class="active"><a>${p}</a></li>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+					
 					<li><a href="#">&raquo;</a></li>
-					<div class="float-right pagecount">共${currentPage}页</div>
+					<div class="float-right pagecount">共${page.pageCount}页</div>
 				</ul>
 			</div>
 		</div>

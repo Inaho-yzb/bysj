@@ -13,7 +13,15 @@ public class Page {
 	
 	private List<Integer> pageList;
 	
-	Page(Integer count,Integer pageSize,Integer currentPage){
+	public List<Integer> getPageList() {
+		return pageList;
+	}
+
+	public void setPageList(List<Integer> pageList) {
+		this.pageList = pageList;
+	}
+
+	public Page(Integer count,Integer pageSize,Integer currentPage){
 		this.count = count;
 		this.pageSize = pageSize;
 		this.currentPage = currentPage;
@@ -67,7 +75,7 @@ public class Page {
 	
 	private Integer calPrePage(Integer cur){
 		if(cur==1){
-			return 1;
+			return null;
 		}else{
 			return cur-1;
 		}
@@ -77,7 +85,7 @@ public class Page {
 		if(pageList.lastIndexOf(cur.intValue())!=pageList.size()-1){
 			return cur+1;
 		}else{
-			return cur;
+			return null;
 		}
 	}
 	
