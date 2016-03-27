@@ -70,7 +70,10 @@ public class ItemController {
 		User_normal user = user_normalService.findUserByItemid(itemid);
 		item.setUsernormal(user);
 		
-		List<Message> messages = messageService.findInitItemMessageByItemId(itemid);
+		Integer index = 1;
+		Integer pageSize = 8;
+		
+		Map map = messageService.findItemMessageByItemId(itemid,index,pageSize);
 		
 		List<Item> otherItem = itemService.findOtherItemByUserId(user.getUsernormal_id());
 		
@@ -84,12 +87,14 @@ public class ItemController {
 			model.addAttribute("inFav",inFav);
 			model.addAttribute("inReport",inReport);
 		}
-				
+		List<Message> messages = (List<Message>) map.get("mesList");
+		Page page = (Page) map.get("page");
 		itemService.updateViewTimes(itemid);
 		model.addAttribute("item",item);
 		model.addAttribute("messages",messages);
 		model.addAttribute("otherItem",otherItem);
 		model.addAttribute("itemimages",itemImgList);
+		model.addAttribute("page",page);
 		
 		return "item";
 	}
@@ -106,38 +111,46 @@ public class ItemController {
 			Integer pageSize = 8;
 			String pa = request.getParameter("pa");
 			Integer index;
-			if(!StringUtils.isBlank(pa)){
-				index = Integer.valueOf(pa);
+			if(!StringUtils.isBlank(pa)||Integer.valueOf(pa)==0||Integer.valueOf(pa)==1){
+				index = 0;
 			}else{
-				index = Integer.valueOf(pa);
+				index = Integer.valueOf(pa)-1;
 			}
 			
+			ItemClass fatherItemClass = itemClassService.findItemClassById(fid);
+			
+			if(fatherItemClass!=null){
+			
 			Map map = itemService.findItemListFatherItemByFatherId(fid,index,pageSize);
-			List<Item> itemlist = (List<Item>) map.get("itemlist");
+			List<Item> itemlist = (List<Item>) map.get("itemList");
 			Integer count = (Integer) map.get("count");
 			List<ItemClass> itemChildClassList = itemClassService.findChildItemClassListByFatherId(fid);
-			ItemClass fatherItemClass = itemClassService.findItemClassById(fid);
-			Integer pageCount;
-			Integer currentPage = 1;
+			
+			Integer currentPage = index+1;
 			Page page = new Page(count,pageSize,currentPage);
 			
 			model.addAttribute("itemlist",itemlist);
 			model.addAttribute("itemChildClassList",itemChildClassList);
 			model.addAttribute("navFatherItemClass",fatherItemClass);
 			model.addAttribute("page",page);
+			}else{
+				return "404";
+			}
 			
 		}else if(request.getParameter("fid")==null&&request.getParameter("id")!=null){
 			Integer id = Integer.valueOf(request.getParameter("id"));
 			Integer pageSize = 8;
 			ItemClass childItemClass = itemClassService.findItemClassById(id);
 			Integer fid = childItemClass.getItemclass_fatherid();
+			
+			if(fid!=0){
 			ItemClass fatherItemClass = itemClassService.findItemClassById(fid);
 			String pa = request.getParameter("pa");
 			Integer index;
-			if(!StringUtils.isBlank(pa)){
-				index = Integer.valueOf(pa);
+			if(!StringUtils.isBlank(pa)||Integer.valueOf(pa)==0||Integer.valueOf(pa)==1){
+				index = 0;
 			}else{
-				index = Integer.valueOf(pa);
+				index = Integer.valueOf(pa)-1;
 			}
 			
 			List<ItemClass> itemChildClassList = itemClassService.findChildItemClassListByFatherId(fid);
@@ -145,13 +158,16 @@ public class ItemController {
 			List<Item> itemList = (List<Item>) map.get("itemList");
 			Integer count = (Integer) map.get("count");
 			
-			Integer currentPage = 1;
+			Integer currentPage = index+1;
 			Page page = new Page(count,pageSize,currentPage);
 			model.addAttribute("itemChildClassList",itemChildClassList);
 			model.addAttribute("navChildItemClass",childItemClass);
 			model.addAttribute("navFatherItemClass",fatherItemClass);
 			model.addAttribute("itemlist",itemList);
 			model.addAttribute("page",page);
+			}else{
+				return "404";
+			}
 		}
 		
 		return "itemlist";

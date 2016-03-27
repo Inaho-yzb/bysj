@@ -486,12 +486,14 @@ a{
 	float:left;
 	background-color:#fff;
 	width: 50%;
+	height:100%;
 }
 
 .item-top-right{
 	float:left;
 	background-color:#fff;
 	width: 50%;
+	height:100%
 }
 
 .item-info {
@@ -964,4 +966,10 @@ a{
 .itemform{
 	width:60%;
 	margin-left:20%;
+}
+
+#myCarousel{
+	margin-left:auto;
+	margin-right:auto;
+
 }

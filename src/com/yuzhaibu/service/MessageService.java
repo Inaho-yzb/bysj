@@ -1,6 +1,7 @@
 package com.yuzhaibu.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.yuzhaibu.entity.Message;
 
@@ -11,14 +12,14 @@ public interface MessageService {
 	 * @param userid
 	 * @return
 	 */
-	List<Message> findAllNotReadMessageByUserId(int userid);
+	List<Message> findAllNotReadMessageByUserId(Integer userid);
 	
 	/**
 	 * 物品详情页留言
 	 * @param itemid
 	 * @return
 	 */
-	List<Message> findInitItemMessageByItemId(int itemid);
+	Map findItemMessageByItemId(Integer itemid,Integer index,Integer pageSize);
 
 	/**
 	 * 查看未读

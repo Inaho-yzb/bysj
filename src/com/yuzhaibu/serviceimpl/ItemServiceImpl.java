@@ -112,7 +112,8 @@ public class ItemServiceImpl extends BaseManager implements ItemService {
 	public Map findItemListFatherItemByFatherId(Integer fid,Integer index,Integer pageSize) {
 		Map map = new HashMap();
 		map.put("fid", fid);
-		map.put("index", index);
+		Integer startRow = index*pageSize;
+		map.put("index", startRow);
 		map.put("pageSize", pageSize);
 		List<Item> items = itemDao.findItemListFatherItemByFatherId(map);
 		Integer count = itemDao.countItemByFatherId(fid);
@@ -136,7 +137,8 @@ public class ItemServiceImpl extends BaseManager implements ItemService {
 	public Map findItemListByClassId(Integer id,Integer index,Integer pageSize) {
 		Map map = new HashMap();
 		map.put("id", id);
-		map.put("index", index);
+		Integer startRow = index*pageSize;
+		map.put("index", startRow);
 		map.put("pageSize", pageSize);
 		List<Item> itemList = itemDao.findItemListByClassId(map);
 		Integer count = itemDao.countItemById(id);

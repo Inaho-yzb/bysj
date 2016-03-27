@@ -1,6 +1,7 @@
 package com.yuzhaibu.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.yuzhaibu.entity.Message;
 
@@ -18,7 +19,7 @@ public interface MessageDao {
 	 * @param itemid
 	 * @return
 	 */
-	List<Message> findInitItemMessageByItemId(int itemid);
+	List<Message> findItemMessageByItemId(Map map);
 	
 	/**
 	 * 统计留言数

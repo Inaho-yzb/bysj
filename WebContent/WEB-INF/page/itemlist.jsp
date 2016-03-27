@@ -9,9 +9,11 @@
 		<div class="position-nav">
 			<ol class="breadcrumb bkcl-white">
 				<li><a href="index.htm">首页</a></li>
-				<li><a href="itemlist.htm?fid=${navFatherItemClass.itemclass_id}">${navFatherItemClass.itemclass_name}</a></li>
+				<li><a
+					href="itemlist.htm?fid=${navFatherItemClass.itemclass_id}">${navFatherItemClass.itemclass_name}</a></li>
 				<c:if test="${!empty navChildItemClass}">
-					<li><a href="itemlist.htm?id=${navChildItemClass.itemclass_id}">${navChildItemClass.itemclass_name}</a></li>
+					<li><a
+						href="itemlist.htm?id=${navChildItemClass.itemclass_id}">${navChildItemClass.itemclass_name}</a></li>
 				</c:if>
 			</ol>
 		</div>
@@ -19,11 +21,11 @@
 			<div class="panel panel-default itemclass">
 				<div class="panel-body">
 					<c:forEach items="${itemChildClassList}" var="itemChildClass">
-						<span><a href="itemlist.htm?id=${itemChildClass.itemclass_id}">
-							${itemChildClass.itemclass_name}</a>
-						</span> 
+						<span><a
+							href="itemlist.htm?id=${itemChildClass.itemclass_id}">
+								${itemChildClass.itemclass_name}</a> </span>
 					</c:forEach>
-					
+
 				</div>
 			</div>
 		</div>
@@ -47,65 +49,92 @@
 			</div>
 
 			<div class="itemlist">
-				
+
 				<c:forEach items="${itemlist }" var="item">
-				<div class="panel panel-default itemlist-item">
-					<div class="panel-body">
-						<div class="col-md-2">
-							<img class="itemlist-pic" src="${item.itemmainimg }">
-						</div>
-						<div class="col-md-8">
-							<div class="itemlist-detail">
-								<div class="itemlist-title">
-									<a href="item.htm?id=${item.itemid}">${item.itemname }</a>
-								</div>
-								<div class="font-red itemlist-price">
-									<span>￥</span>${item.sellprice }
-								</div>
-								<div class="itemlist-intro">${item.discreption}</div>
-								<div>
+					<div class="panel panel-default itemlist-item">
+						<div class="panel-body">
+							<div class="col-md-2">
+								<img class="itemlist-pic" src="${item.itemmainimg }">
+							</div>
+							<div class="col-md-8">
+								<div class="itemlist-detail">
+									<div class="itemlist-title">
+										<a href="item.htm?id=${item.itemid}">${item.itemname }</a>
+									</div>
+									<div class="font-red itemlist-price">
+										<span>￥</span>${item.sellprice }
+									</div>
+									<div class="itemlist-intro">${item.discreption}</div>
 									<div>
-										<span class="itemlist-mesfav"><a href="">留言</a>${item.mescount}</span> <span
-											class="itemlist-mesfav"><a href="">收藏</a>${item.favcount}</span>
+										<div>
+											<span class="itemlist-mesfav"><a href="item.htm?id=${item.itemid}">留言</a>${item.mescount}</span>
+											<span class="itemlist-mesfav"><a href="item.htm?id=${item.itemid}">收藏</a>${item.favcount}</span>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-						<div class="col-md-2 pad-lf-clr pad-rt-clr">
-							<div class="itemlist-seller">
-								<img class="itemlist-seller-pic img-circle"
-									src="images/qcode.png">
-								<div class="itemlist-seller-name">
-									<div>
-										<span style="color:blue">${item.username}</span>
+							<div class="col-md-2 pad-lf-clr pad-rt-clr">
+								<div class="itemlist-seller">
+									<img class="itemlist-seller-pic img-circle"
+										src="images/qcode.png">
+									<div class="itemlist-seller-name">
+										<div>
+											<span style="color: blue">${item.username}</span>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
 				</c:forEach>
 
-				
+
 
 			</div>
 
 			<div class="float-right pagi">
 				<ul class="pagination">
-					<li><a href="#">&laquo;</a></li>
-					<c:forEach items="${page.pageList}" var="p">
-						<c:choose>
-							<c:when test="${page.currentPage}==${p}">
-								<li><a href="#">${p}</a></li>
-							</c:when>
-							<c:otherwise>
-								<li class="active"><a>${p}</a></li>
-							</c:otherwise>
-						</c:choose>
-					</c:forEach>
-					
-					<li><a href="#">&raquo;</a></li>
+					<c:choose>
+						<c:when test="${!empty navChildItemClass}">
+							<c:if test="${!empty page.prvPage}">
+								<li><a href="itemlist.htm?id=${navChildItemClass.itemclass_id}<c:if test="${!empty page.prvPage}">&pa=${page.prvPage}</c:if>">&laquo;</a></li>
+							</c:if>
+
+							<c:forEach items="${page.pageList}" var="p">
+								<c:choose>
+									<c:when test="${page.currentPage==p}">
+										<li  class="active"><a>${p}</a></li>
+									</c:when>
+									<c:otherwise>
+										<li><a href="itemlist.htm?id=${navChildItemClass.itemclass_id}&pa=${p}">${p}</a></li>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+
+							
+								<li><a href="itemlist.htm?id=${navChildItemClass.itemclass_id}<c:if test="${!empty page.nextPage}">&pa=${page.nextPage}</c:if>">&raquo;</a></li>
+							
+						</c:when>
+						<c:otherwise>
+							
+								<li><a href="itemlist.htm?fid=${navFatherItemClass.itemclass_id}<c:if test="${!empty page.prvPage}">&pa=${page.prvPage}</c:if>">&laquo;</a></li>
+							
+							<c:forEach items="${page.pageList}" var="p">
+								<c:choose>
+									<c:when test="${page.currentPage==p}">
+										<li  class="active"><a>${p}</a></li>
+									</c:when>
+									<c:otherwise>
+										<li><a href="itemlist.htm?fid=${navFatherItemClass.itemclass_id}&pa=${p}">${p}</a></li>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+
+							<li><a href="itemlist.htm?fid=${navFatherItemClass.itemclass_id}<c:if test="${!empty page.nextPage}">&pa=${page.nextPage}</c:if>">&raquo;</a></li>
+						</c:otherwise>
+					</c:choose>
 					<div class="float-right pagecount">共${page.pageCount}页</div>
+
 				</ul>
 			</div>
 		</div>

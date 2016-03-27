@@ -147,6 +147,10 @@ public class User_normalController implements Serializable {
 	              result.setErrorCode(2);
 	              result.setErrorMes("请上传图片文件！");
 	              return result;
+	        }else if(mf.getSize()>(long)10485760){
+	        		result.setErrorCode(2);
+	              result.setErrorMes("图片过大！请上传小于10M的图");
+	              return result;
 	        }
 
 		}
