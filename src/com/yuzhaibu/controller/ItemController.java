@@ -29,6 +29,8 @@ import com.yuzhaibu.util.AjaxResult;
 import com.yuzhaibu.util.Page;
 import com.yuzhaibu.util.StringUtils;
 
+import net.sf.json.JSONObject;
+
 @Controller
 public class ItemController {
 	
@@ -105,13 +107,13 @@ public class ItemController {
 		if(username!=null){
 			model.addAttribute("username",username);
 		}
-		
+		String order = request.getParameter("sort");
 		if(request.getParameter("fid")!=null&&request.getParameter("id")==null){
 			Integer fid = Integer.valueOf(request.getParameter("fid"));
 			Integer pageSize = 8;
 			String pa = request.getParameter("pa");
 			Integer index;
-			if(!StringUtils.isBlank(pa)||Integer.valueOf(pa)==0||Integer.valueOf(pa)==1){
+			if(StringUtils.isBlank(pa)||Integer.valueOf(pa)==0||Integer.valueOf(pa)==1){
 				index = 0;
 			}else{
 				index = Integer.valueOf(pa)-1;
@@ -120,8 +122,7 @@ public class ItemController {
 			ItemClass fatherItemClass = itemClassService.findItemClassById(fid);
 			
 			if(fatherItemClass!=null){
-			
-			Map map = itemService.findItemListFatherItemByFatherId(fid,index,pageSize);
+			Map map = itemService.findItemListFatherItemByFatherId(fid,index,pageSize,order);
 			List<Item> itemlist = (List<Item>) map.get("itemList");
 			Integer count = (Integer) map.get("count");
 			List<ItemClass> itemChildClassList = itemClassService.findChildItemClassListByFatherId(fid);
@@ -133,6 +134,7 @@ public class ItemController {
 			model.addAttribute("itemChildClassList",itemChildClassList);
 			model.addAttribute("navFatherItemClass",fatherItemClass);
 			model.addAttribute("page",page);
+			model.addAttribute("order",order);
 			}else{
 				return "404";
 			}
@@ -147,14 +149,14 @@ public class ItemController {
 			ItemClass fatherItemClass = itemClassService.findItemClassById(fid);
 			String pa = request.getParameter("pa");
 			Integer index;
-			if(!StringUtils.isBlank(pa)||Integer.valueOf(pa)==0||Integer.valueOf(pa)==1){
+			if(StringUtils.isBlank(pa)||Integer.valueOf(pa)==0||Integer.valueOf(pa)==1){
 				index = 0;
 			}else{
 				index = Integer.valueOf(pa)-1;
 			}
 			
 			List<ItemClass> itemChildClassList = itemClassService.findChildItemClassListByFatherId(fid);
-			Map map = itemService.findItemListByClassId(id,index,pageSize);
+			Map map = itemService.findItemListByClassId(id,index,pageSize,order);
 			List<Item> itemList = (List<Item>) map.get("itemList");
 			Integer count = (Integer) map.get("count");
 			
@@ -165,6 +167,7 @@ public class ItemController {
 			model.addAttribute("navFatherItemClass",fatherItemClass);
 			model.addAttribute("itemlist",itemList);
 			model.addAttribute("page",page);
+			model.addAttribute("order",order);
 			}else{
 				return "404";
 			}
@@ -221,6 +224,22 @@ public class ItemController {
 			result.setErrorCode(1);
 		}
 		
+		return result;
+	}
+	@RequestMapping(value=("ajaxitemnextmes"),method=RequestMethod.POST)
+	public @ResponseBody AjaxResult ajaxitemnextmes(HttpServletRequest request){
+		String itemid = request.getParameter("itemid");
+		String nxtPage = request.getParameter("nxtPage");
+		AjaxResult result = new AjaxResult();
+		if(StringUtils.isBlank(itemid)||StringUtils.isBlank(nxtPage)){
+			result.setErrorCode(1);
+			result.setErrorMes("参数错误！");
+			return result;
+		}
+		Map map = messageService.findItemMessageByItemId(Integer.valueOf(itemid),Integer.valueOf(nxtPage),8);
+		String str = JSONObject.fromObject(map).toString();
+		result.setErrorCode(0);
+		result.setResultStr(str);
 		return result;
 	}
 	

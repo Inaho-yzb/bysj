@@ -147,3 +147,43 @@ $(function(){
 		});
 });
 
+function toMesPage(nxtPage,itemid){
+	$.ajax({
+		url:"ajaxitemnextmes.htm",
+		type:'POST',
+		data:{"itemid":itemid,"nxtPage":nxtPage},
+		success:function(res){
+			if(res.errorCode==0){
+				var obj = JSON.parse(res.resultStr);
+				var mesList = obj.mesList;
+				var page = obj.page;
+				$("#meslist").empty();
+				for(var i=0;i<mesList.length;i++){
+					var str = '<div class="comment-detail"><img class="comment-hdpic img-circle" src="'+mesList[i].mes_levuserheadpic+'"><div class="comment-user"><span>'+mesList[i].mes_levusername+'</span></div><div class="comment-content">'+mesList[i].mes_content+'</div></div>';
+					$("#meslist").append(str);
+				}
+				var pg='';
+				if(page.prvPage!=0){
+					pg+='<li><a href="javascript:void(0) "onclick="toMesPage('+page.prvPage+','+itemid+')">&laquo;</a></li>';
+				}
+				if(page.pageList.length!=0){
+					for(var i=0;i<page.pageList.length;i++){
+						if(page.currentPage ==page.pageList[i] ){
+							pg+='<li class="active"><a>'+page.pageList[i]+'</a></li>';
+						}else{
+							pg+='<li><a href="javascript:void(0)" onclick="toMesPage('+page.pageList[i]+','+itemid+')">'+page.pageList[i]+'</a></li>';
+						}
+					}
+				}
+				
+				if(page.nextPage!=0){
+					pg+='<li><a href="javascript:void(0)" onclick="toMesPage('+page.nextPage+','+itemid+')">&raquo;</a></li>';
+				}
+				$(".pagination").empty().append(pg);
+			}else{
+				alert(res.errorMes);
+			}
+		}
+	});
+}
+

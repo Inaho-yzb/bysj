@@ -5,8 +5,21 @@
 
 
 <mapper namespace="com.yuzhaibu.dao.MessageDao">
-	<select id="findAllNotReadMessage" parameterType="int" resultType="com.yuzhaibu.entity.Message">
-		select mes_id,mes_itemid,itemname as mes_itemname,itemmainimg as mes_itemmmainimg,mes_levuserid,u.username as mes_levusername,mes_content FROM item i,message m,user_normal u WHERE mes_touserid=#{userid} AND mes_status=1 AND i.itemid=m.mes_itemid limit 0,5;
+	<select id="findAllNotReadMessage" parameterType="java.util.Map" resultType="com.yuzhaibu.entity.Message">
+		select 
+		mes_id,
+		mes_itemid,
+		itemname as mes_itemname,
+		itemmainimg as mes_itemmmainimg,
+		mes_levuserid,
+		u.username as mes_levusername,
+		mes_content 
+		FROM item i,message m,user_normal u 
+		WHERE mes_touserid=#{userid} AND mes_status=1 AND i.itemid=m.mes_itemid and m.mes_levuserid=u.usernormal_id limit #{index},#{pageSize};
+	</select>
+	<select id="finddAllNotReadMessageCount" parameterType="java.util.Map" resultType="int">
+		select count(1) FROM item i,message m,user_normal u 
+		WHERE mes_touserid=#{userid} AND mes_status=1 AND i.itemid=m.mes_itemid and m.mes_levuserid=u.usernormal_id;
 	</select>
 	
 	<select id="findItemMessageByItemId" parameterType="java.util.Map" resultType="com.yuzhaibu.entity.Message">

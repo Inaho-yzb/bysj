@@ -12,7 +12,7 @@ public interface MessageDao {
 	 * @param userid
 	 * @return
 	 */
-	List<Message> findAllNotReadMessage(int userid);
+	List<Message> findAllNotReadMessage(Map map);
 	
 	/**
 	 * item页查找留言
@@ -41,5 +41,7 @@ public interface MessageDao {
 	 * @return
 	 */
 	Integer addMessage(Message mes);
+
+	Integer finddAllNotReadMessageCount(Map<String, Integer> map);
 	
 }

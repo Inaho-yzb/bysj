@@ -31,6 +31,7 @@ import com.yuzhaibu.entity.ItemClass;
 import com.yuzhaibu.entity.User_normal;
 import com.yuzhaibu.service.ItemService;
 import com.yuzhaibu.util.DateUtils;
+import com.yuzhaibu.util.Page;
 import com.yuzhaibu.util.StringUtils;
 
 @Service
@@ -61,20 +62,35 @@ public class ItemServiceImpl extends BaseManager implements ItemService {
 	private FavDao favDao;
 
 	@Override
-	public List<Item> findItemByUserId(Integer sellerid) {
-
-		List<Item> items = itemDao.findItemByUserId(sellerid);
-
-		return items;
-
+	public Map findItemByUserId(Integer sellerid,Integer index,Integer pageSize) {
+		Integer curIndex = (index-1)*pageSize;
+		Map map = new HashMap();
+		map.put("sellerid", sellerid);
+		map.put("index", curIndex);
+		map.put("pageSize", pageSize);
+		List<Item> items = itemDao.findItemByUserId(map);
+		Integer count =  itemDao.findItemByUserIdCount(map);
+		Page page = new Page(count,pageSize,index);
+		Map resMap = new HashMap();
+		resMap.put("items", items);
+		resMap.put("itempage", page);
+		return resMap;
 	}
 
 	@Override
-	public List<Fav> findFavItemByUserId(Integer userid) {
-
-		List<Fav> favItems = favDao.findFavItemByUserId(userid);
-
-		return favItems;
+	public Map findFavItemByUserId(Integer userid,Integer index,Integer pageSize) {
+		Integer curIndex = (index-1)*pageSize;
+		Map map = new HashMap();
+		map.put("userid",userid);
+		map.put("index", curIndex);
+		map.put("pageSize", pageSize);
+		List<Fav> favItems = favDao.findFavItemByUserId(map);
+		Integer favcount = favDao.findFavItemCountByUserId(map);
+		Page page = new Page(favcount,pageSize,index);
+		Map resMap = new HashMap();
+		resMap.put("favItems", favItems);
+		resMap.put("favpage", page);
+		return resMap;
 
 	}
 
@@ -109,12 +125,13 @@ public class ItemServiceImpl extends BaseManager implements ItemService {
 	}
 
 	@Override
-	public Map findItemListFatherItemByFatherId(Integer fid,Integer index,Integer pageSize) {
+	public Map findItemListFatherItemByFatherId(Integer fid,Integer index,Integer pageSize,String order) {
 		Map map = new HashMap();
 		map.put("fid", fid);
 		Integer startRow = index*pageSize;
 		map.put("index", startRow);
 		map.put("pageSize", pageSize);
+		map.put("order", order);
 		List<Item> items = itemDao.findItemListFatherItemByFatherId(map);
 		Integer count = itemDao.countItemByFatherId(fid);
 		for (Item item : items) {
@@ -134,12 +151,13 @@ public class ItemServiceImpl extends BaseManager implements ItemService {
 	}
 
 	@Override
-	public Map findItemListByClassId(Integer id,Integer index,Integer pageSize) {
+	public Map findItemListByClassId(Integer id,Integer index,Integer pageSize,String order) {
 		Map map = new HashMap();
 		map.put("id", id);
 		Integer startRow = index*pageSize;
 		map.put("index", startRow);
 		map.put("pageSize", pageSize);
+		map.put("order", order);
 		List<Item> itemList = itemDao.findItemListByClassId(map);
 		Integer count = itemDao.countItemById(id);
 		for (Item item : itemList) {

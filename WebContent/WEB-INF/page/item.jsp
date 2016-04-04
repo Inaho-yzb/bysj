@@ -178,11 +178,11 @@
 						</c:forEach>
 
 					</div>
-
+					<c:if test="${!empty messages}">
 					<div class="fy">
 						<ul class="pagination">
 							
-							<li><a href="javascript:void(0)" <c:if test="${!empty page.prvPage}">onclick="toMesPage(${page.prvPage})"</c:if>>&laquo;</a></li>
+							 <c:if test="${!empty page.prvPage}"><li><a href="javascript:void(0)"onclick="toMesPage(${page.prvPage})">&laquo;</a></li></c:if>
 							
 							<c:forEach items="${page.pageList}" var="p">
 								<c:choose>
@@ -190,14 +190,15 @@
 										<li class="active"><a>${p}</a></li>
 									</c:when>
 									<c:otherwise>
-										<li><a href="javascript:void(0)" onclick="toMesPage(${p})">${p}</a></li>
+										<li><a href="javascript:void(0)" onclick="toMesPage(${p},${item.itemid})">${p}</a></li>
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>
 
-							<li><a href="javascript:void(0)"<c:if test="${!empty page.nextPage}">onclick="toMesPage(${page.nextPage})"</c:if>>&raquo;</a></li>
+							<c:if test="${!empty page.nextPage}"><li><a href="javascript:void(0)" onclick="toMesPage(${page.nextPage},${item.itemid})">&raquo;</a></li></c:if>
 						</ul>
 					</div>
+					</c:if>
 				</div>
 			</div>
 			<div class="col-md-5">

@@ -41,7 +41,6 @@
 						<li><a href="${pageContext.request.contextPath}/user/toProfile.htm?tag=myitems">我的物品</a></li>
 						<li><a href="${pageContext.request.contextPath}/user/toProfile.htm?tag=favitems"><span class="glyphicon glyphicon-heart">
 							</span> 收藏夹</a></li>
-						<li><a href="#">联系客服</a></li>
 					</ul>
 				</nav>
 			</div>

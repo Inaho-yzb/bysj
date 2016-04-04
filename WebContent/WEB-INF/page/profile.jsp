@@ -127,7 +127,7 @@
 
 					</div>
 					<div class=<c:choose><c:when test="${tag=='myitems'}">"tab-pane fade in active"</c:when><c:otherwise>"tab-pane fade"</c:otherwise></c:choose> id="items">
-					
+					<div id="item-tab">
 					<c:forEach items="${items}" var="item">
 						<div class="panel panel-default put-items">
 							<div class="panel-body">
@@ -151,7 +151,8 @@
 										<p>出售价：￥${item.sellprice}</p>
 										<p>浏览次数：${item.viewtime}</p>
 										<p>发布时间：</p>
-										<p>${item.itemcreatime}</p>
+										<p><fmt:formatDate value="${item.itemcreatime}"
+									pattern="yyyy-MM-dd  HH:mm:ss" /></p>
 									</div>
 									<div class="col-md-4">
 										<p>交易地点：${item.tradeposition}</p>
@@ -161,8 +162,6 @@
 								<c:when test="${usernormal.authen==1 }">审核中</c:when>
 								<c:when test="${usernormal.authen==2 }">已认证</c:when>
 							</c:choose></p>
-										<p>留言：0</p>
-										<p>收藏：0</p>
 									</div>
 								</div>
 								<div class="col-md-2">
@@ -172,25 +171,32 @@
 							</div>
 						</div>
 						</c:forEach>
-
+						</div>
 						
 
 						<div class="put-items">
-							<ul class="pagination">
-								<li><a href="#">&laquo;</a></li>
-								<li class="active"><a href="#">1</a></li>
-								<li class="disabled"><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">4</a></li>
-								<li><a href="#">5</a></li>
-								<li><a href="#">&raquo;</a></li>
+							<ul class="pagination" id="itempag">
+								 <c:if test="${!empty itempage.prvPage}"><li><a href="javascript:void(0)"onclick="toMesPage(${itempage.prvPage})">&laquo;</a></li></c:if>
+							
+							<c:forEach items="${itempage.pageList}" var="p">
+								<c:choose>
+									<c:when test="${itempage.currentPage==p}">
+										<li class="active"><a>${p}</a></li>
+									</c:when>
+									<c:otherwise>
+										<li><a href="javascript:void(0)" onclick="chageitempage(${p},${usernormal.usernormal_id})">${p}</a></li>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+
+							<c:if test="${!empty itempage.nextPage}"><li><a href="javascript:void(0)" onclick="chageitempage(${itempage.nextPage},${usernormal.usernormal_id})">&raquo;</a></li></c:if>
 							</ul>
 						</div>
 
 					</div>
 					
 					<div class=<c:choose><c:when test="${tag=='favitems'}">"tab-pane fade in active"</c:when><c:otherwise>"tab-pane fade"</c:otherwise></c:choose> id="favitems">
-						
+						<div id="fav-tab">
 						<c:forEach items="${favs}" var="fav">
 						<div class="panel panel-default put-items">
 							<div class="panel-body">
@@ -214,7 +220,8 @@
 										<p>出售价：￥${fav.sellprice}</p>
 										<p>浏览次数：${fav.viewtime}</p>
 										<p>发布时间：</p>
-										<p>${fav.itemcreatime }</p>
+										<p><fmt:formatDate value="${fav.itemcreatime}"
+									pattern="yyyy-MM-dd  HH:mm:ss" /></p>
 									</div>
 									<div class="col-md-4">
 										<p>交易地点：${fav.tradeposition}</p>
@@ -226,8 +233,7 @@
 								<c:when test="${fav.sellerauthen==2 }">已认证</c:when>
 							</c:choose>
 										</p>
-										<p>留言：0</p>
-										<p>收藏：0</p>
+										
 									</div>
 								</div>
 								<div class="col-md-2">
@@ -237,21 +243,29 @@
 							</div>
 						</div>
 						</c:forEach>
-
+						</div>
 						<div class="put-items">
-							<ul class="pagination">
-								<li><a href="#">&laquo;</a></li>
-								<li class="active"><a href="#">1</a></li>
-								<li class="disabled"><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">4</a></li>
-								<li><a href="#">5</a></li>
-								<li><a href="#">&raquo;</a></li>
+							<ul class="pagination" id="favpag">
+								<c:if test="${!empty favpage.prvPage}"><li><a href="javascript:void(0)"onclick="changefavpage(${favpage.prvPage})">&laquo;</a></li></c:if>
+							
+								<c:forEach items="${favpage.pageList}" var="p">
+								<c:choose>
+									<c:when test="${favpage.currentPage==p}">
+										<li class="active"><a>${p}</a></li>
+									</c:when>
+									<c:otherwise>
+										<li><a href="javascript:void(0)" onclick="chagefavpage(${p},${usernormal.usernormal_id})">${p}</a></li>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+
+							<c:if test="${!empty favpage.nextPage}"><li><a href="javascript:void(0)" onclick="chagefavpage(${favpage.nextPage},${usernormal.usernormal_id})">&raquo;</a></li></c:if>
 							</ul>
 						</div>
 					</div>
-					<div class="tab-pane fade" id="message">
 					
+					<div class="tab-pane fade" id="message">
+						<div id="mes-tab">
 						<c:forEach items="${messages}" var="message">
 						<div class="panel panel-default profile-message">
 							<div class="panel-body">
@@ -271,17 +285,24 @@
 							</div>
 						</div> 
 						</c:forEach>
-
+						</div>
 
 						<div class="profile-message">
-							<ul class="pagination">
-								<li><a href="#">&laquo;</a></li>
-								<li class="active"><a href="#">1</a></li>
-								<li class="disabled"><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">4</a></li>
-								<li><a href="#">5</a></li>
-								<li><a href="#">&raquo;</a></li>
+							<ul class="pagination" id="mespag">
+								<c:if test="${!empty mespage.prvPage}"><li><a href="javascript:void(0)"onclick="chagemespage(${mespage.prvPage})">&laquo;</a></li></c:if>
+							
+								<c:forEach items="${mespage.pageList}" var="p">
+								<c:choose>
+									<c:when test="${mespage.currentPage==p}">
+										<li class="active"><a>${p}</a></li>
+									</c:when>
+									<c:otherwise>
+										<li><a href="javascript:void(0)" onclick="chagemespage(${p},${usernormal.usernormal_id})">${p}</a></li>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+
+							<c:if test="${!empty mespage.nextPage}"><li><a href="javascript:void(0)" onclick="chagemespage(${mespage.nextPage},${usernormal.usernormal_id})">&raquo;</a></li></c:if>
 							</ul>
 						</div>
 

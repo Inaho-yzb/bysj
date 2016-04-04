@@ -69,7 +69,7 @@ public class LoginController implements Serializable{
 	public AjaxResult checkusername(HttpServletRequest request){
 		AjaxResult result = new AjaxResult();
 		String username = request.getParameter("username");
-		if(!StringUtils.isBlank(username)||username.length()>20||!username.matches("[a-zA-Z0-9_.]{6,20}")){
+		if(StringUtils.isBlank(username)||username.length()>20||!username.matches("[a-zA-Z0-9_.]{6,20}")){
 			result.setErrorCode(1);
 		}else{
 			if(user_normalService.findUserByUsername(username)==null){
@@ -88,22 +88,22 @@ public class LoginController implements Serializable{
 		String pwd = request.getParameter("pwd");
 		String email = request.getParameter("email");
 		
-		if(!StringUtils.isBlank(username)||username.length()>20||!username.matches("[a-zA-Z0-9_.]{6,20}")){
+		if(StringUtils.isBlank(username)||username.length()>20||!username.matches("[a-zA-Z0-9_.]{6,20}")){
 			model.addAttribute("errorMes", "请检查用户名是否符合规范！");
 			return "loginerror";
 		}
 		
-		if(!StringUtils.isBlank(nickname)||nickname.length()>20||!nickname.matches("[a-zA-Z0-9_.]{6,20}")){
+		if(StringUtils.isBlank(nickname)||nickname.length()>20||!nickname.matches("[a-zA-Z0-9_.]{6,20}")){
 			model.addAttribute("errorMes", "请检查昵称是否符合规范！");
 			return "loginerror";
 		}
 		
-		if(!StringUtils.isBlank(pwd)||pwd.length()>15||!pwd.matches("[a-zA-Z0-9]{8,15}")){
+		if(StringUtils.isBlank(pwd)||pwd.length()>15||!pwd.matches("[a-zA-Z0-9]{8,15}")){
 			model.addAttribute("errorMes", "请检查密码是否符合规范！");
 			return "loginerror";
 		}
 		
-		if(!StringUtils.isBlank(email)||!email.matches("^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$")){
+		if(StringUtils.isBlank(email)||!email.matches("^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$")){
 			model.addAttribute("errorMes", "请检查邮箱是否符合规范！");
 			return "loginerror";
 		}

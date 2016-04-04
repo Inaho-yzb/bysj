@@ -11,7 +11,7 @@ public interface ItemDao {
 	/**
 	 * 用户发布物品列表查询
 	 **/
-	List<Item> findItemByUserId(Integer sellerid);
+	List<Item> findItemByUserId(Map map);
 	
 	/**
 	 * 首页通过父类id查找物品
@@ -82,5 +82,7 @@ public interface ItemDao {
 	 * @return
 	 */
 	Integer countItemById(Integer id);
+
+	Integer findItemByUserIdCount(Map map);
 	
 }

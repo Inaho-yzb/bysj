@@ -20,10 +20,19 @@ public class MessageServiceImpl extends BaseManager implements MessageService {
 	private MessageDao messageDao;
 
 	@Override
-	public List<Message> findAllNotReadMessageByUserId(Integer userid) {
-		List<Message> messages = messageDao.findAllNotReadMessage(userid);
-		
-		return messages;
+	public Map findAllNotReadMessageByUserId(Integer userid,Integer index,Integer pageSize) {
+		Map<String,Integer> map = new HashMap<String,Integer>();
+		map.put("userid", userid);
+		Integer startRow = (index-1)*pageSize;
+		map.put("index", startRow);
+		map.put("pageSize", pageSize);
+		List<Message> messages = messageDao.findAllNotReadMessage(map);
+		Integer count = messageDao.finddAllNotReadMessageCount(map);
+		Page page = new Page(count,pageSize,index);
+		Map resMap = new HashMap();
+		resMap.put("messages", messages);
+		resMap.put("mespage", page);
+		return resMap;
 	}
 
 	@Override

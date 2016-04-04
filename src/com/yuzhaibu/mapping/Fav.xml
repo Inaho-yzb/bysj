@@ -27,7 +27,7 @@
 		values(#{itemid},#{favUserId})
 	</insert>
 	
-	<select id="findFavItemByUserId" parameterType="int" resultMap="favResultMap">
+	<select id="findFavItemByUserId" parameterType="java.util.Map" resultMap="favResultMap">
 		select
 		itemid,
 		itemname,
@@ -45,7 +45,15 @@
 		u.authen as sellerauthen,
 		favid from item i,fav
 		f,user_normal u where itemid=item_id and f.setfavuserid=#{userid} and
-		u.usernormal_id=i.sellerid limit 0,5;
+		u.usernormal_id=i.sellerid 
+		limit #{index},#{pageSize};
+	</select>
+	<select id="findFavItemCountByUserId" parameterType="java.util.Map" resultType="int">
+		select
+		count(1)
+		from item i,fav
+		f,user_normal u where itemid=item_id and f.setfavuserid=#{userid} and
+		u.usernormal_id=i.sellerid 
 	</select>
 	
 	<select id="findFavCountByItemId" parameterType="int" resultType="int">

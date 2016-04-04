@@ -18,9 +18,12 @@
 		</association>
 	</resultMap>
 
-	<select id="findItemByUserId" parameterType="int"
+	<select id="findItemByUserId" parameterType="java.util.Map"
 		resultType="com.yuzhaibu.entity.Item">
-		select * from item where sellerid=#{sellerid} limit 0,5;
+		select * from item where sellerid=#{sellerid} order by itemcreatime desc limit #{index},#{pageSize} ;
+	</select>
+	<select id="findItemByUserIdCount" parameterType="java.util.Map" resultType="int">
+		select count(1) from item where sellerid=#{sellerid} order by itemcreatime desc ;
 	</select>
 
 	<select id="findIndexItemByClassId" parameterType="int"
@@ -29,7 +32,9 @@
 		from item i,user_normal u,itemclass ic where
 		i.sellerid=u.usernormal_id and sellstatus=0 and
 		ic.itemclass_fatherid=#{classid} and ic.itemclass_id=i.itemclassid
-		order by itemcreatime desc;
+		order by itemcreatime desc 
+		limit 0,6
+		;
 	</select>
 
 
@@ -48,8 +53,22 @@
 		resultType="com.yuzhaibu.entity.Item">
 		select * from item i,itemclass it where
 		it.itemclass_fatherid=#{fid} and i.itemclassid=it.itemclass_id and
-		sellstatus!=2 		
-		order by viewtime 
+		sellstatus!=2 	
+		<if test="order==null">
+			order by i.viewtime
+		</if>	
+		<if test="order=='0'.toString()">
+			order by i.sellprice desc
+		</if> 
+		<if test="order=='1'.toString()">
+			order by i.sellprice asc
+		</if> 
+		<if test="order=='2'.toString()">
+			order by i.itemcreatime desc
+		</if> 
+		<if test="order=='3'.toString()">
+			order by i.itemcreatime asc
+		</if> 
 		limit #{index},#{pageSize};
 	</select>
 	
@@ -61,7 +80,23 @@
 	<select id="findItemListByClassId" parameterType="int"
 		resultType="com.yuzhaibu.entity.Item">
 		select * from item where itemclassid=#{id} and
-		sellstatus!=2 order by viewtime limit #{index},#{pageSize};
+		sellstatus!=2 
+		<if test="order==null">
+			order by i.viewtime
+		</if>	
+		<if test="order=='0'.toString()">
+			order by i.sellprice desc
+		</if> 
+		<if test="order=='1'.toString()">
+			order by i.sellprice asc
+		</if> 
+		<if test="order=='2'.toString()">
+			order by i.itemcreatime desc
+		</if> 
+		<if test="order=='3'.toString()">
+			order by i.itemcreatime asc
+		</if> 
+		limit #{index},#{pageSize};
 	</select>
 	
 	<select id="countItemById" parameterType="int" resultType="int">

@@ -12,7 +12,7 @@ public interface MessageService {
 	 * @param userid
 	 * @return
 	 */
-	List<Message> findAllNotReadMessageByUserId(Integer userid);
+	Map findAllNotReadMessageByUserId(Integer userid,Integer index,Integer pageSize);
 	
 	/**
 	 * 物品详情页留言

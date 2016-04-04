@@ -12,9 +12,9 @@ public class StringUtils {
 	 */
 	public static boolean isBlank(String str){
 		if(str==null||str==""){
-			return false;
-		}else{
 			return true;
+		}else{
+			return false;
 		}
 	}
 	

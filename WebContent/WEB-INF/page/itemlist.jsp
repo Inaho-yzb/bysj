@@ -20,12 +20,16 @@
 		<div class="col-md-3">
 			<div class="panel panel-default itemclass">
 				<div class="panel-body">
+				<c:if test="${!empty itemChildClassList}">
 					<c:forEach items="${itemChildClassList}" var="itemChildClass">
 						<span><a
 							href="itemlist.htm?id=${itemChildClass.itemclass_id}">
 								${itemChildClass.itemclass_name}</a> </span>
 					</c:forEach>
-
+				</c:if>
+				<c:if test="${empty itemChildClassList}">
+					<span>无子栏目</span>
+				</c:if>
 				</div>
 			</div>
 		</div>
@@ -34,17 +38,23 @@
 			<div class="sort-btn">
 				<div class="btn-group">
 					<div class="btn-group">
-						<button type="button" class="btn btn-default dropdown-toggle"
-							data-toggle="dropdown">
+						<button type="button" class="btn btn-default dropdown-toggle"data-toggle="dropdown">
 							价格<span class="caret"></span>
 						</button>
 						<ul class="dropdown-menu sorts">
-							<li><a href="#">从高到低</a></li>
-							<li><a href="#">从低到高</a></li>
+							<li><a href="itemlist.htm?fid=${navFatherItemClass.itemclass_id}&pa=${page.currentPage}&sort=0">从高到低</a></li>
+							<li><a href="itemlist.htm?fid=${navFatherItemClass.itemclass_id}&pa=${page.currentPage}&sort=1">从低到高</a></li>
 						</ul>
 					</div>
-					<button type="button" class="btn btn-default">发布时间</button>
-					<button type="button" class="btn btn-default">卖家信誉</button>
+					<div class="btn-group">
+					<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+						发布时间<span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu sorts">
+							<li><a href="itemlist.htm?fid=${navFatherItemClass.itemclass_id}&pa=${page.currentPage}&sort=2">从近到远</a></li>
+							<li><a href="itemlist.htm?fid=${navFatherItemClass.itemclass_id}&pa=${page.currentPage}&sort=3">从远到近</a></li>
+					</ul>
+					</div class="btn-group">
 				</div>
 			</div>
 
@@ -97,7 +107,7 @@
 					<c:choose>
 						<c:when test="${!empty navChildItemClass}">
 							<c:if test="${!empty page.prvPage}">
-								<li><a href="itemlist.htm?id=${navChildItemClass.itemclass_id}<c:if test="${!empty page.prvPage}">&pa=${page.prvPage}</c:if>">&laquo;</a></li>
+								<li><a href="itemlist.htm?id=${navChildItemClass.itemclass_id}&pa=${page.prvPage}&sort=${order}">&laquo;</a></li>
 							</c:if>
 
 							<c:forEach items="${page.pageList}" var="p">
@@ -106,18 +116,18 @@
 										<li  class="active"><a>${p}</a></li>
 									</c:when>
 									<c:otherwise>
-										<li><a href="itemlist.htm?id=${navChildItemClass.itemclass_id}&pa=${p}">${p}</a></li>
+										<li><a href="itemlist.htm?id=${navChildItemClass.itemclass_id}&pa=${p}&sort=${order}">${p}</a></li>
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>
 
 							
-								<li><a href="itemlist.htm?id=${navChildItemClass.itemclass_id}<c:if test="${!empty page.nextPage}">&pa=${page.nextPage}</c:if>">&raquo;</a></li>
+							<c:if test="${!empty page.nextPage}"><li><a href="itemlist.htm?id=${navChildItemClass.itemclass_id}&pa=${page.nextPage}&sort=${order}">&raquo;</a></li></c:if>
 							
 						</c:when>
 						<c:otherwise>
 							
-								<li><a href="itemlist.htm?fid=${navFatherItemClass.itemclass_id}<c:if test="${!empty page.prvPage}">&pa=${page.prvPage}</c:if>">&laquo;</a></li>
+								<c:if test="${!empty page.prvPage}"><li><a href="itemlist.htm?fid=${navFatherItemClass.itemclass_id}&pa=${page.prvPage}&sort=${order}">&laquo;</a></li></c:if>
 							
 							<c:forEach items="${page.pageList}" var="p">
 								<c:choose>
@@ -125,12 +135,12 @@
 										<li  class="active"><a>${p}</a></li>
 									</c:when>
 									<c:otherwise>
-										<li><a href="itemlist.htm?fid=${navFatherItemClass.itemclass_id}&pa=${p}">${p}</a></li>
+										<li><a href="itemlist.htm?fid=${navFatherItemClass.itemclass_id}&pa=${p}&sort=${order}">${p}</a></li>
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>
 
-							<li><a href="itemlist.htm?fid=${navFatherItemClass.itemclass_id}<c:if test="${!empty page.nextPage}">&pa=${page.nextPage}</c:if>">&raquo;</a></li>
+							<c:if test="${!empty page.nextPage}"><li><a href="itemlist.htm?fid=${navFatherItemClass.itemclass_id}&pa=${page.nextPage}&sort=${order}">&raquo;</a></li></c:if>
 						</c:otherwise>
 					</c:choose>
 					<div class="float-right pagecount">共${page.pageCount}页</div>

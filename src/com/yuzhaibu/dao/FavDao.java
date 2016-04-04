@@ -1,6 +1,7 @@
 package com.yuzhaibu.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.yuzhaibu.entity.Fav;
 
@@ -16,7 +17,7 @@ public interface FavDao {
 	/**
 	 * 用户收藏物品列表查询
 	 **/
-	List<Fav> findFavItemByUserId(int userid);
+	List<Fav> findFavItemByUserId(Map map);
 	
 	/**
 	 * 收藏数查询
@@ -31,5 +32,7 @@ public interface FavDao {
 	 * @return
 	 */
 	Integer isInFav(Fav fav);
+
+	Integer findFavItemCountByUserId(Map map);
 
 }

@@ -12,12 +12,12 @@ public interface ItemService {
 	/**
 	 * 用户发布物品列表查询
 	 **/
-	List<Item> findItemByUserId(Integer sellerid);
+	Map findItemByUserId(Integer sellerid,Integer index,Integer pageSize);
 	
 	/**
 	 * 用户收藏物品列表查询
 	 **/
-	List<Fav> findFavItemByUserId(Integer userid);
+	Map findFavItemByUserId(Integer userid,Integer index,Integer pageSize);
 	
 	/**
 	 * 首页通过父类类别查找物品，返回父类id+物品列表（查找大类下的物品）
@@ -45,14 +45,14 @@ public interface ItemService {
 	 * @param fid
 	 * @return
 	 */
-	Map findItemListFatherItemByFatherId(Integer fid,Integer index,Integer pageSize);
+	Map findItemListFatherItemByFatherId(Integer fid,Integer index,Integer pageSize,String order);
 
 	/**
 	 * 列表页子类下的物品列表
 	 * @param id
 	 * @return
 	 */
-	Map findItemListByClassId(Integer id,Integer index,Integer pageSize);
+	Map findItemListByClassId(Integer id,Integer index,Integer pageSize,String order);
 
 	/**
 	 * 发布商品

@@ -69,20 +69,24 @@ public class User_normalController implements Serializable {
 	@RequestMapping("/user/toProfile")
 	public String toProfile(HttpSession session, ModelMap model, HttpServletRequest request) {
 		String username = (String) session.getAttribute("username");
+		Integer userid = (Integer) session.getAttribute("userid");
 		String tag = request.getParameter("tag");
 
 		usernormal = user_normalService.findUserByUsername(username);
-		List<Item> items = itemService.findItemByUserId(usernormal.getUsernormal_id());
-		List<Fav> favs = itemService.findFavItemByUserId(usernormal.getUsernormal_id());
-		List<Message> messages = messageService.findAllNotReadMessageByUserId(usernormal.getUsernormal_id());
+		Map itemsMap = itemService.findItemByUserId(userid,1,5);
+		Map favsMap = itemService.findFavItemByUserId(userid,1,5);
+		Map messagesMap = messageService.findAllNotReadMessageByUserId(userid,1,5);
 
 		int exp = (usernormal.getLevexp() / 1000 + 1) * 1000;
 
 		model.addAttribute("usernormal", usernormal);
 		model.put("nextexp", exp);
-		model.addAttribute("items", items);
-		model.addAttribute("favs", favs);
-		model.addAttribute("messages", messages);
+		model.addAttribute("items", itemsMap.get("items"));
+		model.addAttribute("itempage", itemsMap.get("itempage"));
+		model.addAttribute("favs", favsMap.get("favItems"));
+		model.addAttribute("favpage",favsMap.get("favpage"));
+		model.put("messages", messagesMap.get("messages"));
+		model.put("mespage", messagesMap.get("mespage"));
 		model.put("tag", tag);
 
 		return "profile";
@@ -156,7 +160,7 @@ public class User_normalController implements Serializable {
 		}
 		
 		String date = DateUtils.dateToStrLong(new Date(), "yyyyMMdd");
-		// 得到上传文件的保存目录，将上传的文件存放于WEB-INF目录下，不允许外界直接访问，保证上传文件的安全
+		
 		String savePath = req.getServletContext().getRealPath("/uploads/itemimages/"+date);
 		
 		String itemname = multipartHttpServletRequest.getParameter("itemname");
@@ -200,4 +204,39 @@ public class User_normalController implements Serializable {
 		return result;
 	}
 
+	@RequestMapping(value=("/user/ajaxprofilenextitems"),method=RequestMethod.POST)
+	public @ResponseBody AjaxResult ajaxprofilenextitems(HttpServletRequest request){
+		Integer userid = Integer.valueOf(request.getParameter("userid"));
+		Integer page = Integer.valueOf(request.getParameter("page"));
+		AjaxResult result = new AjaxResult();
+		Map itemsMap = itemService.findItemByUserId(userid,page,5);
+		String str = JSONObject.fromObject(itemsMap).toString();
+		result.setErrorCode(0);
+		result.setResultStr(str);
+		return result;
+	}
+	
+	@RequestMapping(value=("/user/ajaxprofilenextfav"),method=RequestMethod.POST)
+	public @ResponseBody AjaxResult ajaxprofilenextfav(HttpServletRequest request){
+		Integer userid = Integer.valueOf(request.getParameter("userid"));
+		Integer page = Integer.valueOf(request.getParameter("page"));
+		AjaxResult result = new AjaxResult();
+		Map favsMap = itemService.findFavItemByUserId(userid,page,5);
+		String str = JSONObject.fromObject(favsMap).toString();
+		result.setErrorCode(0);
+		result.setResultStr(str);
+		return result;
+	}
+	
+	@RequestMapping(value=("/user/ajaxprofilenextmes"),method=RequestMethod.POST)
+	public @ResponseBody AjaxResult ajaxprofilenextmes(HttpServletRequest request){
+		Integer userid = Integer.valueOf(request.getParameter("userid"));
+		Integer page = Integer.valueOf(request.getParameter("page"));
+		AjaxResult result = new AjaxResult();
+		Map messagesMap = messageService.findAllNotReadMessageByUserId(userid,page,5);
+		String str = JSONObject.fromObject(messagesMap).toString();
+		result.setErrorCode(0);
+		result.setResultStr(str);
+		return result;
+	}
 }
