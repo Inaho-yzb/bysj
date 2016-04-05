@@ -17,6 +17,18 @@
 			<result property="authen" column="authen" />
 		</association>
 	</resultMap>
+	
+	<resultMap type="com.yuzhaibu.entity.Item" id="searchItemMap">
+		<result property="itemid" column="itemid"/>
+		<result property="itemname" column="itemname" />
+		<result property="sellprice" column="sellprice" />
+		<result property="itemmainimg" column="itemmainimg" />
+		<result property="discreption" column="discreption" />
+		<result property="mescount" column="mescount" />
+		<result property="favcount" column="favcount"/>
+		<result property="headimg" column="headimg"/>
+		<result property="username" column="username"/>
+	</resultMap>
 
 	<select id="findItemByUserId" parameterType="java.util.Map"
 		resultType="com.yuzhaibu.entity.Item">
@@ -140,4 +152,22 @@
 		
 	</update>
 
+	<select id="searchItemByKeyword" parameterType="String" resultMap="searchItemMap">
+		select 
+		i.itemid,
+		i.itemname,
+		i.sellprice,
+		i.itemmainimg,
+		i.discreption,
+		(select count(1) from message m where m.mes_itemid = i.itemid) as mescount,
+		(select count(1) from fav f where f.item_id = i.itemid) as favcount,
+		u.headimg,
+		u.username
+		from item i,user_normal u
+		where 
+		i.sellerid = u.usernormal_id and
+		(i.itemname like CONCAT('%','${keyword}','%' )
+		or
+		i.discreption like CONCAT('%','${keyword}','%' )) 
+	</select>
 </mapper>

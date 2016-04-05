@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -12,6 +13,7 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.yuzhaibu.entity.Item;
 import com.yuzhaibu.entity.ItemClass;
@@ -65,8 +67,18 @@ public class FrontViewController implements Serializable{
 		model.addAttribute("fatherClass",fatherClass);
 		model.addAttribute("childClass",childClass);
 		model.addAttribute("itemList",itemList);
+		model.addAttribute("tt","首页");
 
 		return "index";
+	}
+	
+	@RequestMapping(value=("search"),method=RequestMethod.POST)
+	public String toSearchResult(HttpServletRequest request,ModelMap model){
+		String keyword = request.getParameter("keyword");
+		List<Item> itemList = itemService.searchItemByKeyword(keyword);
+		model.put("result", itemList);
+		model.put("tt", "搜索");
+		return "search";
 	}
 
 }

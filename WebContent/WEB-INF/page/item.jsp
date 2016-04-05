@@ -73,8 +73,8 @@
 								<span>售价:￥</span>${item.sellprice}
 							</div>
 							<div class="item-price-down">
-								<c:if test="${item.bargain==0}">一口价</c:if>
-								<c:if test="${item.bargain==1}">可议价</c:if>
+								<c:if test="${item.bargain==1}">一口价</c:if>
+								<c:if test="${item.bargain==0}">可议价</c:if>
 							</div>
 							<div class="addfav">
 								<c:choose>

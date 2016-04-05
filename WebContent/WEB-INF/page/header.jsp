@@ -4,7 +4,7 @@
 <!DOCTYPE>
 <html>
 <head lang="zh-CN">
-<title>个人主页</title>
+<title>${tt}-校园跳蚤市场</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="IE=Edge">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -59,9 +59,9 @@
 					</ul>
 
 
-					<form id="indexsearch" class="navbar-form navbar-right">
+					<form id="indexsearch" class="navbar-form navbar-right" action="${pageContext.request.contextPath}/search.htm" method="post">
 						<div class="form-group">
-							<input type="text" class="form-control" placeholder="搜跳蚤">
+							<input type="text" class="form-control" placeholder="搜跳蚤" name="keyword">
 						</div>
 						<button type="submit" class="btn btn-default">
 							<span class="glyphicon glyphicon-search searchbtn"> </span>

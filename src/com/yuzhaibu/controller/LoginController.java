@@ -34,6 +34,7 @@ public class LoginController implements Serializable{
 			if(reUrl!=null){
 				model.put("url", reUrl);
 			}
+			model.put("tt", "登录");
 			return "login";
 		}
 		return "redirect:../user/toProfile.htm";
@@ -42,9 +43,9 @@ public class LoginController implements Serializable{
 	
 	
 	@RequestMapping("/login/checkLogin")
-	public String login(String username,String pwd,HttpSession session,HttpServletRequest request){
+	public String login(String username,String pwd,HttpSession session,HttpServletRequest request,ModelMap model){
 		User_normal user = user_normalService.findUserByUsernameAndPwd(username, pwd);
-		
+		model.put("tt", "登录");
 		if(user!=null){
 			session.setAttribute("username", username);
 			session.setAttribute("userid", user.getUsernormal_id());
@@ -60,7 +61,8 @@ public class LoginController implements Serializable{
 	}
 	
 	@RequestMapping("/login/toRegistered")
-	public String toRegistered(){
+	public String toRegistered(HttpServletRequest request,ModelMap model){
+		model.put("tt","注册" );
 		return "registered";
 	}
 	
@@ -87,7 +89,7 @@ public class LoginController implements Serializable{
 		String nickname = request.getParameter("nickname");
 		String pwd = request.getParameter("pwd");
 		String email = request.getParameter("email");
-		
+		model.put("tt","注册" );
 		if(StringUtils.isBlank(username)||username.length()>20||!username.matches("[a-zA-Z0-9_.]{6,20}")){
 			model.addAttribute("errorMes", "请检查用户名是否符合规范！");
 			return "loginerror";
@@ -116,9 +118,11 @@ public class LoginController implements Serializable{
 		
 		if(user_normalService.regUser(user)>0){
 			session.setAttribute("username", username);
+			model.put("tt","注册成功" );
 			return "regsuccess";
 		}else{
 			model.addAttribute("errorMes","注册失败，请稍候再试！");
+			model.put("tt","注册失败" );
 			return "loginerror";
 		}
 	}

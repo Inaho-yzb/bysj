@@ -104,5 +104,12 @@ public interface ItemDao {
 	 * @return
 	 */
 	Integer editItem(Item item);
+
+	/**
+	 * 搜索物品
+	 * @param keyword
+	 * @return
+	 */
+	List<Item> searchItemByKeyword(String keyword);
 	
 }

@@ -280,4 +280,9 @@ public class ItemServiceImpl extends BaseManager implements ItemService {
 		return itemDao.editItem(item);
 	}
 
+	@Override
+	public List<Item> searchItemByKeyword(String keyword) {
+		return itemDao.searchItemByKeyword(keyword);
+	}
+
 }

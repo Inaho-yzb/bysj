@@ -88,7 +88,7 @@ public class User_normalController implements Serializable {
 		model.put("messages", messagesMap.get("messages"));
 		model.put("mespage", messagesMap.get("mespage"));
 		model.put("tag", tag);
-
+		model.put("tt","个人主页" );
 		return "profile";
 	}
 
@@ -103,7 +103,7 @@ public class User_normalController implements Serializable {
 	}
 
 	@RequestMapping("/user/quit")
-	public String quit(HttpSession session) {
+	public String quit(HttpSession session,ModelMap model) {
 		session.setAttribute("username", null);
 		session.setAttribute("userid", null);
 		return "redirect:../index.htm";
@@ -127,9 +127,10 @@ public class User_normalController implements Serializable {
 	}
 
 	@RequestMapping(value = ("/user/releasepro"))
-	public String toReleasePro(HttpServletRequest request,ModelMap map) {
+	public String toReleasePro(HttpServletRequest request,ModelMap model) {
+		model.put("tt","发布物品" );
 		List<ItemClass> itemClassList =  itemClassService.findAllChildClass();
-		map.put("itemClassList", itemClassList);
+		model.put("itemClassList", itemClassList);
 		return "releasepro";
 	}
 

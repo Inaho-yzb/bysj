@@ -223,9 +223,9 @@ function editItem(itemid){
 				'<tr><th>售价：</th><td><div class="input-group"><input id="itemsellprice" value="'+item.sellprice+'" name="itemsellprice" class="form-control" placeholder="请输入出售价格" onkeyup="value=value.replace(/[^\\d\\.]/g,\'\')"> <span class="input-group-addon">元</span></div></td>'+
 			'</tr><tr><th>原价：</th><td><div class="input-group"><input id="itemoriginprice" value="'+item.originprice+'" name="itemoriginprice" class="form-control" placeholder="请输入原价" onkeyup="value=value.replace(/[^\\d\\.]/g,\'\')"> <span class="input-group-addon">元</span></div></td>';
 				if(item.bargain==1){
-					str += '</tr><tr><th>接受议价：</th><td><input id="itembargain-y" name="itembargain" type="radio" checked="checked" value="1">是<input id="itembargain-n" name="itembargain" type="radio" value="2">否</td></tr>';
+					str += '</tr><tr><th>接受议价：</th><td><input id="itembargain-y" name="itembargain" type="radio" checked="checked" value="0">是<input id="itembargain-n" name="itembargain" type="radio" value="1">否</td></tr>';
 				}else{
-					str += '</tr><tr><th>接受议价：</th><td><input id="itembargain-y" name="itembargain" type="radio"  value="1">是<input id="itembargain-n"  checked="checked" name="itembargain" type="radio" value="2">否</td></tr>'
+					str += '</tr><tr><th>接受议价：</th><td><input id="itembargain-y" name="itembargain" type="radio"  value="0">是<input id="itembargain-n"  checked="checked" name="itembargain" type="radio" value="1">否</td></tr>'
 				}
 			
 			str += '<tr><th>成色：</th><td><div class="input-group"><select class="form-control" id="itemuse">';

@@ -30,6 +30,7 @@ public class Item {
 	private String username;
 	private Integer index;
 	private Integer pagesize;
+	private Integer headimg;
 	
 	public Integer getIndex() {
 		return index;
@@ -162,6 +163,12 @@ public class Item {
 	}
 	public void setUsername(String username) {
 		this.username = username;
+	}
+	public Integer getHeadimg() {
+		return headimg;
+	}
+	public void setHeadimg(Integer headimg) {
+		this.headimg = headimg;
 	}
 	
 	

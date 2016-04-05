@@ -97,6 +97,7 @@ public class ItemController {
 		model.addAttribute("otherItem",otherItem);
 		model.addAttribute("itemimages",itemImgList);
 		model.addAttribute("page",page);
+		model.addAttribute("tt",item.getItemname());
 		
 		return "item";
 	}
@@ -135,6 +136,7 @@ public class ItemController {
 			model.addAttribute("navFatherItemClass",fatherItemClass);
 			model.addAttribute("page",page);
 			model.addAttribute("order",order);
+			model.addAttribute("tt",fatherItemClass.getItemclass_name()+"列表");
 			}else{
 				return "404";
 			}
@@ -168,6 +170,7 @@ public class ItemController {
 			model.addAttribute("itemlist",itemList);
 			model.addAttribute("page",page);
 			model.addAttribute("order",order);
+			model.addAttribute("tt",childItemClass.getItemclass_name()+"列表");
 			}else{
 				return "404";
 			}
