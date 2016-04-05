@@ -239,4 +239,58 @@ public class User_normalController implements Serializable {
 		result.setResultStr(str);
 		return result;
 	}
+	
+	@RequestMapping(value=("/user/getitemdetail"),method=RequestMethod.POST)
+	public @ResponseBody AjaxResult getitemdetail(HttpServletRequest request){
+		AjaxResult result = new AjaxResult();
+		Integer itemid = Integer.valueOf(request.getParameter("itemid"));
+		
+		Item item = itemService.findItemByItemId(itemid);
+		
+		if(item!=null){
+			String resStr = JSONObject.fromObject(item).toString();
+			result.setErrorCode(0);
+			result.setResultStr(resStr);
+		}else{
+			result.setErrorCode(1);
+			result.setErrorMes("没有该物品!");
+		}
+		
+		return result;
+		
+	}
+	
+	@RequestMapping(value=("/user/ajaxupdateitem"),method=RequestMethod.POST)
+	public @ResponseBody AjaxResult ajaxupdateitem(HttpServletRequest request,HttpSession session){
+		AjaxResult result = new AjaxResult();
+		Integer itemid = Integer.valueOf(request.getParameter("itemid"));
+		String itemname = request.getParameter("itemname");
+		Double itemsellprice = Double.valueOf(request.getParameter("itemsellprice"));
+		Double itemoriginprice = Double.valueOf(request.getParameter("itemoriginprice"));
+		Integer bargain = Integer.valueOf(request.getParameter("bargain"));
+		String color = request.getParameter("color");
+		String itemtradeposition = request.getParameter("itemtradeposition");
+		String itemdescription = request.getParameter("itemdescription");
+		
+		Integer userid = (Integer) session.getAttribute("userid");
+		if(itemService.findItemCountByUseridAndItemId(userid,itemid)==1){
+			Item item = new Item();
+			item.setItemid(itemid);
+			item.setItemname(itemname);
+			item.setSellprice(itemsellprice);
+			item.setOriginprice(itemoriginprice);
+			item.setBargain(bargain);
+			item.setColor(color);
+			item.setTradeposition(itemtradeposition);
+			item.setDiscreption(itemdescription);
+			itemService.editItem(item);
+			result.setErrorCode(0);
+			return result;
+		}else{
+			result.setErrorCode(0);
+			result.setErrorMes("非法操作！");
+			return result;
+		}
+		
+	}
 }

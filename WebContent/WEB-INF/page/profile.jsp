@@ -69,9 +69,9 @@
 							<div>学院：${usernormal.school}</div>
 							<div>班级：${usernormal.userclass}</div>
 							<div>认证状态：<c:choose>
-								<c:when test="${usernormal.authen==0 }">未认证</c:when>
-								<c:when test="${usernormal.authen==1 }">审核中</c:when>
-								<c:when test="${usernormal.authen==2 }">已认证</c:when>
+								<c:when test="${usernormal.authen==0 }"><span id="authenstatus">未认证</span></c:when>
+								<c:when test="${usernormal.authen==1 }"><span id="authenstatus">审核中</span></c:when>
+								<c:when test="${usernormal.authen==2 }"><span id="authenstatus">已认证</span></c:when>
 							</c:choose>
 							</div>
 							<div>
@@ -165,8 +165,7 @@
 									</div>
 								</div>
 								<div class="col-md-2">
-									<a href="" class="btn btn-primary">修改</a> <a href=""
-										class="btn btn-danger btndelete">删除</a>
+									<a href="javascript:void(0)" onclick="editItem(${item.itemid})" class="btn btn-primary">修改</a> <a href="" class="btn btn-danger btndelete">删除</a>
 								</div>
 							</div>
 						</div>

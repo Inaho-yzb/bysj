@@ -267,4 +267,17 @@ public class ItemServiceImpl extends BaseManager implements ItemService {
 		return itemDao.updateViewTimes(itemid);
 	}
 
+	@Override
+	public Integer findItemCountByUseridAndItemId(Integer userid, Integer itemid) {
+		Map map = new HashMap();
+		map.put("userid", userid);
+		map.put("itemid", itemid);
+		return itemDao.findItemCountByUseridAndItemId(map);
+	}
+
+	@Override
+	public Integer editItem(Item item) {
+		return itemDao.editItem(item);
+	}
+
 }

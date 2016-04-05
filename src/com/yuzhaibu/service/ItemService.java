@@ -68,4 +68,20 @@ public interface ItemService {
 	 * @return
 	 */
 	Integer updateViewTimes(Integer itemid);
+
+	/**
+	 * 判断该物品是否是属于该用户的
+	 * @param userid
+	 * @param itemid
+	 * @return
+	 */
+	Integer findItemCountByUseridAndItemId(Integer userid, Integer itemid);
+
+	/**
+	 * 编辑物品
+	 * @param item
+	 * @return
+	 */
+	Integer editItem(Item item);
+	
 }

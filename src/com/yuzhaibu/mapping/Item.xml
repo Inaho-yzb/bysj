@@ -79,7 +79,7 @@
 
 	<select id="findItemListByClassId" parameterType="int"
 		resultType="com.yuzhaibu.entity.Item">
-		select * from item where itemclassid=#{id} and
+		select * from item i where itemclassid=#{id} and
 		sellstatus!=2 
 		<if test="order==null">
 			order by i.viewtime
@@ -120,6 +120,24 @@
 		update item
 		set viewtime = viewtime+1
 		where itemid = #{itemid}
+	</update>
+	
+	<select id="findItemCountByUseridAndItemId" parameterType="java.util.Map" resultType="int">
+		select count(1) from item where itemid = #{itemid} and sellerid= #{userid}
+	</select>
+	
+	<update id="editItem" parameterType="com.yuzhaibu.entity.Item">
+		update item
+		set 
+		itemname = #{itemname},
+		sellprice = #{sellprice},
+		originprice = #{originprice},
+		color = #{color},
+		tradeposition = #{tradeposition},
+		bargain = #{bargain},
+		discreption = #{discreption}
+		where itemid = #{itemid}
+		
 	</update>
 
 </mapper>

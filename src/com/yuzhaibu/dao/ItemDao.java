@@ -82,7 +82,27 @@ public interface ItemDao {
 	 * @return
 	 */
 	Integer countItemById(Integer id);
-
+	
+	/**
+	 * 用户发布物品总数
+	 * @param map
+	 * @return
+	 */
 	Integer findItemByUserIdCount(Map map);
+
+	/**
+	 * 判断该物品是否是属于该用户的
+	 * @param userid
+	 * @param itemid
+	 * @return
+	 */
+	Integer findItemCountByUseridAndItemId(Map map);
+
+	/**
+	 * 更新物品
+	 * @param item
+	 * @return
+	 */
+	Integer editItem(Item item);
 	
 }

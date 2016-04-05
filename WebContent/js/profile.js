@@ -63,17 +63,11 @@ function chageitempage(nxtpage,userid){
 							'<p>'+formatDate(new Date(itemList[i].itemcreatime.time)) +'</p>'+
 						'</div><div class="col-md-4">'+
 							'<p>交易地点：'+itemList[i].tradeposition+'</p>'+
-							'<p>卖家：'+$("#navusername").text()+'</p>'+
+							'<p>卖家：'+$(".nickname").text()+'</p>'+
 							'<p>认证状态:';
-					if($(".profile-authen").text()=="您已经认证"){
-						str+='已认证';
-					}else if($(".profile-authen").text()=="审核中"){
-						str +="审核中";
-					}else{
-						str +='未认证';
-					}
+						str+=$("#authenstatus").text().trim();
 					
-					str+='</p></div></div><div class="col-md-2"><a href="" class="btn btn-primary">修改</a> <a href="" class="btn btn-danger btndelete">删除</a></div></div></div>';
+					str+='</p></div></div><div class="col-md-2"><a href="javascript:void(0)" onclick="editItem('+itemList[i].itemid+')" class="btn btn-primary">修改</a> <a href="" class="btn btn-danger btndelete">删除</a></div></div></div>';
 				}
 				$("#item-tab").empty().append(str);
 				var pg='';
@@ -134,15 +128,9 @@ function chagefavpage(nxtpage,userid){
 							'<p>'+formatDate(new Date(itemList[i].itemcreatime.time)) +'</p>'+
 						'</div><div class="col-md-4">'+
 							'<p>交易地点：'+itemList[i].tradeposition+'</p>'+
-							'<p>卖家：'+$("#navusername").text()+'</p>'+
+							'<p>卖家：'+itemList[i].nickname+'</p>'+
 							'<p>认证状态:';
-					if($(".profile-authen").text()=="您已经认证"){
-						str+='已认证';
-					}else if($(".profile-authen").text()=="审核中"){
-						str +="审核中";
-					}else{
-						str +='未认证';
-					}
+					str+=$("#authenstatus").text().trim();
 					
 					str+='</p></div></div><div class="col-md-2"> <a href="" class="btn btn-danger btndelete">删除</a></div></div></div>';
 				}
@@ -219,6 +207,105 @@ function chagemespage(nxtpage,userid){
 			}
 		}
 	});
+}
+
+function editItem(itemid){
+	$.ajax({
+		url:"/user/getitemdetail.htm",
+		type:"POST",
+		data:{"itemid":itemid},
+		success:function(res){
+			if(res.errorCode==0){
+				var item = JSON.parse(res.resultStr);
+				var str;
+				str='<table style="margin-left:auto;margin-right:auto;margin-top:30px;"><tbody>'+
+				'<tr><th>商品名：</th><td><input id="itemname" name="itemname" class="form-control" placeholder="请输入商品名" value="'+item.itemname+'"></td></tr>'+
+				'<tr><th>售价：</th><td><div class="input-group"><input id="itemsellprice" value="'+item.sellprice+'" name="itemsellprice" class="form-control" placeholder="请输入出售价格" onkeyup="value=value.replace(/[^\\d\\.]/g,\'\')"> <span class="input-group-addon">元</span></div></td>'+
+			'</tr><tr><th>原价：</th><td><div class="input-group"><input id="itemoriginprice" value="'+item.originprice+'" name="itemoriginprice" class="form-control" placeholder="请输入原价" onkeyup="value=value.replace(/[^\\d\\.]/g,\'\')"> <span class="input-group-addon">元</span></div></td>';
+				if(item.bargain==1){
+					str += '</tr><tr><th>接受议价：</th><td><input id="itembargain-y" name="itembargain" type="radio" checked="checked" value="1">是<input id="itembargain-n" name="itembargain" type="radio" value="2">否</td></tr>';
+				}else{
+					str += '</tr><tr><th>接受议价：</th><td><input id="itembargain-y" name="itembargain" type="radio"  value="1">是<input id="itembargain-n"  checked="checked" name="itembargain" type="radio" value="2">否</td></tr>'
+				}
+			
+			str += '<tr><th>成色：</th><td><div class="input-group"><select class="form-control" id="itemuse">';
+			for(var i=3;i<=10;i++){
+				if(item.color==i){
+					if(i!=10){
+						str += '<option value="'+i+'" selected="true">'+i+'</option>';
+					}else{
+						str += '<option value="'+i+'" selected="true">全新</option>';
+					}
+				}else{
+					if(i!=10){
+						str += '<option value="'+i+'">'+i+'</option>';
+					}else{
+						str += '<option value="'+i+'">全新</option>';
+					}
+				}
+			}
+				str += '</select><span class="input-group-addon">成新</span></div></td></tr>'+
+			'<tr><th>交易地点：</th><td><input id="itemtradeposition" value="'+item.tradeposition+'" name="itemtradeposition" class="form-control" placeholder="请输入交易地点"></td></tr>'+
+			'<tr><th>物品描述：</th><td><textarea placeholder="请输入物品描述" id="itemdescription" style="width:300px;height:150px"></textarea></td></tr></tbody></table>';
+				$s = $(str);
+				$s[0].getElementsByTagName("textarea")[0].innerHTML=item.discreption;
+				hrHuTui.popout({
+					width:600,
+					height:500,
+					type:"text",
+					title:"修改物品详情",
+					content:$s,
+					onOk:function(callback){
+						if(checkDetail()){
+							$.ajax({
+								url:"/user/ajaxupdateitem.htm",
+								type:"POST",
+								data:{"itemid":itemid,"itemname":$("#itemname").val(),"itemsellprice":$("#itemsellprice").val(),"itemoriginprice":$("#itemoriginprice").val(),"bargain":$("input[type='radio'][checked='checked']").val(),"color":$("#itemuse").val(),"itemtradeposition":$("#itemtradeposition").val(),"itemdescription":$("#itemdescription").val()},
+								success:function(res){
+									if(res.errorCode==0){
+										alert("更新成功！");
+										location.reload();
+										return true;
+									}else{
+										alert("出错了！");
+										return false;
+									}
+								}
+							});
+						}else{
+							return false;
+						}
+					}
+				});
+			}else{
+				alert(res.errorMes);
+			}
+		},
+		error:function(xhr){
+			
+		}
+	});
+}
+
+function checkDetail(){
+	if($("#itemname").val()==""){
+		alert('物品名不能为空！');
+		return false;
+	}
+	if($("#itemsellprice").val()==""){
+		alert('出售价格不能为空！');
+		return false;
+	}
+	if($("#itemoriginprice").val()==""){
+		alert('原价不能为空！');
+		return false;
+	}
+	if($("#itemtradeposition").val()==""){
+		alert('交易地点不能为空！');
+		return false;
+	}
+	
+	return true;
 }
 
 function   formatDate(now)   {     
