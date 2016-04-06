@@ -35,4 +35,18 @@ public interface FavDao {
 
 	Integer findFavItemCountByUserId(Map map);
 
+	/**
+	 * 删除物品的所有收藏
+	 * @param itemid
+	 * @return
+	 */
+	Integer deleteFavByItemid(Integer itemid);
+
+	/**
+	 * 删除收藏
+	 * @param fav
+	 * @return
+	 */
+	Integer deleteFav(Fav fav);
+
 }

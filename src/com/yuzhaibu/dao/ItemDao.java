@@ -110,6 +110,10 @@ public interface ItemDao {
 	 * @param keyword
 	 * @return
 	 */
-	List<Item> searchItemByKeyword(String keyword);
+	List<Item> searchItemByKeyword(Map map);
+
+	Integer searchItemByKeywordCount(Map map);
+
+	Integer deleteItem(Map map);
 	
 }

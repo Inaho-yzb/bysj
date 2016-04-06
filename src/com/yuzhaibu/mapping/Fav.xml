@@ -64,4 +64,12 @@
 		select favid from fav where item_id = #{itemid} and setfavuserid = #{favUserId}
 	</select>
 	
+	<delete id="deleteFavByItemid" parameterType="int">
+		delete from fav where item_id = #{itemid}
+	</delete>
+	
+	<delete id="deleteFav" parameterType="com.yuzhaibu.entity.Fav">
+		delete from fav where item_id = #{itemid} and setfavuserid = #{favUserId}
+	</delete>
+	
 </mapper>

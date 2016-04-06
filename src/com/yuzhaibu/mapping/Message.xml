@@ -47,4 +47,8 @@
 		);
 	</insert>
 	
+	<delete id="deleteMesByItemid" parameterType="int">
+		delete from message where mes_itemid = #{itemid}
+	</delete>
+	
 </mapper>

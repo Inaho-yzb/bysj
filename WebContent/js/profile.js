@@ -308,6 +308,106 @@ function checkDetail(){
 	return true;
 }
 
+function deletemyitems(itemid){
+	hrHuTui.popout({
+		type:"info",
+		title:"确认",
+		content:"确定删除吗？不可恢复！",
+		onOk:function(callback){
+			$.ajax({
+				url:"/user/deletemyitem.htm",
+				type:"POST",
+				data:{"itemid":itemid},
+				success:function(res){
+					if(res.errorCode==0){
+						alert("操作成功！");
+						location.reload();
+						return ture;
+					}else{
+						alert("操作失败！");
+						return false;
+					}
+				},
+				error:function(xhr){
+					alert("服务器连接失败！");
+					return false;
+				}
+			});
+		}
+	});
+}
+
+function deletefav(itemid){
+	hrHuTui.popout({
+		type:"info",
+		title:"确认",
+		content:"确定删除吗？",
+		onOk:function(callback){
+			$.ajax({
+				url:"/user/deletefav.htm",
+				type:"POST",
+				data:{"itemid":itemid},
+				success:function(res){
+					if(res.errorCode==0){
+						alert("操作成功！");
+						location.reload();
+						return ture;
+					}else{
+						alert("操作失败！");
+						return false;
+					}
+				},
+				error:function(xhr){
+					alert("服务器连接失败！");
+					return false;
+				}
+			});
+		}
+	});
+}
+
+function changeStatus(itemid,status){
+	var str;
+	if(status==0){
+		str = '出售中';
+	}else if(status==1){
+		str = '被预定';
+	}
+	
+	hrHuTui.popout({
+		type:"select",
+		title:"更改状态",
+		nttext:['当前状态：'+str],
+		content:"<option value='0'>出售中</option><option value='1'>被预定</option><option value='1'>已售出</option>",
+		onOk:function(v,callback){
+			if(confirm("确定更改？")){
+				$.ajax({
+					url:"/user/changeItemstatus.htm",
+					type:"post",
+					data:{"itemid":itemid,"status":v},
+					success:function(res){
+						if(res.errorCode==0){
+							alert("更改成功！");
+							location.reload();
+							return true;
+						}else{
+							alert("操作失败！");
+							return false;
+						}
+					},
+					error:function(xhr){
+						alert("服务器连接失败，请稍后再试！");
+						return true;
+					}
+				});
+			}else{
+				return false;
+			}
+			
+		}
+	});
+}
+
 function   formatDate(now)   {     
     var   year=now.getFullYear();     
     var   month=now.getMonth()+1;     

@@ -13,8 +13,8 @@
 			<div class="position-nav">
 				<ol class="breadcrumb bkcl-white">
 					<li><a href="index.htm">首页</a></li>
-					<li><a href="itemlist.htm?fid=${item.itemClass.itemclass_fatherid}">${item.itemClass.fatherclass}</a></li>
-					<li class="active">${item.itemClass.itemclass_name }</li>
+					<li><a href="itemlist.htm?fid=${item.fatherid}">${item.fatherclassname}</a></li>
+					<li class="active">${item.itemclass_name }</li>
 				</ol>
 			</div>
 		</div>
@@ -115,20 +115,20 @@
 								<span class="label label-info">交易地点</span>${item.tradeposition}
 							</div>
 							<div class="item-pad">
-								<span class="label label-info">卖 家</span>${item.usernormal.nickname }
+								<span class="label label-info">卖 家</span>${item.nickname }
 							</div>
 							<div class="item-pad">
 								<span class="label label-info">认证状态</span>
 								<c:choose>
-									<c:when test="${item.usernormal.authen==0 }">未认证</c:when>
-									<c:when test="${item.usernormal.authen==1 }">审核中</c:when>
-									<c:when test="${item.usernormal.authen==2 }">已认证</c:when>
+									<c:when test="${item.userauthen==0 }">未认证</c:when>
+									<c:when test="${item.userauthen==1 }">审核中</c:when>
+									<c:when test="${item.userauthen==2 }">已认证</c:when>
 								</c:choose>
 							</div>
 							<div class="item-pad">
 								<span class="label label-info">联系方式</span>
-								<c:if test="${!empty item.usernormal.mobile}">手机：${item.usernormal.mobile }</c:if>
-								<c:if test="${!empty item.usernormal.qq}">QQ：${item.usernormal.qq}</c:if>
+								<c:if test="${!empty item.mobile}">手机：${item.mobile }</c:if>
+								<c:if test="${!empty item.qq}">QQ：${item.qq}</c:if>
 							</div>
 							<div class="item-pad">
 								<span class="label label-info">发布时间</span>

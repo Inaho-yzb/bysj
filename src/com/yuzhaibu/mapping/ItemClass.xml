@@ -8,7 +8,9 @@
 	</select>
 	
 	<select id="findSomeChildClassByFatherId" parameterType="int" resultType="com.yuzhaibu.entity.ItemClass">
-		select * from itemclass where itemclass_fatherid=#{fatherId} limit 0,3;
+		select * from itemclass 
+		where itemclass_fatherid=#{fatherId} 
+		limit 0,3;
 	</select>
 	
 	<select id="childClassMapper" parameterType="int" resultType="com.yuzhaibu.entity.ItemClass">

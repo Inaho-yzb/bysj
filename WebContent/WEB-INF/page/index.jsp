@@ -106,9 +106,9 @@
 											<a href="item.htm?id=${itm.itemid}">${itm.itemname}</a> <span class="simp-proname-price">￥${itm.sellprice}</span>
 										</div>
 										<div class="simp-prointro">
-											<span>${itm.usernormal.school}</span> <span
+											<span>${itm.school}</span> <span
 												class="simp-prointro-right"> <c:choose>
-													<c:when test="${itm.usernormal.authen==2}">
+													<c:when test="${itm.userauthen==2}">
 												认证用户
 											</c:when>
 													<c:otherwise>

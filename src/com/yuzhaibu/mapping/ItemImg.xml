@@ -14,4 +14,9 @@
   	select id,imgpath,itemid from itemimg where itemid = #{id}
   </select>
   
+  <delete id="deleteItemImg" parameterType="int">
+  	delete from itemimg
+  	where itemid = #{itemid}
+  </delete>
+  
   </mapper>

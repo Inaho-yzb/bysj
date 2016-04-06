@@ -31,5 +31,14 @@ public class FavServiceImpl implements FavService {
 		
 		return favDao.isInFav(fav);
 	}
+
+	@Override
+	public Integer deletefav(Integer itemid, Integer userid) {
+		Fav fav = new Fav();
+		fav.setItemid(itemid);
+		fav.setFavUserId(userid);
+		
+		return favDao.deleteFav(fav);
+	}
 	
 }

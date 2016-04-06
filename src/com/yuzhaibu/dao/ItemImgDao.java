@@ -7,7 +7,9 @@ import com.yuzhaibu.entity.ItemImg;
 
 public interface ItemImgDao {
 
-	int insertNewImg(Map imgMap);
+	Integer insertNewImg(Map imgMap);
 
 	List<ItemImg> findItemImagesByItemId(int itemid);
+
+	Integer deleteItemImg(Integer itemid);
 }

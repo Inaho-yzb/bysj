@@ -17,5 +17,13 @@ public interface FavService {
 	 * @return
 	 */
 	Integer isInFav(Integer serid, Integer itemid);
+
+	/**
+	 * 删除收藏
+	 * @param itemid
+	 * @param userid
+	 * @return
+	 */
+	Integer deletefav(Integer itemid, Integer userid);
 	
 }

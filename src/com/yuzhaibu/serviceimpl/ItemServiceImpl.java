@@ -24,6 +24,7 @@ import com.yuzhaibu.dao.ItemClassDao;
 import com.yuzhaibu.dao.ItemDao;
 import com.yuzhaibu.dao.ItemImgDao;
 import com.yuzhaibu.dao.MessageDao;
+import com.yuzhaibu.dao.ReportDao;
 import com.yuzhaibu.dao.User_normalDao;
 import com.yuzhaibu.entity.Fav;
 import com.yuzhaibu.entity.Item;
@@ -60,6 +61,9 @@ public class ItemServiceImpl extends BaseManager implements ItemService {
 	
 	@Autowired
 	private FavDao favDao;
+	
+	@Autowired
+	private ReportDao reportDao;
 
 	@Override
 	public Map findItemByUserId(Integer sellerid,Integer index,Integer pageSize) {
@@ -112,8 +116,6 @@ public class ItemServiceImpl extends BaseManager implements ItemService {
 	public Item findItemByItemId(Integer itemid) {
 
 		Item item = itemDao.findItemByItemId(itemid);
-		ItemClass itemClass = itemClassDao.childClassMapper(item.getItemclassid());
-		item.setItemClass(itemClass);
 
 		return item;
 	}
@@ -134,16 +136,6 @@ public class ItemServiceImpl extends BaseManager implements ItemService {
 		map.put("order", order);
 		List<Item> items = itemDao.findItemListFatherItemByFatherId(map);
 		Integer count = itemDao.countItemByFatherId(fid);
-		for (Item item : items) {
-			Integer mescount = messageDao.findMesCountByItemId(item.getItemid());
-			Integer favcount = favDao.findFavCountByItemId(item.getItemid());
-			User_normal user= user_normalDao.findByItemId(item.getItemid());
-			
-			item.setMescount(mescount);
-			item.setFavcount(favcount);
-			item.setUserid(user.getUsernormal_id());
-			item.setUsername(user.getUsername());
-		}
 		Map resMap = new HashMap();
 		resMap.put("itemList", items);
 		resMap.put("count", count);
@@ -160,16 +152,6 @@ public class ItemServiceImpl extends BaseManager implements ItemService {
 		map.put("order", order);
 		List<Item> itemList = itemDao.findItemListByClassId(map);
 		Integer count = itemDao.countItemById(id);
-		for (Item item : itemList) {
-			Integer mescount = messageDao.findMesCountByItemId(item.getItemid());
-			Integer favcount = favDao.findFavCountByItemId(item.getItemid());
-			User_normal user= user_normalDao.findByItemId(item.getItemid());
-
-			item.setMescount(mescount);
-			item.setFavcount(favcount);
-			item.setUserid(user.getUsernormal_id());
-			item.setUsername(user.getUsername());
-		}
 		Map resMap = new HashMap();
 		resMap.put("itemList", itemList);
 		resMap.put("count", count);
@@ -281,8 +263,42 @@ public class ItemServiceImpl extends BaseManager implements ItemService {
 	}
 
 	@Override
-	public List<Item> searchItemByKeyword(String keyword) {
-		return itemDao.searchItemByKeyword(keyword);
+	public Map searchItemByKeyword(Map frommap) {
+		Integer index = ((Integer)frommap.get("toPage")-1)*8;
+		frommap.put("index", index);
+		List<Item> itemList = itemDao.searchItemByKeyword(frommap);
+		Integer count = itemDao.searchItemByKeywordCount(frommap);
+		Page pg = new Page(count,(Integer)frommap.get("pageSize"),(Integer)frommap.get("toPage"));
+		Map resMap = new HashMap();
+		resMap.put("itemList", itemList);
+		resMap.put("page", pg);
+		return resMap;
+	}
+
+	@Override
+	public Integer deleteItem(final Integer itemid,final Integer userid) {
+		return transactionTemplate.execute(new TransactionCallback<Integer>() {
+					public Integer doInTransaction(TransactionStatus status){
+						try{
+							Map map = new HashMap();
+							map.put("itemid", itemid);
+							map.put("userid", userid);
+							
+							if(itemDao.deleteItem(map)!=0){
+								itemImgDao.deleteItemImg(itemid);
+								favDao.deleteFavByItemid(itemid);
+								messageDao.deleteMesByItemid(itemid);
+								reportDao.deleteReportByItemid(itemid);
+							}
+							return 1;
+						}catch(Exception e){
+							e.printStackTrace();
+							log.error(e.getMessage());
+							return -1;
+						}
+					}
+				}
+				);
 	}
 
 }

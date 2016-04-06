@@ -132,7 +132,7 @@
 						<div class="panel panel-default put-items">
 							<div class="panel-body">
 								<div class="col-md-2">
-									<a href="${pageContext.request.contextPath}/item.htm?id=${item.itemid }"><img class="itemlist-pic" src="${item.itemmainimg}"></a>
+									<a href="${pageContext.request.contextPath}/item.htm?id=${item.itemid}"><img class="itemlist-pic" src="${item.itemmainimg}"></a>
 									<div>
 										<a href="${pageContext.request.contextPath}/item.htm?id=${item.itemid }">${item.itemname}</a>
 									</div>
@@ -143,6 +143,11 @@
 											<c:when test="${item.sellstatus==2 }">已售出</c:when>
 										</c:choose>
 									</div>
+									<c:if test="${item.sellstatus!=2}">
+									<div>
+										<a class="btn btn-default" onclick="changeStatus(${item.itemid},${item.sellstatus})">更改状态</a>
+									</div>
+									</c:if>
 								</div>
 								<div class="col-md-8">
 									<div class="col-md-4">${item.discreption}</div>
@@ -165,7 +170,8 @@
 									</div>
 								</div>
 								<div class="col-md-2">
-									<a href="javascript:void(0)" onclick="editItem(${item.itemid})" class="btn btn-primary">修改</a> <a href="" class="btn btn-danger btndelete">删除</a>
+									<a href="javascript:void(0)" onclick="editItem(${item.itemid})" class="btn btn-primary">修改</a> 
+									<a class="btn btn-danger" onclick="deletemyitems(${item.itemid})">删除</a>
 								</div>
 							</div>
 						</div>
@@ -236,7 +242,7 @@
 									</div>
 								</div>
 								<div class="col-md-2">
-									<a class="btn btn-danger btndelete">删除</a>
+									<a class="btn btn-danger" onclick="deletefav(${fav.itemid})">删除</a>
 								</div>
 
 							</div>
@@ -285,7 +291,7 @@
 						</div> 
 						</c:forEach>
 						</div>
-
+						<c:if test="${!empty messages}">
 						<div class="profile-message">
 							<ul class="pagination" id="mespag">
 								<c:if test="${!empty mespage.prvPage}"><li><a href="javascript:void(0)"onclick="chagemespage(${mespage.prvPage})">&laquo;</a></li></c:if>
@@ -304,7 +310,7 @@
 							<c:if test="${!empty mespage.nextPage}"><li><a href="javascript:void(0)" onclick="chagemespage(${mespage.nextPage},${usernormal.usernormal_id})">&raquo;</a></li></c:if>
 							</ul>
 						</div>
-
+						</c:if>
 					</div>
 					<div class="tab-pane fade" id="authen">
 						<div class="profile-authen">

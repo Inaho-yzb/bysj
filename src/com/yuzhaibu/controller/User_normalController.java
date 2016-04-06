@@ -33,6 +33,7 @@ import com.yuzhaibu.entity.Item;
 import com.yuzhaibu.entity.ItemClass;
 import com.yuzhaibu.entity.Message;
 import com.yuzhaibu.entity.User_normal;
+import com.yuzhaibu.service.FavService;
 import com.yuzhaibu.service.ItemClassService;
 import com.yuzhaibu.service.ItemService;
 import com.yuzhaibu.service.MessageService;
@@ -62,6 +63,9 @@ public class User_normalController implements Serializable {
 
 	@Resource
 	private ItemService itemService;
+	
+	@Resource
+	private FavService favService;
 	
 	@Resource
 	private ItemClassService itemClassService;
@@ -293,5 +297,31 @@ public class User_normalController implements Serializable {
 			return result;
 		}
 		
+	}
+	
+	@RequestMapping(value=("/user/deletemyitem"),method=RequestMethod.POST)
+	public @ResponseBody AjaxResult deletemyitem(HttpServletRequest request,HttpSession session){
+		Integer itemid = Integer.valueOf(request.getParameter("itemid"));
+		Integer userid = (Integer) session.getAttribute("userid");
+		AjaxResult result = new AjaxResult();
+		if(itemService.deleteItem(itemid,userid)!=0){
+			result.setErrorCode(0);
+		}else{
+			result.setErrorCode(1);
+		}
+		return result;
+	}
+	
+	@RequestMapping(value=("/user/deletefav"),method=RequestMethod.POST)
+	public @ResponseBody AjaxResult deleteFav(HttpServletRequest request,HttpSession session){
+		Integer itemid = Integer.valueOf(request.getParameter("itemid"));
+		Integer userid = (Integer) session.getAttribute("userid");
+		AjaxResult result = new AjaxResult();
+		if(favService.deletefav(itemid,userid)!=0){
+			result.setErrorCode(0);
+		}else{
+			result.setErrorCode(1);
+		}
+		return result;
 	}
 }

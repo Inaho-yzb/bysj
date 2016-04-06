@@ -69,15 +69,12 @@ public class ItemController {
 		int itemid = Integer.valueOf(request.getParameter("id"));		
 		Item item = itemService.findItemByItemId(itemid);
 		
-		User_normal user = user_normalService.findUserByItemid(itemid);
-		item.setUsernormal(user);
-		
 		Integer index = 1;
 		Integer pageSize = 8;
 		
 		Map map = messageService.findItemMessageByItemId(itemid,index,pageSize);
 		
-		List<Item> otherItem = itemService.findOtherItemByUserId(user.getUsernormal_id());
+		List<Item> otherItem = itemService.findOtherItemByUserId(item.getUserid());
 		
 		List<ItemImg> itemImgList = itemImagesService.findItemImagesByItemId(itemid);
 		

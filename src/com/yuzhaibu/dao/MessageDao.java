@@ -42,6 +42,18 @@ public interface MessageDao {
 	 */
 	Integer addMessage(Message mes);
 
+	/**
+	 * 查找所有未读的消息
+	 * @param map
+	 * @return
+	 */
 	Integer finddAllNotReadMessageCount(Map<String, Integer> map);
+
+	/**
+	 * 删除该物品的所有评论
+	 * @param itemid
+	 * @return
+	 */
+	Integer deleteMesByItemid(Integer itemid);
 	
 }

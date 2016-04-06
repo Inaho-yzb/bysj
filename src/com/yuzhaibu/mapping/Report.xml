@@ -12,4 +12,9 @@
 		insert into report(itemid,userid,reasonid)
 		values(#{itemid},#{userid},#{reasonid})
 	</insert>
+	
+	<delete id="deleteReportByItemid" parameterType="int">
+		delete from report where itemid = #{itemid}
+	</delete>
+	
 </mapper>

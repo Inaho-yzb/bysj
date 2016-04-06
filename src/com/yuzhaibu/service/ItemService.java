@@ -89,6 +89,13 @@ public interface ItemService {
 	 * @param keyword
 	 * @return
 	 */
-	List<Item> searchItemByKeyword(String keyword);
+	Map searchItemByKeyword(Map map);
+
+	/**
+	 * 删除物品
+	 * @param itemid
+	 * @return
+	 */
+	Integer  deleteItem(Integer itemid,Integer userid);
 	
 }

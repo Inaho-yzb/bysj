@@ -7,18 +7,15 @@
 
 	
 	<resultMap type="com.yuzhaibu.entity.Item" id="itemAndUserMap">
-		<id property="itemid" column="itemid"></id>
+		<result property="itemid" column="itemid"/>
 		<result property="itemname" column="itemname" />
 		<result property="sellprice" column="sellprice" />
 		<result property="itemmainimg" column="itemmainimg" />
-		<association property="usernormal" javaType="com.yuzhaibu.entity.User_normal">
-			<id property="uernormal_id" column="usernormal_id" />
-			<result property="school" column="school" />
-			<result property="authen" column="authen" />
-		</association>
+		<result property="school" column="school" />
+		<result property="userauthen" column="userauthen" />
 	</resultMap>
 	
-	<resultMap type="com.yuzhaibu.entity.Item" id="searchItemMap">
+	<resultMap type="com.yuzhaibu.entity.Item" id="ItemMap">
 		<result property="itemid" column="itemid"/>
 		<result property="itemname" column="itemname" />
 		<result property="sellprice" column="sellprice" />
@@ -29,10 +26,35 @@
 		<result property="headimg" column="headimg"/>
 		<result property="username" column="username"/>
 	</resultMap>
+	
+	<resultMap type="com.yuzhaibu.entity.Item" id="ItemDetailMap">
+		<result property="itemid" column="itemid"/>
+		<result property="itemname" column="itemname" />
+		<result property="sellprice" column="sellprice" />
+		<result property="originprice" column="originprice"/>
+		<result property="itemmainimg" column="itemmainimg" />
+		<result property="discreption" column="discreption" />
+		<result property="color" column="color"/>
+		<result property="tradeposition" column="tradeposition"/>
+		<result property="sellstatus" column="sellstatus"/>
+		<result property="bargain" column="bargain"/>
+		<result property="username" column="username"/>
+		<result property="fatherid" column="fatherid"/>
+		<result property="fatherclassname" column="fatherclassname"/>
+		<result property="itemclass_name" column="itemclass_name"/>
+		<result property="userauthen" column="userauthen"/>
+		<result property="nickname" column="nickname"/>
+		<result property="mobile" column="mobile"/>
+		<result property="qq" column="qq"/>
+		<result property="viewtime" column="viewtime"/>
+		<result property="itemcreatime" column="itemcreatime"/>
+		<result property="userid" column="userid"/>
+	</resultMap>
 
-	<select id="findItemByUserId" parameterType="java.util.Map"
-		resultType="com.yuzhaibu.entity.Item">
-		select * from item where sellerid=#{sellerid} order by itemcreatime desc limit #{index},#{pageSize} ;
+	<select id="findItemByUserId" parameterType="java.util.Map" resultType="com.yuzhaibu.entity.Item">
+		select * from item where sellerid=#{sellerid} 
+		order by 
+		itemcreatime desc limit #{index},#{pageSize} ;
 	</select>
 	<select id="findItemByUserIdCount" parameterType="java.util.Map" resultType="int">
 		select count(1) from item where sellerid=#{sellerid} order by itemcreatime desc ;
@@ -40,19 +62,47 @@
 
 	<select id="findIndexItemByClassId" parameterType="int"
 		resultMap="itemAndUserMap">
-		select itemid,itemname,sellprice,itemmainimg,school,authen
+		select 
+		i.itemid,
+		i.itemname,
+		i.sellprice,
+		i.itemmainimg,
+		u.school,
+		u.authen as userauthen
 		from item i,user_normal u,itemclass ic where
 		i.sellerid=u.usernormal_id and sellstatus=0 and
 		ic.itemclass_fatherid=#{classid} and ic.itemclass_id=i.itemclassid
 		order by itemcreatime desc 
-		limit 0,6
-		;
+		limit 0,6;
 	</select>
 
 
-	<select id="findItemByItemId" parameterType="int"
-		resultType="com.yuzhaibu.entity.Item">
-		select * from item where itemid = #{itemid}
+	<select id="findItemByItemId" parameterType="int" resultMap="ItemDetailMap">
+		select  
+		i.itemid,
+		i.itemname,
+		i.sellprice,
+		i.itemmainimg,
+		i.discreption,
+		i.originprice,
+		i.viewtime,
+		i.sellstatus,
+		i.bargain,
+		u.username,
+		i.itemcreatime,
+		i.color,
+		i.tradeposition,
+		(select itemclass_fatherid from itemclass where itemclass_id = i.itemclassid) as fatherid,
+		(select itemclass_name from itemclass where itemclass_id = fatherid) as fatherclassname,
+		(select itemclass_name from itemclass where itemclass_id = i.itemclassid) as itemclass_name,
+		u.authen as userauthen,
+		u.nickname,
+		u.mobile,
+		u.qq,
+		u.usernormal_id as userid
+		from item i,user_normal u
+		where 
+		i.itemid = #{itemid} and i.sellerid = u.usernormal_id
 	</select>
 
 	<select id="findOtherItemByUserId" parameterType="int"
@@ -61,10 +111,19 @@
 		= #{userid} and sellstatus=0 order by viewtime desc limit 0,4;
 	</select>
 
-	<select id="findItemListFatherItemByFatherId" parameterType="java.util.Map"
-		resultType="com.yuzhaibu.entity.Item">
-		select * from item i,itemclass it where
-		it.itemclass_fatherid=#{fid} and i.itemclassid=it.itemclass_id and
+	<select id="findItemListFatherItemByFatherId" parameterType="java.util.Map" resultMap="ItemMap">
+		select 
+		i.itemid,
+		i.itemname,
+		i.sellprice,
+		i.itemmainimg,
+		i.discreption,
+		(select count(1) from message m where m.mes_itemid = i.itemid) as mescount,
+		(select count(1) from fav f where f.item_id = i.itemid) as favcount,
+		u.headimg,
+		u.username
+		from item i,itemclass it,user_normal u where
+		it.itemclass_fatherid=#{fid} and i.itemclassid=it.itemclass_id and i.sellerid = u.usernormal_id and
 		sellstatus!=2 	
 		<if test="order==null">
 			order by i.viewtime
@@ -85,13 +144,23 @@
 	</select>
 	
 	<select id="countItemByFatherId" parameterType="int" resultType="int">
-		select count(i.itemid) from item i,itemclass it where it.itemclass_fatherid=#{fid} and i.itemclassid=it.itemclass_id and
+		select count(i.itemid) from item i,itemclass it,user_normal u where
+		it.itemclass_fatherid=#{fid} and i.itemclassid=it.itemclass_id and i.sellerid = u.usernormal_id and
 		sellstatus!=2 
 	</select>
 
-	<select id="findItemListByClassId" parameterType="int"
-		resultType="com.yuzhaibu.entity.Item">
-		select * from item i where itemclassid=#{id} and
+	<select id="findItemListByClassId" parameterType="int" resultMap="ItemMap">
+		select 
+		i.itemid,
+		i.itemname,
+		i.sellprice,
+		i.itemmainimg,
+		i.discreption,
+		(select count(1) from message m where m.mes_itemid = i.itemid) as mescount,
+		(select count(1) from fav f where f.item_id = i.itemid) as favcount,
+		u.headimg,
+		u.username
+		from item i,user_normal u where itemclassid=#{id} and i.sellerid = u.usernormal_id and
 		sellstatus!=2 
 		<if test="order==null">
 			order by i.viewtime
@@ -112,7 +181,7 @@
 	</select>
 	
 	<select id="countItemById" parameterType="int" resultType="int">
-		select count(itemid) from item where itemclassid = #{id} and
+		select count(itemid) from item i,user_normal u where itemclassid=#{id} and i.sellerid = u.usernormal_id and
 		sellstatus!=2 
 	</select>
 
@@ -152,7 +221,7 @@
 		
 	</update>
 
-	<select id="searchItemByKeyword" parameterType="String" resultMap="searchItemMap">
+	<select id="searchItemByKeyword" parameterType="java.util.Map" resultMap="ItemMap">
 		select 
 		i.itemid,
 		i.itemname,
@@ -169,5 +238,39 @@
 		(i.itemname like CONCAT('%','${keyword}','%' )
 		or
 		i.discreption like CONCAT('%','${keyword}','%' )) 
+		and i.sellstatus in (0,1)
+		<if test="order==null">
+			order by i.viewtime
+		</if>	
+		<if test="order=='0'.toString()">
+			order by i.sellprice desc
+		</if> 
+		<if test="order=='1'.toString()">
+			order by i.sellprice asc
+		</if> 
+		<if test="order=='2'.toString()">
+			order by i.itemcreatime desc
+		</if> 
+		<if test="order=='3'.toString()">
+			order by i.itemcreatime asc
+		</if> 
+		limit #{index},#{pageSize}
 	</select>
+	
+	<select id="searchItemByKeywordCount" parameterType="java.util.Map" resultType="int">
+		select count(1) 
+		from item i
+		where 
+		i.itemname like CONCAT('%','${keyword}','%') 
+		or
+		i.discreption like CONCAT('%','${keyword}','%' )
+		and i.sellstatus in (0,1)
+	</select>
+	
+	<delete id="deleteItem" parameterType="java.util.Map">
+		delete from item 
+		where itemid = #{itemid}
+		and sellerid = #{userid} 
+	</delete>
+	
 </mapper>

@@ -18,4 +18,11 @@ public interface ReportDao {
 	 */
 	Integer addReport(Report rep);
 
+	/**
+	 * 删除该物品的举报
+	 * @param itemid
+	 * @return
+	 */
+	Integer deleteReportByItemid(Integer itemid);
+
 }

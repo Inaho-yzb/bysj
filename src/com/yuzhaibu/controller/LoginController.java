@@ -34,7 +34,7 @@ public class LoginController implements Serializable{
 			if(reUrl!=null){
 				model.put("url", reUrl);
 			}
-			model.put("tt", "登录");
+			model.addAttribute("tt", "登录");
 			return "login";
 		}
 		return "redirect:../user/toProfile.htm";
@@ -45,7 +45,7 @@ public class LoginController implements Serializable{
 	@RequestMapping("/login/checkLogin")
 	public String login(String username,String pwd,HttpSession session,HttpServletRequest request,ModelMap model){
 		User_normal user = user_normalService.findUserByUsernameAndPwd(username, pwd);
-		model.put("tt", "登录");
+		
 		if(user!=null){
 			session.setAttribute("username", username);
 			session.setAttribute("userid", user.getUsernormal_id());
@@ -55,6 +55,7 @@ public class LoginController implements Serializable{
 			}
 			return "redirect:../user/toProfile.htm";
 		}else{
+			model.addAttribute("tt", "登录");
 			request.setAttribute("loginmessage", "用户名密码错误");
 			return "login";
 		}
@@ -62,7 +63,7 @@ public class LoginController implements Serializable{
 	
 	@RequestMapping("/login/toRegistered")
 	public String toRegistered(HttpServletRequest request,ModelMap model){
-		model.put("tt","注册" );
+		model.addAttribute("tt", "注册");
 		return "registered";
 	}
 	

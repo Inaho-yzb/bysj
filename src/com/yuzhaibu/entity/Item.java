@@ -22,8 +22,6 @@ public class Item {
 	private String itemmainimg;
 	private Integer sellstatus;
 	private Integer itemclassid;
-	private User_normal usernormal;
-	private ItemClass itemClass;
 	private Integer favcount;
 	private Integer mescount;
 	private Integer userid;
@@ -31,6 +29,14 @@ public class Item {
 	private Integer index;
 	private Integer pagesize;
 	private Integer headimg;
+	private Integer fatherid;
+	private String fatherclassname;
+	private String itemclass_name;
+	private Integer userauthen;
+	private String nickname;
+	private String mobile;
+	private String qq;
+	private String school;
 	
 	public Integer getIndex() {
 		return index;
@@ -128,18 +134,6 @@ public class Item {
 	public void setItemclassid(Integer itemclassid) {
 		this.itemclassid = itemclassid;
 	}
-	public User_normal getUsernormal() {
-		return usernormal;
-	}
-	public void setUsernormal(User_normal usernormal) {
-		this.usernormal = usernormal;
-	}
-	public ItemClass getItemClass() {
-		return itemClass;
-	}
-	public void setItemClass(ItemClass itemClass) {
-		this.itemClass = itemClass;
-	}
 	public Integer getFavcount() {
 		return favcount;
 	}
@@ -170,8 +164,53 @@ public class Item {
 	public void setHeadimg(Integer headimg) {
 		this.headimg = headimg;
 	}
-	
-	
-	
-	
+	public String getFatherclassname() {
+		return fatherclassname;
+	}
+	public void setFatherclassname(String fatherclassname) {
+		this.fatherclassname = fatherclassname;
+	}
+	public String getItemclass_name() {
+		return itemclass_name;
+	}
+	public void setItemclass_name(String itemclass_name) {
+		this.itemclass_name = itemclass_name;
+	}
+	public Integer getUserauthen() {
+		return userauthen;
+	}
+	public void setUserauthen(Integer userauthen) {
+		this.userauthen = userauthen;
+	}
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+	public String getMobile() {
+		return mobile;
+	}
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+	public String getQq() {
+		return qq;
+	}
+	public void setQq(String qq) {
+		this.qq = qq;
+	}
+	public Integer getFatherid() {
+		return fatherid;
+	}
+	public void setFatherid(Integer fatherid) {
+		this.fatherid = fatherid;
+	}
+	public String getSchool() {
+		return school;
+	}
+	public void setSchool(String school) {
+		this.school = school;
+	}
+
 }

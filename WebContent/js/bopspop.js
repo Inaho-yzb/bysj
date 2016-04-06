@@ -42,7 +42,7 @@
 		case "info":
 			options.title = "提示";
 			options.content = "<span class='pop-icon' style='background-position:0 0'></span><span class='pop-con-text'>"+options.content+"</span>";
-			options.btn = "ok";
+			options.btn = "okcancel";
 			break;
 		case "select":  
 			options.content = "<span id='nttext' class='nttext'>"+options.nttext[0] +"</span><select id='pop-select' class='pop-select'>"+options.content+"</select>";
@@ -103,10 +103,10 @@
 		var itop;
 		var iheight;
 		if(options.height == "auto"){
-			itop =(($(window).height()- $dialog.height())/2)/$(window).height()*100+"%";
+			itop =((document.body.clientHeight- $dialog.height())/2)/document.body.clientHeight*100+"%";
 			iheight = "auto";
 		}else{
-			itop = (($(window).height()- parseInt(options.height))/2)/$(window).height()*100+"%";
+			itop = ((document.body.clientHeight- parseInt(options.height))/2)/document.body.clientHeight*100+"%";
 			iheight = options.height;
 			$content.css({height:iheight-90});
 		}

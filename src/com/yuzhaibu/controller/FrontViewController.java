@@ -1,24 +1,20 @@
 package com.yuzhaibu.controller;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.yuzhaibu.entity.Item;
 import com.yuzhaibu.entity.ItemClass;
-import com.yuzhaibu.entity.ItemImg;
-import com.yuzhaibu.entity.Message;
 import com.yuzhaibu.entity.User_normal;
 import com.yuzhaibu.service.ItemClassService;
 import com.yuzhaibu.service.ItemImagesService;
@@ -72,12 +68,28 @@ public class FrontViewController implements Serializable{
 		return "index";
 	}
 	
-	@RequestMapping(value=("search"),method=RequestMethod.POST)
+	@RequestMapping(value=("search"))
 	public String toSearchResult(HttpServletRequest request,ModelMap model){
 		String keyword = request.getParameter("keyword");
-		List<Item> itemList = itemService.searchItemByKeyword(keyword);
-		model.put("result", itemList);
-		model.put("tt", "搜索");
+		String page = request.getParameter("pa");
+		String order = request.getParameter("sort");
+		Integer toPage;
+		if(page==null){
+			toPage = 1;
+		}else{
+			toPage = Integer.valueOf(page);
+		}
+		Map fromMap = new HashMap();
+		fromMap.put("keyword", keyword);
+		fromMap.put("toPage", toPage);
+		fromMap.put("order", order);
+		fromMap.put("pageSize", 8);
+		Map map = itemService.searchItemByKeyword(fromMap);
+		model.put("itemlist", map.get("itemList"));
+		model.put("page", map.get("page"));
+		model.addAttribute("tt", "搜索");
+		model.put("keyword", keyword);
+		model.put("order", order);
 		return "search";
 	}
 

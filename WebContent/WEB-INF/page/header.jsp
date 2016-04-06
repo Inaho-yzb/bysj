@@ -61,7 +61,7 @@
 
 					<form id="indexsearch" class="navbar-form navbar-right" action="${pageContext.request.contextPath}/search.htm" method="post">
 						<div class="form-group">
-							<input type="text" class="form-control" placeholder="搜跳蚤" name="keyword">
+							<input type="text" class="form-control" placeholder="搜跳蚤" name="keyword" value="${keyword}">
 						</div>
 						<button type="submit" class="btn btn-default">
 							<span class="glyphicon glyphicon-search searchbtn"> </span>
