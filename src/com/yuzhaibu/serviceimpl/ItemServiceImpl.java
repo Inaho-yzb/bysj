@@ -301,4 +301,13 @@ public class ItemServiceImpl extends BaseManager implements ItemService {
 				);
 	}
 
+	@Override
+	public int changeItemStatus(Integer itemid, Integer status, Integer userid) {
+		Map map = new HashMap<>();
+		map.put("itemid", itemid);
+		map.put("status", status);
+		map.put("userid", userid);
+		return itemDao.changeItemStatus(map);
+	}
+
 }

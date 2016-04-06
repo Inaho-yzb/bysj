@@ -40,6 +40,7 @@ import com.yuzhaibu.service.MessageService;
 import com.yuzhaibu.service.User_normalService;
 import com.yuzhaibu.util.AjaxResult;
 import com.yuzhaibu.util.DateUtils;
+import com.yuzhaibu.util.StringUtils;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -131,7 +132,15 @@ public class User_normalController implements Serializable {
 	}
 
 	@RequestMapping(value = ("/user/releasepro"))
-	public String toReleasePro(HttpServletRequest request,ModelMap model) {
+	public String toReleasePro(HttpServletRequest request,ModelMap model,HttpSession session) {
+		
+		User_normal user = user_normalService.findUserByUsername((String)session.getAttribute("username"));
+		if(StringUtils.isBlank(user.getMobile())&&StringUtils.isBlank(user.getQq())){
+			model.put("errorMes", "请先完善信息！");
+			model.put("returnurl", "/user/toProfile.htm");
+			model.put("returnname", "返回个人主页");
+			return "fail";
+		}
 		model.put("tt","发布物品" );
 		List<ItemClass> itemClassList =  itemClassService.findAllChildClass();
 		model.put("itemClassList", itemClassList);
@@ -322,6 +331,22 @@ public class User_normalController implements Serializable {
 		}else{
 			result.setErrorCode(1);
 		}
+		return result;
+	}
+	
+	@RequestMapping(value=("/user/changeItemstatus"),method=RequestMethod.POST)
+	public @ResponseBody AjaxResult changeItemStatus(HttpServletRequest request,HttpSession session){
+		Integer itemid = Integer.valueOf(request.getParameter("itemid"));
+		Integer status = Integer.valueOf(request.getParameter("status"));
+		Integer userid = (Integer) session.getAttribute("userid");
+		
+		AjaxResult result = new AjaxResult();
+		if(itemService.changeItemStatus(itemid,status,userid)!=0){
+			result.setErrorCode(0);
+		}else{
+			result.setErrorCode(1);
+		}
+		
 		return result;
 	}
 }

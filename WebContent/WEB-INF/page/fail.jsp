@@ -5,7 +5,7 @@
 <!DOCTYPE>
 <html>
 <head>
-<title>注册成功</title>
+<title>失败</title>
 <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 <style>
 .frame{
@@ -37,12 +37,12 @@ margin-top:50px;
 </head>
 <body style="background-color:#F7F7F7">
 	<div class="frame">
-		<div class="suc"><h1>注册成功</h1></div>
+		<div class="suc"><h1>失败</h1></div>
 		<div class="content">
-			<p>恭喜您，注册成功，赶快去<a href="${pageContext.request.contextPath}/user/toProfile.htm">完善资料</a>吧！</p>
+			<p>失败，${errorMes}</p>
 		</div>
 		<div class="fot">
-			<a href="../index.htm">返回首页</a>
+			<a href="${pageContext.request.contextPath}${returnurl}">返回${returnname}</a>
 		</div>
 	</div>
 </body>

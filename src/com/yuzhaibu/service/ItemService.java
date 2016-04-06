@@ -97,5 +97,14 @@ public interface ItemService {
 	 * @return
 	 */
 	Integer  deleteItem(Integer itemid,Integer userid);
+
+	/**
+	 * 更改物品状态
+	 * @param itemid
+	 * @param status
+	 * @param userid
+	 * @return
+	 */
+	int changeItemStatus(Integer itemid, Integer status, Integer userid);
 	
 }

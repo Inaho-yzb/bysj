@@ -273,4 +273,11 @@
 		and sellerid = #{userid} 
 	</delete>
 	
+	<update id="changeItemStatus" parameterType="java.util.Map" >
+		update item
+		set sellstatus = #{status}
+		where itemid = #{itemid}
+		and sellerid = #{userid}
+	</update>
+	
 </mapper>

@@ -114,6 +114,18 @@ public interface ItemDao {
 
 	Integer searchItemByKeywordCount(Map map);
 
+	/**
+	 * 删除物品
+	 * @param map
+	 * @return
+	 */
 	Integer deleteItem(Map map);
+
+	/**
+	 * 变更状态
+	 * @param map
+	 * @return
+	 */
+	Integer changeItemStatus(Map map);
 	
 }

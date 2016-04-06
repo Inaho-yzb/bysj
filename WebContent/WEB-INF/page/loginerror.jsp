@@ -5,7 +5,7 @@
 <!DOCTYPE>
 <html>
 <head>
-<title>注册失败</title>
+<title>失败</title>
 <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 <style>
 .frame{

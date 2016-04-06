@@ -178,7 +178,7 @@
 						</c:forEach>
 						</div>
 						
-
+						<c:if test="${!empty items}">
 						<div class="put-items">
 							<ul class="pagination" id="itempag">
 								 <c:if test="${!empty itempage.prvPage}"><li><a href="javascript:void(0)"onclick="toMesPage(${itempage.prvPage})">&laquo;</a></li></c:if>
@@ -197,7 +197,7 @@
 							<c:if test="${!empty itempage.nextPage}"><li><a href="javascript:void(0)" onclick="chageitempage(${itempage.nextPage},${usernormal.usernormal_id})">&raquo;</a></li></c:if>
 							</ul>
 						</div>
-
+						</c:if>
 					</div>
 					
 					<div class=<c:choose><c:when test="${tag=='favitems'}">"tab-pane fade in active"</c:when><c:otherwise>"tab-pane fade"</c:otherwise></c:choose> id="favitems">
@@ -249,6 +249,7 @@
 						</div>
 						</c:forEach>
 						</div>
+						<c:if test="${!empty favs}">
 						<div class="put-items">
 							<ul class="pagination" id="favpag">
 								<c:if test="${!empty favpage.prvPage}"><li><a href="javascript:void(0)"onclick="changefavpage(${favpage.prvPage})">&laquo;</a></li></c:if>
@@ -267,6 +268,7 @@
 							<c:if test="${!empty favpage.nextPage}"><li><a href="javascript:void(0)" onclick="chagefavpage(${favpage.nextPage},${usernormal.usernormal_id})">&raquo;</a></li></c:if>
 							</ul>
 						</div>
+						</c:if>
 					</div>
 					
 					<div class="tab-pane fade" id="message">

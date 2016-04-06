@@ -378,7 +378,7 @@ function changeStatus(itemid,status){
 		type:"select",
 		title:"更改状态",
 		nttext:['当前状态：'+str],
-		content:"<option value='0'>出售中</option><option value='1'>被预定</option><option value='1'>已售出</option>",
+		content:"<option value='0'>出售中</option><option value='1'>被预定</option><option value='2'>已售出</option>",
 		onOk:function(v,callback){
 			if(confirm("确定更改？")){
 				$.ajax({
