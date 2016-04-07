@@ -28,7 +28,7 @@ public class Item {
 	private String username;
 	private Integer index;
 	private Integer pagesize;
-	private Integer headimg;
+	private String headimg;
 	private Integer fatherid;
 	private String fatherclassname;
 	private String itemclass_name;
@@ -158,10 +158,10 @@ public class Item {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	public Integer getHeadimg() {
+	public String getHeadimg() {
 		return headimg;
 	}
-	public void setHeadimg(Integer headimg) {
+	public void setHeadimg(String headimg) {
 		this.headimg = headimg;
 	}
 	public String getFatherclassname() {

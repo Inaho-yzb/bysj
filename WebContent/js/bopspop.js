@@ -154,7 +154,7 @@
 		}
 		
 		var r = true;
-		res = options.onOk(v);
+		res = options.onOk(v,$o);
 		if(res!=undefined){
 			r = res;
 		}

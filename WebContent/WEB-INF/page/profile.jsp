@@ -9,13 +9,14 @@
 	<script src="../js/jquery-confirm.js"></script>
 	<script src="../js/profile.js"></script>
 	<link href="../css/jquery-confirm.css" rel="stylesheet" media="screen">
+	<script src="${pageContext.request.contextPath}/js/uploadfile.js"></script>
 	<div class="container">
 		<div class="col-md-12">
 			<div class="prof-first">
 				<div class="cghd  bkcl-white">
 					<img src="../${usernormal.headimg} " class="prof-hdpic img-circle">
 					<div class="text-center">
-						<a href="">更改头像</a>
+						<a href="javascript:void(0)" onclick="changeHead()" id="changehd">更改头像</a>
 					</div>
 				</div>
 
@@ -37,6 +38,12 @@
 						当前经验：${usernormal.levexp }/${nextexp}
 					</div>
 					<a href="releasepro.htm" class="btn btn-info profile-putitems">发布商品</a>
+				</div>
+				
+				<div class="righthd">
+					<h1>更改头像</h1>
+					<input type="file" name="uploadfile"  id="cghdipt"/>
+					<button class="btn btn-default subhdimg" style="margin-top:20px;">提交</button>
 				</div>
 			</div>
 
@@ -75,8 +82,7 @@
 							</c:choose>
 							</div>
 							<div>
-								<a class="btn btn-success profile-editbtn" data-toggle="modal"
-									data-target="#profile-info">修改</a>
+								<a class="btn btn-success profile-editbtn" data-toggle="modal" data-target="#profile-info">修改</a>
 							</div>
 							<div class="modal fade" id="profile-info" tabindex="-1"
 								role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -321,8 +327,29 @@
 								<div>您已经认证！</div>
 							</c:when>
 							<c:when test="${usernormal.authen==0 }">
-							<a href="" class="btn btn-primary btn-lg">身份证认证</a> <a href=""
-								class="btn btn-primary btn-lg">学生证认证</a>
+							<a href="" class="btn btn-primary btn-lg">身份认证</a>
+							<div id="authenframe">
+								<table style="margin-top:20px;border-collapse:separate; border-spacing:10px;">
+									<tbody>
+										<tr>
+											<th>姓名：</th><td><input id="atname"/></td>
+										</tr>
+										<tr>
+											<th>证件号：</th><td><input id="atid"/></td>
+										</tr>
+										<tr>
+											<th>上传证件照：</th><td><input type="file" id="authenfile" name="uploadfile" accept=".jpg,.jpeg,.png,.gif" style="width:200px"><label id="filelabe"></label></td>
+										</tr>
+										<tr>
+											<td>
+											<button class="btn btn-primary" id="btn-subauthen">
+												提交
+											</button>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
 							</c:when>
 							<c:otherwise>
 								<div>审核中</div>

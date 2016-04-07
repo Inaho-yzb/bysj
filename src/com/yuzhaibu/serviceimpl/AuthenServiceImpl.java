@@ -10,61 +10,40 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Resource;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.TransactionCallback;
+import org.springframework.transaction.support.TransactionTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.yuzhaibu.dao.AuthenDao;
 import com.yuzhaibu.dao.User_normalDao;
-import com.yuzhaibu.entity.User_normal;
-import com.yuzhaibu.service.User_normalService;
+import com.yuzhaibu.entity.Item;
+import com.yuzhaibu.entity.UserAuthen;
+import com.yuzhaibu.service.AuthenService;
 import com.yuzhaibu.util.DateUtils;
 import com.yuzhaibu.util.StringUtils;
 
 @Service
-public class User_normalServiceImpl extends BaseManager implements User_normalService {
+public class AuthenServiceImpl extends BaseManager implements AuthenService {
+
+	@Autowired
+	private AuthenDao authenDao;
 	
-	@Resource
+	@Autowired
 	private User_normalDao user_normalDao;
+
+	@Autowired
+	private TransactionTemplate transactionTemplate;
 	
-	
-	
 	@Override
-	public User_normal findUserByUsernameAndPwd(String username,String pwd) {
-		return user_normalDao.findByUsernameAndPwd(username, pwd); 
+	public Integer findUserIsAuthen(Integer userid) {
+		return authenDao.findUserIsAuthen(userid);
 	}
 
-
 	@Override
-	public User_normal findUserByUsername(String username) {		
-		User_normal user = user_normalDao.findByUsername(username);
-		return user;
-	}
-
-
-	@Override
-	public void updateUser(User_normal usernormal) {
-		user_normalDao.updateUser(usernormal);
-		
-	}
-
-
-	@Override
-	public User_normal findUserByItemid(int itemid) {
-		User_normal user = user_normalDao.findByItemId(itemid);
-		return user;
-	}
-
-
-	@Override
-	public Integer regUser(User_normal user) {
-		return user_normalDao.regUser(user);
-	}
-
-
-	@Override
-	public Integer editHeadImg(Map map) {
-		String savePath = (String) map.get("savePath");
+	public Integer addNewAuthen(Map map, String savePath) {
 		List<MultipartFile> list = (List<MultipartFile>) map.get("images");
 		// 创建保存目录的文件
 		File saveFile = new File(savePath);
@@ -83,9 +62,9 @@ public class User_normalServiceImpl extends BaseManager implements User_normalSe
 				if (fileName == null || fileName.trim().equals("")) {
 					continue;
 				}
-				String changeName = StringUtils.changeHeadImgFileName(multipartFile.getOriginalFilename(),
+				String changeName = StringUtils.changeAuthenImgFileName(multipartFile.getOriginalFilename(),
 						multipartFile.hashCode());
-				String destPath = "uploads\\userheadimg\\" + DateUtils.dateToStrLong(new Date(), "yyyyMMdd") + "\\"
+				String destPath = "WEB-INF\\upload\\userauthen\\" + DateUtils.dateToStrLong(new Date(), "yyyyMMdd") + "\\"
 						+ changeName;
 				try {
 					// 获取item中的上传输入流
@@ -120,15 +99,27 @@ public class User_normalServiceImpl extends BaseManager implements User_normalSe
 				}
 			}
 		}
-		
-		Map resMap = new HashMap(); 
-		resMap.put("userid", map.get("userid"));
-		resMap.put("imgPath", fileNameList.get(0));
-		
-		return user_normalDao.editUserHeadImg(resMap);
-		
+
+		final UserAuthen userAuthen = (UserAuthen) map.get("UserAuthen");
+		userAuthen.setImage(fileNameList.get(0));
+		return transactionTemplate.execute(new TransactionCallback<Integer>() {
+			public Integer doInTransaction(TransactionStatus status){
+				try{
+					authenDao.addNewAuthen(userAuthen);
+					Map map = new HashMap();
+					map.put("userid", userAuthen.getUserId());
+					map.put("authen", 1);
+					user_normalDao.updateAuthen(map);
+					return 1;
+				}catch(Exception e){
+					e.printStackTrace();
+					log.error(e.getMessage());
+					return -1;
+				}
+			}
+		}
+		);
+
 	}
-	
-	
 	
 }

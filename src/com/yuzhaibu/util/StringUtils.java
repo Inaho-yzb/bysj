@@ -27,4 +27,20 @@ public class StringUtils {
 		return newFileName;
 	}
 	
+	public static String changeAuthenImgFileName(String originFileName,int num){
+		String suf = originFileName.substring(originFileName.lastIndexOf("."));
+		
+		String newFileName = "authenimg"+DateUtils.dateToStrLong(new Date(), "yyyyMMddhhmmss")+new Random().nextInt(100)+num+suf;
+		
+		return newFileName;
+	}
+	
+	public static String changeHeadImgFileName(String originFileName,int num){
+		String suf = originFileName.substring(originFileName.lastIndexOf("."));
+		
+		String newFileName = "headimg"+DateUtils.dateToStrLong(new Date(), "yyyyMMddhhmmss")+new Random().nextInt(100)+num+suf;
+		
+		return newFileName;
+	}
+	
 }

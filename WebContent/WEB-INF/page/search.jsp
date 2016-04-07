@@ -58,7 +58,7 @@
 							<div class="col-md-2 pad-lf-clr pad-rt-clr">
 								<div class="itemlist-seller">
 									<img class="itemlist-seller-pic img-circle"
-										src="images/qcode.png">
+										src="${item.headimg}">
 									<div class="itemlist-seller-name">
 										<div>
 											<span style="color: blue">${item.username}</span>

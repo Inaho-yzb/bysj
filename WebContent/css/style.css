@@ -869,25 +869,40 @@ a{
 .prof-first{
 	margin-top:20px;
 	margin-bottom:20px;
+	height: 250px;
+	background-color:#fff;
+	overflow:hidden;
 }
 
 .prof-hdpic{
-	width:200px;
-	height:200px;
-	margin-left:20px;
-	margin-top:10px;
-	margin-bottom:10px;
+	width: 200px;
+    height: 210px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: block;
 }
 
 .cghd{
-	width:240px;
+	width:25%;
 	float:left;
 }
 
 .prof-detail{
 	padding-left:30px;
+	height: 250px;
+	width:50%;
+	float:left;
 	padding-top:20px;
+}
+
+.righthd{
+	width:25%;
+	float:left;
+	line-height:250px;
 	height:250px;
+	display:none;
 }
 
 .nickname{
@@ -908,7 +923,7 @@ a{
 }
 
 .profile-strip{
-	width:30%;
+	width:50%;
 	height:20px;
 	margin-top:10px;
 	margin-bottom:0;

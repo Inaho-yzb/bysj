@@ -36,4 +36,16 @@
     	set levexp = levexp+#{point}
     	where usernormal_id = #{id}
     </update>
+    
+    <update id="updateAuthen" parameterType="java.util.Map">
+    	update user_normal
+    	set authen = #{authen}
+    	where usernormal_id = #{userid}
+    </update>
+    
+    <update id="editUserHeadImg" parameterType="java.util.Map">
+    	update user_normal
+    	set headimg = #{imgPath}
+    	where usernormal_id = #{userid}
+    </update>
  </mapper>  

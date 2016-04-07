@@ -11,7 +11,53 @@ $(function(){
 		    }
 		});
 	});
+	
+	$("#btn-subauthen").click(function(){
+		var authenname = $("#atname").val();
+		var idcode = $("#atid").val();
+		if(authenname==""||idcode==""){
+			hrHuTui.popout({
+				type : "info",
+				title : "表单不完整！",
+				content : "请填正确表单！"
+			});
+		}else{
+			ajaxSubmit();
+		}
+	});
+	
+	$(".subhdimg").click(function(){
+		hdSubmit();
+	});
 });
+
+function ajaxSubmit() {
+	$("#authenfile").upload({
+		url : "/user/authen.htm",
+		// 其他表单数据
+		params : {
+			authenname:$("#atname").val(),
+			idcode:$("#atid").val()
+		},
+		// 上传完成后, 返回json, text
+		dataType : 'json',
+		onSend : function(obj, str) {
+			return true;
+		},
+		// 上传之后回调
+		onComplate : function(data) {
+			console.log(data.errorCode);
+			if(data.errorCode!=0){
+				alert(data.errorMes);
+				return false;
+			}else{
+				alert("申请成功！请等待审核通过！");
+				location.reload();
+			}
+		}
+	});
+	$("#authenfile").upload("ajaxSubmit");
+}
 
 function checkMes(id,itemid){
 	$.ajax({
@@ -282,7 +328,7 @@ function editItem(itemid){
 			}
 		},
 		error:function(xhr){
-			
+			alert("服务器连接失败！");
 		}
 	});
 }
@@ -406,6 +452,34 @@ function changeStatus(itemid,status){
 			
 		}
 	});
+}
+
+function changeHead(){
+	$(".righthd").show();
+}
+
+function hdSubmit() {
+	$("#cghdipt").upload({
+		url : "/user/changehd.htm",
+		// 上传完成后, 返回json, text
+		dataType : 'json',
+		onSend : function(obj, str) {
+			return true;
+		},
+		// 上传之后回调
+		onComplate : function(data) {
+			console.log(data.errorCode);
+			if(data.errorCode!=0){
+				alert(data.errorMes);
+				return false;
+			}else{
+				alert("提交成功！");
+				$(".righthd").hide();
+				location.reload();
+			}
+		}
+	});
+	$("#cghdipt").upload("ajaxSubmit");
 }
 
 function   formatDate(now)   {     

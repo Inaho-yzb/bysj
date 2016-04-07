@@ -36,7 +36,31 @@ public interface User_normalDao {
 	 */
 	Integer regUser(User_normal user);
 
+	/**
+	 * 通过用户名查询用户ID
+	 * @param username
+	 * @return
+	 */
 	Integer findUserIdByUsername(String username);
 
-	int addUserExp(Map map);
+	
+	/**
+	 * 添加经验
+	 * @param map
+	 * @return
+	 */
+	Integer addUserExp(Map map);
+
+	/**
+	 * 更新审核状态
+	 * @param i
+	 */
+	Integer updateAuthen(Map map);
+
+	/**
+	 * 更改用户头像
+	 * @param resMap
+	 * @return
+	 */
+	Integer editUserHeadImg(Map resMap);
 }

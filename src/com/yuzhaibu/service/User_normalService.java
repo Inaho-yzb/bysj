@@ -1,5 +1,7 @@
 package com.yuzhaibu.service;
 
+import java.util.Map;
+
 import com.yuzhaibu.entity.User_normal;
 
 
@@ -33,4 +35,11 @@ public interface User_normalService {
 	 * @return
 	 */
 	Integer regUser(User_normal user);
+
+	/**
+	 * 更改用户头像
+	 * @param map
+	 * @return
+	 */
+	Integer editHeadImg(Map map);
 }

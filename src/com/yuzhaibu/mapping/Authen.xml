@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+          "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.yuzhaibu.dao.AuthenDao"> 
+	
+	<select id="findUserIsAuthen" parameterType="int" resultType="int">
+		select count(1) from userauthen
+		where UserId = #{userid} and
+		Status !=2
+	</select>
+	
+	<insert id="addNewAuthen" parameterType="com.yuzhaibu.entity.UserAuthen">
+		insert into userauthen(AuthenName,IdCode,Image,CreateTime,Status,UserId)
+		values(#{AuthenName},#{IdCode},#{Image},now(),0,#{UserId})
+	</insert>
+	
+</mapper>

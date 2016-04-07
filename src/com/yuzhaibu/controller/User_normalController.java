@@ -32,7 +32,9 @@ import com.yuzhaibu.entity.Fav;
 import com.yuzhaibu.entity.Item;
 import com.yuzhaibu.entity.ItemClass;
 import com.yuzhaibu.entity.Message;
+import com.yuzhaibu.entity.UserAuthen;
 import com.yuzhaibu.entity.User_normal;
+import com.yuzhaibu.service.AuthenService;
 import com.yuzhaibu.service.FavService;
 import com.yuzhaibu.service.ItemClassService;
 import com.yuzhaibu.service.ItemService;
@@ -67,6 +69,9 @@ public class User_normalController implements Serializable {
 	
 	@Resource
 	private FavService favService;
+	
+	@Resource
+	private AuthenService authenService;
 	
 	@Resource
 	private ItemClassService itemClassService;
@@ -347,6 +352,116 @@ public class User_normalController implements Serializable {
 			result.setErrorCode(1);
 		}
 		
+		return result;
+	}
+	
+	@RequestMapping(value=("/user/authen"),method=RequestMethod.POST)
+	public @ResponseBody AjaxResult authen(HttpServletRequest request,HttpSession session){
+		AjaxResult result = new AjaxResult();
+		Integer userid = (Integer) session.getAttribute("userid");
+		Integer count = authenService.findUserIsAuthen(userid);
+		
+		if(count!=0){
+			result.setErrorCode(1);
+			result.setErrorMes("操作失败！");
+			return result;
+		}
+		// 消息提示
+				// 将req转换成Spring的request
+				MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest) request;
+				// 获取上传文件
+				List<MultipartFile> list = multipartHttpServletRequest.getFiles("uploadfile");
+				
+				for(MultipartFile mf:list){
+					int index = mf.getOriginalFilename().lastIndexOf("."); 
+			        String la = mf.getOriginalFilename().substring(index).toLowerCase();
+			        if(!(".jpg".equals(la)||".gif".equals(la)||".jpeg".equals(la)||".png".equals(la))){ 
+			              result.setErrorCode(2);
+			              result.setErrorMes("请上传图片文件！");
+			              return result;
+			        }else if(mf.getSize()>(long)10485760){
+			        		result.setErrorCode(2);
+			              result.setErrorMes("图片过大！请上传小于10M的图");
+			              return result;
+			        }
+
+				}
+				
+				String date = DateUtils.dateToStrLong(new Date(), "yyyyMMdd");
+				
+				String savePath = request.getServletContext().getRealPath("WEB-INF/upload/userauthen/"+date);
+				
+				String authenName = multipartHttpServletRequest.getParameter("authenname");
+				String idCode = multipartHttpServletRequest.getParameter("idcode");
+				
+				if(StringUtils.isBlank(authenName) || StringUtils.isBlank(idCode)){
+					result.setErrorCode(1);
+					result.setErrorMes("请输入正确的表单信息！");
+					return result;
+				}
+				
+				UserAuthen userAuthen = new UserAuthen();
+				
+				userAuthen.setAuthenName(authenName);
+				userAuthen.setIdCode(idCode);
+				userAuthen.setUserId(userid);
+				
+				Map map = new HashMap();
+				map.put("images", list);
+				map.put("UserAuthen", userAuthen);
+				
+				Integer res = authenService.addNewAuthen(map,savePath);
+				if(res!=0){
+					result.setErrorCode(0);
+				}else{
+					result.setErrorCode(1);
+					result.setErrorMes("操作失败！");
+				}
+				return result;
+	}
+
+	@RequestMapping(value = ("/user/changehd"), method = RequestMethod.POST)
+	public @ResponseBody AjaxResult changeHead(HttpServletRequest request, HttpSession session) {
+		AjaxResult result = new AjaxResult();
+		Integer userid = (Integer) session.getAttribute("userid");
+
+		// 将req转换成Spring的request
+		MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest) request;
+		// 获取上传文件
+		List<MultipartFile> list = multipartHttpServletRequest.getFiles("uploadfile");
+
+		for (MultipartFile mf : list) {
+			int index = mf.getOriginalFilename().lastIndexOf(".");
+			String la = mf.getOriginalFilename().substring(index).toLowerCase();
+			if (!(".jpg".equals(la) || ".gif".equals(la) || ".jpeg".equals(la) || ".png".equals(la))) {
+				result.setErrorCode(2);
+				result.setErrorMes("请上传图片文件！");
+				return result;
+			} else if (mf.getSize() > (long) 10485760) {
+				result.setErrorCode(2);
+				result.setErrorMes("图片过大！请上传小于10M的图");
+				return result;
+			}
+
+		}
+
+		String date = DateUtils.dateToStrLong(new Date(), "yyyyMMdd");
+
+		String savePath = request.getServletContext().getRealPath("uploads/userheadimg/" + date);
+
+		Map map = new HashMap();
+		map.put("images", list);
+		map.put("userid", userid);
+		map.put("savePath", savePath);
+		
+		Integer res = user_normalService.editHeadImg(map);
+		
+		if (res != 0) {
+			result.setErrorCode(0);
+		} else {
+			result.setErrorCode(1);
+			result.setErrorMes("操作失败！");
+		}
 		return result;
 	}
 }
