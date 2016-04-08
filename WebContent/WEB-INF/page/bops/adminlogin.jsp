@@ -7,10 +7,11 @@
 <head>
     <title>后台管理系统</title>
 	<meta charset="UTF-8">
-   <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" />
+   	<link rel="stylesheet" type="text/css" href="../css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="../css/style.css" />
     <script type="text/javascript" src="../js/jquery.js"></script>
     <script type="text/javascript" src="../js/bootstrap.js"></script>
+    <script type="text/javascript" src="../js/bops/login.js"></script>
     <style type="text/css">
         body {
             padding-top: 40px;
@@ -61,25 +62,28 @@
 <div class="container">
 
     <form class="form-signin" method="post" action="adminlogin.htm">
-    	<table style="width:70%;margin-left:auto;margin-right:auto">
+    	<table style="width:75%;margin-left:auto;margin-right:auto">
     	<tbody>
     	<tr>
         	<th colspan="2"><h2 class="form-signin-heading">登录系统</h2></th>
         </tr>
         <tr>
         	<th>帐号：</th>
-        	<td><input type="text" name="username" class="input-block-level" placeholder="账号"></td>
+        	<td><input type="text" name="username" class="input-block-level" placeholder="账号" id="username"><span id="usernameerror"></span></td>
         </tr>
         <tr>
         	<th>密码：</th>
-        	<td><input type="password" name="password" class="input-block-level" placeholder="密码"></td>
+        	<td><input type="password" name="password" class="input-block-level" placeholder="密码" id="password"><span id="pwderror">${passworderror}</span></td>
         </tr>
         <tr>
         	<th>验证码：</th>
-        	<td><input type="text" name="verify" class="input-medium" placeholder="验证码"></td>
+        	<td><input type="text" name="verify" class="input-medium" placeholder="验证码" id="vali">
+        	<img id="imgObj" alt="验证码" src="/code.htm" onclick="changeImg()"/>
+        	<span id="valierror"></span>
+        	</td>
         </tr>
         <tr>
-        	<td align="right" colspan="2"><button class="btn btn-large btn-primary" type="submit" style="margin-right:50px;">登录</button>
+        	<td align="right" colspan="2"><button class="btn btn-large btn-primary" style="margin-right:50px;" id="btn-sub">登录</button>
         </tr>
         </tbody>
         </table>

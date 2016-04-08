@@ -7,12 +7,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>404 Not Found</title>
 <meta http-equiv="refresh" content="10;url=index.htm">
-<link href="css/error.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/error.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 <!-- 代码 开始 -->
-<div id="container"><img class="png" src="images/404.png" /> <img class="png msg" src="images/404_msg.png" />
-  <p><a href="index.htm"><img class="png" src="images/404_to_index.png" /></a> </p>
+<div id="container"><img class="png" src="${pageContext.request.contextPath}/images/404.png" /> <img class="png msg" src="${pageContext.request.contextPath}/images/404_msg.png" />
+  <p><a href="${pageContext.request.contextPath}/index.htm"><img class="png" src="${pageContext.request.contextPath}/images/404_to_index.png" /></a> </p>
 </div>
 <div id="cloud" class="png"></div>
 <!-- 代码 结束 -->
