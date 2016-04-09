@@ -11,8 +11,12 @@
 		<result property="CreateTime" column="CreateTime"/>
 	</resultMap>
 
-	<select id="findSysUserByLoginName" resultMap="SysUserMap">
+	<select id="findSysUserByLoginName" parameterType="String" resultMap="SysUserMap">
 		select ID,LoginName,Password,CreateTime from sysuser where LoginName = #{loginName}
+	</select>
+	
+	<select id="findSysUserByLoginNameAndPassword" parameterType="java.util.Map" resultMap="SysUserMap">
+		select ID,LoginName,Password,CreateTime from sysuser where LoginName = #{username} and Password = #{password}
 	</select>
 
 </mapper>

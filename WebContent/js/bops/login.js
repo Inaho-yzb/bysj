@@ -7,7 +7,10 @@ $(function(){
 	
 	$("#btn-sub").click(function(){
 		if($("#username").val()!="" && $("#password").val()!="" && $("#vali").val()!=""){
-			checkuser();
+			$(".form-signin").submit();
+		}else{
+			alert("请填写表单！");
+			return false;
 		}
 	});
 	

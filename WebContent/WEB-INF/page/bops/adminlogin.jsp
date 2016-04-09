@@ -73,7 +73,7 @@
         </tr>
         <tr>
         	<th>密码：</th>
-        	<td><input type="password" name="password" class="input-block-level" placeholder="密码" id="password"><span id="pwderror">${passworderror}</span></td>
+        	<td><input type="password" name="password" class="input-block-level" placeholder="密码" id="password"><span id="pwderror"></span></td>
         </tr>
         <tr>
         	<th>验证码：</th>
@@ -81,6 +81,9 @@
         	<img id="imgObj" alt="验证码" src="/code.htm" onclick="changeImg()"/>
         	<span id="valierror"></span>
         	</td>
+        </tr>
+        <tr>
+        	<td colspan="2" style="color:red">${error}</td>
         </tr>
         <tr>
         	<td align="right" colspan="2"><button class="btn btn-large btn-primary" style="margin-right:50px;" id="btn-sub">登录</button>

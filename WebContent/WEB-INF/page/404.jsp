@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>404 Not Found</title>
-<meta http-equiv="refresh" content="10;url=index.htm">
+<meta http-equiv="refresh" content="10;url=/index.htm">
 <link href="${pageContext.request.contextPath}/css/error.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
