@@ -3,8 +3,8 @@ package com.yuzhaibu.dao;
 import java.util.List;
 import java.util.Map;
 
-import com.yuzhaibu.entity.Fav;
 import com.yuzhaibu.entity.Item;
+import com.yuzhaibu.entity.bops.query.BopsItemQuery;
 
 public interface ItemDao {
 	
@@ -127,5 +127,14 @@ public interface ItemDao {
 	 * @return
 	 */
 	Integer changeItemStatus(Map map);
+	
+	/**
+	 * 后台
+	 * @param query
+	 * @return
+	 */
+	List<Item> queryList(BopsItemQuery query);
+
+	Integer queryListCount(BopsItemQuery query);
 	
 }

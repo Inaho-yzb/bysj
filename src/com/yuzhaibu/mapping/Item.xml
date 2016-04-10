@@ -280,4 +280,41 @@
 		and sellerid = #{userid}
 	</update>
 	
+	<select id="queryList" parameterType="com.yuzhaibu.entity.bops.query.BopsItemQuery" resultMap="ItemDetailMap">
+		select 
+		i.itemid,
+		i.itemname,
+		i.sellprice,
+		i.itemmainimg,
+		i.discreption,
+		i.originprice,
+		i.viewtime,
+		i.sellstatus,
+		i.bargain,
+		u.username,
+		i.itemcreatime,
+		i.color,
+		i.tradeposition,
+		(select itemclass_fatherid from itemclass where itemclass_id = i.itemclassid) as fatherid,
+		(select itemclass_name from itemclass where itemclass_id = fatherid) as fatherclassname,
+		(select itemclass_name from itemclass where itemclass_id = i.itemclassid) as itemclass_name,
+		u.authen as userauthen,
+		u.nickname,
+		u.mobile,
+		u.qq,
+		u.usernormal_id as userid
+		from item i,user_normal u
+		where 
+		i.sellerid = u.usernormal_id
+		limit #{beginIndex},#{pageSize};
+	</select>
+	
+	<select id="queryListCount" parameterType="com.yuzhaibu.entity.bops.query.BopsItemQuery" resultType="int">
+		select 
+		count(*)
+		from item i,user_normal u
+		where 
+		i.sellerid = u.usernormal_id
+	</select>
+	
 </mapper>

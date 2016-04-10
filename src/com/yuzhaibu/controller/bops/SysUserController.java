@@ -23,7 +23,7 @@ public class SysUserController {
 	
 	@RequestMapping(value=("/bops/adminlogin"),method=RequestMethod.GET)
 	public String toLogin(HttpServletRequest request,HttpSession session){
-		if(session.getAttribute("sysuserid")==null){
+		if(session.getAttribute("sysuser")==null){
 			return "/bops/adminlogin";
 		}else{
 			return "redirect:../bops/main.htm";
@@ -32,7 +32,7 @@ public class SysUserController {
 	
 	@RequestMapping(value=("/bops/adminlogin"),method=RequestMethod.POST)
 	public String Login(HttpServletRequest request,HttpSession session,ModelMap model){
-		if(session.getAttribute("sysuserid")==null){
+		if(session.getAttribute("sysuser")==null){
 			String verify = request.getParameter("verify");
 			String code = (String) session.getAttribute("code");
 			if(code.equals(verify.toUpperCase())){
@@ -40,7 +40,7 @@ public class SysUserController {
 				String password = request.getParameter("password");
 				SysUser user = sysUserService.loginSysUser(username,password);
 				if(user.getError()==null){
-					session.setAttribute("sysuserid", user.getID());
+					session.setAttribute("sysuser", user);
 					return "redirect:../bops/main.htm";
 				}else{
 					model.put("error", user.getError());
@@ -91,5 +91,11 @@ public class SysUserController {
 	@RequestMapping(value=("/bops/main"))
 	public String toMain(HttpServletRequest request){
 		return "/bops/main";
+	}
+	
+	@RequestMapping(value=("/bops/logout"))
+	public String logOut(HttpServletRequest request,HttpSession session){
+		session.setAttribute("sysuser", null);
+		return "redirect:/bops/adminlogin.htm";
 	}
 }
