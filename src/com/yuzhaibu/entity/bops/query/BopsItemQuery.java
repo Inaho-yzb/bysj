@@ -19,8 +19,8 @@ public class BopsItemQuery extends Pagination<Item> {
 	private String Tradeposition;
 	private Integer Bargain;
 	private String SellerNickName;
-	private Date StartCreateTime;
-	private Date EndCreateTime;
+	private String StartCreateTime;
+	private String EndCreateTime;
 	private Integer SellStatus;
 	public String getItemName() {
 		return ItemName;
@@ -70,16 +70,16 @@ public class BopsItemQuery extends Pagination<Item> {
 	public void setSellerNickName(String sellerNickName) {
 		SellerNickName = sellerNickName;
 	}
-	public Date getStartCreateTime() {
+	public String getStartCreateTime() {
 		return StartCreateTime;
 	}
-	public void setStartCreateTime(Date startCreateTime) {
+	public void setStartCreateTime(String startCreateTime) {
 		StartCreateTime = startCreateTime;
 	}
-	public Date getEndCreateTime() {
+	public String getEndCreateTime() {
 		return EndCreateTime;
 	}
-	public void setEndCreateTime(Date endCreateTime) {
+	public void setEndCreateTime(String endCreateTime) {
 		EndCreateTime = endCreateTime;
 	}
 	public Integer getSellStatus() {

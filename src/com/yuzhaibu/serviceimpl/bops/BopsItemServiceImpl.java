@@ -21,11 +21,13 @@ public class BopsItemServiceImpl extends BaseService implements BopsItemService 
 
 	@Override
 	public void queryList(BopsItemQuery query) {
-		List<Item> itemList = itemDao.queryList(query);
-		Integer pageCount = itemDao.queryListCount(query);
 		
-		query.setData(itemList);
-		query.setTotalCount(pageCount);
+		Integer pageCount = itemDao.queryListCount(query);
+		if(pageCount>0){
+			List<Item> itemList = itemDao.queryList(query);
+			query.setData(itemList);
+			query.setTotalCount(pageCount);
+		}
 	}
 	
 	

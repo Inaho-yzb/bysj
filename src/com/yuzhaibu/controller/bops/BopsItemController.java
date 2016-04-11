@@ -19,7 +19,7 @@ public class BopsItemController {
 	private BopsItemService bopsItemService;
 	
 	@RequestMapping(value=("/bops/item"))
-	public String toItem(HttpServletRequest request,@ModelAttribute("query") BopsItemQuery query){
+	public String toItem(HttpServletRequest request,@ModelAttribute("query") BopsItemQuery query,ModelMap model){
 		bopsItemService.queryList(query);
 		return "/bops/item";
 	}

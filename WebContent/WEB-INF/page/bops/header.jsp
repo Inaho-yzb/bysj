@@ -10,7 +10,10 @@
 <link href="/css/bops/dpl-min.css" rel="stylesheet" type="text/css" />
 <link href="/css/bops/bui-min.css" rel="stylesheet" type="text/css" />
 <link href="/css/bops/main-min.css" rel="stylesheet" type="text/css" />
+<link href="/css/bops/common.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="/js/jquery.js" ></script>
+<script type="text/javascript" src="/js/bops/common.js" ></script>
+
 <script type="text/javascript">
 $(function(){
 	$("#ft").on("click",slidde);

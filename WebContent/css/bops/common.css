@@ -1,0 +1,58 @@
+*{
+	font-family:"Microsoft Yahei","Hiragino Sans GB",SimSun,Arial,"Helvetica Neue",Helvetica;
+}
+.searchForm{
+	width:98%;
+	border:1px solid #9E9E9E;;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:20px;
+	padding-top:20px;
+	padding-bottom:20px;
+}
+
+.btn{
+	width: 55px;
+	font-size: 15px;
+	line-height: 20px;
+	height: 20px;
+	display: block;
+	text-align:center;
+	text-decoration: none;
+	border:1px solid #eee;
+	float:left;
+	margin-left:10px;
+}
+
+.btn:hover{
+	text-decoration: none;
+}
+
+.btn-ok{
+    color: #fff;
+    background-color: #2196F3;
+}
+
+.searchForm table,.dataFrom table{
+	width:100%;
+}
+
+.dataFrom{
+	width:98%;
+	border:1px solid #9E9E9E;;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:20px;
+}
+
+th{
+	text-align:center;
+}
+
+td{
+	text-align:center;
+}
+.titleth{
+	background-color: #00BCD4;
+	color:#fff;
+}

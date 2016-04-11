@@ -14,6 +14,12 @@
 	</div>
 	
 	<div style="text-align: center;"></div>
-
+	<script type="text/javascript" src="/js/jedate/jedate.js"></script>
+<script type="text/javascript">
+$(".time").on("click", function() {
+var dateCell = "#" + $(this).attr('id');
+jeDate({dateCell: dateCell, format: "YYYY-MM-DD",isTime:true})
+});
+</script>
 </body>
 </html>
