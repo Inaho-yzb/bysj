@@ -4,9 +4,9 @@
  <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
  
 <%@include file="header.jsp" %>
-	
+	<script type="text/javascript" src="/js/bops/item.js" ></script>
 	<div class="searchForm">
-		<form action="/bops/item.htm" method="post" id="scfrom">
+		<form action="/bops/item.htm" method="post" id="scform">
 		<table>
 			<tr>
 				<th>物品名称:</th>
@@ -63,8 +63,8 @@
 					<spring:bind path="query.Bargain">
 						<select name="${status.expression}" >
 							<option value="">请选择</option>
-							<option value="0" <c:if test="${status.value}==0">selected="selected"</c:if>>一口价</option>
-							<option value="1" <c:if test="${status.value}==1">selected="selected"</c:if>>可议价</option>
+							<option value="0" <c:if test="${status.value==0}">selected="selected"</c:if>>一口价</option>
+							<option value="1" <c:if test="${status.value==1}">selected="selected"</c:if>>可议价</option>
 						</select>
 						<span>${status.errorMessage}</span>
 					</spring:bind>
@@ -100,9 +100,9 @@
 					<spring:bind path="query.SellStatus">
 						<select name="${status.expression}">
 							<option value="">请选择</option>
-							<option value="0" <c:if test="${status.value}==0">selected="selected"</c:if>>发布中</option>
-							<option value="1" <c:if test="${status.value}==1">selected="selected"</c:if>>被预定</option>
-							<option value="2" <c:if test="${status.value}==2">selected="selected"</c:if>>已售出</option>
+							<option value="0" <c:if test="${status.value==0}">selected="selected"</c:if>>发布中</option>
+							<option value="1" <c:if test="${status.value==1}">selected="selected"</c:if>>被预定</option>
+							<option value="2" <c:if test="${status.value==2}">selected="selected"</c:if>>已售出</option>
 						</select>
 						<span>${status.errorMessage}</span>
 					</spring:bind>
@@ -123,7 +123,7 @@
 		</table>
 		</form>
 	</div>
-	<div class="dataFrom">
+	<div class="dataForm">
 	<table>
 		<tbody>
 		<tr class="titleth">
@@ -174,10 +174,10 @@
 							<td>${q.itemcreatime}</td>
 							<td>
 								<c:choose>
-									<c:when test="${q.sellstatus}==0">
+									<c:when test="${q.sellstatus==0}">
 										出售中
 									</c:when>
-									<c:when test="${q.sellstatus}==1">
+									<c:when test="${q.sellstatus==1}">
 										被预定
 									</c:when>
 									<c:otherwise>
@@ -187,18 +187,23 @@
 							</td>
 							<td>
 								<a href="/item.htm?id=${q.itemid}" target="_blank">查看</a>
+								<a href="javascript:void(0)" id="deleteitem" onclick="deleteitem(${q.itemid})">删除</a>
 							</td>
 						</tr>
 					</c:forEach>
 				</c:when>
 				<c:otherwise>
-					没有数据
+					<tr>
+						<td>
+							没有数据
+						</td>
+					</tr>
 				</c:otherwise>
 			</c:choose>
 		</tbody>
 	</table>
 </div>
-	<div>
+	<div class="pg">
 	<c:choose>
 		<c:when test="${!empty query && query.totalCount>0}">
 		    <div id="_page">
@@ -206,17 +211,17 @@
 				
 				<c:choose>
 		        <c:when test="${!empty query.firstPage}">
-					<a id="_pre_page" href="#" style="font-weight:bold">&laquo;</a>
-					<input type="hidden" value="${query.prePage}" />
+					<a id="_pre_page" href="javascript:void(0)" style="font-weight:bold">&laquo;</a>
+					<input type="hidden" value="${query.prePage}" id="prepage"/>
 				</c:when>
 				<c:otherwise>
-					<a id="_none_pre_page" href="#" style="font-weight:bold">&laquo;</a>
+					<a id="_none_pre_page" style="font-weight:bold">&laquo;</a>
 				</c:otherwise>
 				</c:choose>
 				<c:forEach var="p" begin="${query.beginPage}" end="${query.endPage}">
 				<c:choose>
 		        	<c:when test="${query.pageNo!=p}">
-		        		<a id="_page_no" href="#">${p}</a>
+		        		<a id="_page_no" >${p}</a>
 		        	</c:when>
 		        	<c:otherwise>
 		        		<b> ${p} </b>
@@ -224,20 +229,22 @@
 		        </c:choose>
 		        <c:choose>
 		        	<c:when test="${!empty query.lastPage}">
-			        	<a id="_next_page" href="#" style="font-weight:bold">&raquo;</a>
-						<input type="hidden" value="${query.nextPage}" />
+			        	<a id="_next_page" href="javascript:void(0)" style="font-weight:bold">&raquo;</a>
+						<input type="hidden" value="${query.nextPage}" id="nextpage"/>
 		        	</c:when>
 		        	<c:otherwise>
-		        		<a id="_none_next_page" href="#" style="font-weight:bold">&raquo;</a>
+		        		<a id="_none_next_page" style="font-weight:bold">&raquo;</a>
 		        	</c:otherwise>
 		        </c:choose>
 				</c:forEach>
-				<input id="_go_page" type="text" size="2" title="输入页码按回车" maxlength="4" /><a id="_go" href="#" style="color:#000">GO</a>
+				<input id="_go_page" type="text" size="2" title="输入页码按回车" maxlength="4" /><a id="_go" href="javascript:void(0)" style="color:#000">GO</a>
 				页数： [<font color="red">${query.pageNo}</font> / ${query.totalPage} ]  总记录数：${query.totalCount}
 		    </div>
 	    </c:when>
 		<c:otherwise>
+			<div id="_page">
 			没有结果
+			</div>
 		</c:otherwise>
 	</c:choose>
 	</div>

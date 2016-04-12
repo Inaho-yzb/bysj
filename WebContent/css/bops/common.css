@@ -6,7 +6,6 @@
 	border:1px solid #9E9E9E;;
 	margin-left:auto;
 	margin-right:auto;
-	margin-top:20px;
 	padding-top:20px;
 	padding-bottom:20px;
 }
@@ -33,16 +32,21 @@
     background-color: #2196F3;
 }
 
-.searchForm table,.dataFrom table{
+.dataForm table{
 	width:100%;
 }
 
-.dataFrom{
+
+.dataForm{
 	width:98%;
 	border:1px solid #9E9E9E;;
 	margin-left:auto;
 	margin-right:auto;
 	margin-top:20px;
+}
+
+.dataForm table tr{
+	border-bottom:1px solid #2196F3;
 }
 
 th{
@@ -55,4 +59,19 @@ td{
 .titleth{
 	background-color: #00BCD4;
 	color:#fff;
+}
+
+.pg{
+	width:98%;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:5px;
+}
+
+#_page{
+	float:right;
+}
+
+#_go_page{
+	width:50px;
 }

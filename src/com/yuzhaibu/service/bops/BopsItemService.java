@@ -7,4 +7,6 @@ public interface BopsItemService {
 
 	void queryList(BopsItemQuery query);
 
+	Integer deleteItem(Integer itemid);
+
 }

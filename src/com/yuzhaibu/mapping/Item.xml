@@ -306,6 +306,39 @@
 		from item i,user_normal u
 		where 
 		i.sellerid = u.usernormal_id
+		<if test="ItemName!=null and ItemName!=''">
+			and i.itemname = #{ItemName}
+		</if>
+		<if test="StartSell!=null and StartSell!=''">
+			and i.sellprice <![CDATA[>=#{StartSell}]]>
+		</if>
+		<if test="EndSell!=null and EndSell!=''">
+			and i.sellprice <![CDATA[<=#{EndSell}]]>
+		</if>
+		<if test="StartOrigin!=null and StartOrigin!=''">
+			and i.originprice <![CDATA[>=#{StartOrigin}]]>
+		</if>
+		<if test="EndOrigin!=null and EndOrigin!=''">
+			and i.originprice <![CDATA[<=#{EndOrigin}]]>
+		</if>
+		<if test="Tradeposition!=null and Tradeposition!=''">
+			and i.tradeposition = #{Tradeposition}
+		</if>
+		<if test="Bargain!=null and Bargain!=''" >
+			and i.bargain = #{Bargain}
+		</if>
+		<if test="SellerNickName!=null and SellerNickName!=''">
+			and u.nickname = #{SellerNickName}
+		</if>
+		<if test="StartCreateTime!=null and StartCreateTime!=''">
+			and i.itemcreatime <![CDATA[>=date_format(#{StartCreateTime},'%Y-%m-%d')]]>
+		</if>
+		<if test="EndCreateTime!=null and EndCreateTime!=''">
+			and i.itemcreatime <![CDATA[<=date_format(#{EndCreateTime},'%Y-%m-%d')]]>
+		</if>
+		<if test="SellStatus!=null and SellStatus!=''">
+			and i.sellstatus = #{SellStatus}
+		</if>
 		limit #{beginIndex},#{pageSize};
 	</select>
 	
@@ -315,6 +348,44 @@
 		from item i,user_normal u
 		where 
 		i.sellerid = u.usernormal_id
+		<if test="ItemName!=null and ItemName!=''">
+			and i.itemname = #{ItemName}
+		</if>
+		<if test="StartSell!=null and StartSell!=''">
+			and i.sellprice <![CDATA[>=#{StartSell}]]>
+		</if>
+		<if test="EndSell!=null and EndSell!=''">
+			and i.sellprice <![CDATA[<=#{EndSell}]]>
+		</if>
+		<if test="StartOrigin!=null and StartOrigin!=''">
+			and i.originprice <![CDATA[>=#{StartOrigin}]]>
+		</if>
+		<if test="EndOrigin!=null and EndOrigin!=''">
+			and i.originprice <![CDATA[<=#{EndOrigin}]]>
+		</if>
+		<if test="Tradeposition!=null and Tradeposition!=''">
+			and i.tradeposition = #{Tradeposition}
+		</if>
+		<if test="Bargain!=null and Bargain!=''" >
+			and i.bargain = #{Bargain}
+		</if>
+		<if test="SellerNickName!=null and SellerNickName!=''">
+			and u.nickname = #{SellerNickName}
+		</if>
+		<if test="StartCreateTime!=null and StartCreateTime!=''">
+			and i.itemcreatime <![CDATA[>=date_format(#{StartCreateTime},'%Y-%m-%d')]]>
+		</if>
+		<if test="EndCreateTime!=null and EndCreateTime!=''">
+			and i.itemcreatime <![CDATA[<=date_format(#{EndCreateTime},'%Y-%m-%d')]]>
+		</if>
+		<if test="SellStatus!=null and SellStatus!=''">
+			and i.sellstatus = #{SellStatus}
+		</if>
 	</select>
+	
+	<delete id="deleteItemBops" parameterType="int">
+		delete from item 
+		where itemid = #{itemid}
+	</delete>
 	
 </mapper>

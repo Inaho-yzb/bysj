@@ -1,7 +1,5 @@
 package com.yuzhaibu.entity.bops.query;
 
-import java.util.Date;
-
 import com.yuzhaibu.entity.Item;
 import com.yuzhaibu.util.Pagination;
 

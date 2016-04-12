@@ -136,5 +136,12 @@ public interface ItemDao {
 	List<Item> queryList(BopsItemQuery query);
 
 	Integer queryListCount(BopsItemQuery query);
+
+	/**
+	 * 后台删除物品
+	 * @param itemid
+	 * @return
+	 */
+	Integer deleteItemBops(Integer itemid);
 	
 }
