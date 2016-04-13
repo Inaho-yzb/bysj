@@ -2,7 +2,23 @@
     <!DOCTYPE mapper  
       PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
           "http://mybatis.org/dtd/mybatis-3-mapper.dtd">        
-<mapper namespace="com.yuzhaibu.dao.User_normalDao">  
+<mapper namespace="com.yuzhaibu.dao.User_normalDao"> 
+	<resultMap type="com.yuzhaibu.entity.User_normal" id="UserMap">
+		<result property="usernormal_id" column="usernormal_id"/>
+		<result property="username" column="username"/>
+		<result property="email" column="email"/>
+		<result property="nickname" column="nickname"/>
+		<result property="mobile" column="mobile"/>
+		<result property="qq" column="qq"/>
+		<result property="school" column="school"/>
+		<result property="userclass" column="userclass"/>
+		<result property="authen" column="authen"/>
+		<result property="levexp" column="levexp"/>
+		<result property="usernormalcreatime" column="usernormalcreatime"/>
+		<result property="headimg" column="headimg"/>
+		<result property="itemcount" column="itemcount"/>
+	</resultMap>
+ 
     <select id="findAll" resultType="com.yuzhaibu.entity.User_normal">
     	select * from user_normal
     </select>
@@ -48,4 +64,79 @@
     	set headimg = #{imgPath}
     	where usernormal_id = #{userid}
     </update>
+    
+    <select id="queryList" parameterType="com.yuzhaibu.entity.bops.query.BopsUserQuery" resultMap="UserMap">
+    	select
+    	u.usernormal_id,
+    	u.username,
+    	u.email,
+    	u.nickname,
+    	u.mobile,
+    	u.qq,
+    	u.school,
+    	u.userclass,
+    	u.authen,
+    	u.levexp,
+    	u.usernormalcreatime,
+    	u.headimg,
+    	(select count(*) from item i where i.sellerid = u.usernormal_id) as itemcount
+    	from user_normal u
+    	where u.usernormal_id!=0
+    	<if test="Username!=null and Username!=''">
+			and u.username = #{Username}
+		</if>
+		<if test="NickName!=null and NickName!=''">
+			and u.nickname = #{NickName}
+		</if>
+		<if test="Email!=null and Email!=''">
+			and u.email = #{Email}
+		</if>
+		<if test="Mobile!=null and Mobile!=''">
+			and u.mobile = #{Mobile}
+		</if>
+		<if test="QQ!=null and QQ!=''">
+			and u.qq = #{QQ}
+		</if>
+		<if test="StartCreateTime!=null and StartCreateTime!=''">
+			and u.usernormalcreatime <![CDATA[>=date_format(#{StartCreateTime},'%Y-%m-%d')]]>
+		</if>
+		<if test="EndCreateTime!=null and EndCreateTime!=''">
+			and u.usernormalcreatime <![CDATA[<=date_format(#{EndCreateTime},'%Y-%m-%d')]]>
+		</if>
+		<if test="Authen!=null and Authen!=''">
+			and u.authen = #{Authen}
+		</if>
+		limit #{beginIndex},#{pageSize};
+    </select>
+    
+    <select id="queryListCount" parameterType="com.yuzhaibu.entity.bops.query.BopsUserQuery" resultType="int">
+    	select
+    	count(*)
+    	from user_normal u
+    	where u.usernormal_id!=0
+    	<if test="Username!=null and Username!=''">
+			and u.username = #{Username}
+		</if>
+		<if test="NickName!=null and NickName!=''">
+			and u.nickname = #{NickName}
+		</if>
+		<if test="Email!=null and Email!=''">
+			and u.email = #{Email}
+		</if>
+		<if test="Mobile!=null and Mobile!=''">
+			and u.mobile = #{Mobile}
+		</if>
+		<if test="QQ!=null and QQ!=''">
+			and u.qq = #{QQ}
+		</if>
+		<if test="StartCreateTime!=null and StartCreateTime!=''">
+			and u.usernormalcreatime <![CDATA[>=date_format(#{StartCreateTime},'%Y-%m-%d')]]>
+		</if>
+		<if test="EndCreateTime!=null and EndCreateTime!=''">
+			and u.usernormalcreatime <![CDATA[<=date_format(#{EndCreateTime},'%Y-%m-%d')]]>
+		</if>
+		<if test="Authen!=null and Authen!=''">
+			and u.authen = #{Authen}
+		</if>
+    </select>
  </mapper>  

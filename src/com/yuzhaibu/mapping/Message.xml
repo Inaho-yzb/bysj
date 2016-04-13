@@ -5,6 +5,18 @@
 
 
 <mapper namespace="com.yuzhaibu.dao.MessageDao">
+	<resultMap type="com.yuzhaibu.entity.Message" id="MesMap">
+		<result property="mes_id" column="mes_id"/>
+		<result property="mes_itemid" column="mes_itemid"/>
+		<result property="mes_itemname" column="mes_itemname"/>
+		<result property="mes_levuserid" column="mes_levuserid"/>
+		<result property="mes_levusername" column="mes_levusername"/>
+		<result property="mes_content" column="mes_content"/>
+		<result property="mes_status" column="mes_status"/>
+		<result property="creatime" column="creatime"/>
+		<result property="audittime" column="audittime"/>
+	</resultMap>
+
 	<select id="findAllNotReadMessage" parameterType="java.util.Map" resultType="com.yuzhaibu.entity.Message">
 		select 
 		mes_id,
@@ -51,4 +63,62 @@
 		delete from message where mes_itemid = #{itemid}
 	</delete>
 	
+	<select id="queryList" parameterType="com.yuzhaibu.entity.bops.query.BopsMessageQuery" resultType="com.yuzhaibu.entity.Message">
+		select
+		m.mes_id,
+		m.mes_itemid,
+		i.itemname as mes_itemname,
+		m.mes_levuserid,
+		u.nickname as mes_levusername,
+		m.mes_content,
+		m.mes_status,
+		m.createtime,
+		m.audittime
+		from message m left join item i on m.mes_itemid = i.itemid join user_normal u on m.mes_levuserid = u.usernormal_id
+		where m.mes_id!=0
+		<if test="Itemid!=null and Itemid!=''">
+			and m.mes_itemid = #{Itemid}
+		</if>
+		<if test="LevUserid!=null and LevUserid!=''">
+			and m.mes_levuserid <![CDATA[>=#{LevUserid}]]>
+		</if>
+		<if test="Content!=null and Content!=''">
+			and m.mes_content <![CDATA[<=#{Content}]]>
+		</if>
+		<if test="Status!=null and Status!=''">
+			and m.mes_status <![CDATA[>=#{Status}]]>
+		</if>
+		<if test="StartCreateTime!=null and StartCreateTime!=''">
+			and m.createime <![CDATA[>=date_format(#{StartCreateTime},'%Y-%m-%d')]]>
+		</if>
+		<if test="EndCreateTime!=null and EndCreateTime!=''">
+			and m.createime <![CDATA[<=date_format(#{EndCreateTime},'%Y-%m-%d')]]>
+		</if>
+		order by m.createtime desc
+		limit #{beginIndex},#{pageSize}
+	</select>
+	<select id="queryListCount" parameterType="com.yuzhaibu.entity.bops.query.BopsMessageQuery" resultType="int">
+		select
+		count(*)
+		from message m left join item i on m.mes_itemid = i.itemid join user_normal u on m.mes_levuserid = u.usernormal_id
+		where m.mes_id!=0
+		<if test="Itemid!=null and Itemid!=''">
+			and m.mes_itemid = #{Itemid}
+		</if>
+		<if test="LevUserid!=null and LevUserid!=''">
+			and m.mes_levuserid <![CDATA[>=#{LevUserid}]]>
+		</if>
+		<if test="Content!=null and Content!=''">
+			and m.mes_content <![CDATA[<=#{Content}]]>
+		</if>
+		<if test="Status!=null and Status!=''">
+			and m.mes_status <![CDATA[>=#{Status}]]>
+		</if>
+		<if test="StartCreateTime!=null and StartCreateTime!=''">
+			and m.createime <![CDATA[>=date_format(#{StartCreateTime},'%Y-%m-%d')]]>
+		</if>
+		<if test="EndCreateTime!=null and EndCreateTime!=''">
+			and m.createime <![CDATA[<=date_format(#{EndCreateTime},'%Y-%m-%d')]]>
+		</if>
+	</select>
 </mapper>

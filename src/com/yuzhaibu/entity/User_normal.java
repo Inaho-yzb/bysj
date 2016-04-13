@@ -23,8 +23,15 @@ public class User_normal {
 	private int levexp;
 	private Timestamp usernormalcreatime;
 	private String headimg;
+	private Integer itemcount;
 	
 	
+	public Integer getItemcount() {
+		return itemcount;
+	}
+	public void setItemcount(Integer itemcount) {
+		this.itemcount = itemcount;
+	}
 	public String getUsername() {
 		return username;
 	}

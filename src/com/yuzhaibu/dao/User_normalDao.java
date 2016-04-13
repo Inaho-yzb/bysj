@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.yuzhaibu.entity.User_normal;
+import com.yuzhaibu.entity.bops.query.BopsUserQuery;
 
 public interface User_normalDao {
 	
@@ -63,4 +64,13 @@ public interface User_normalDao {
 	 * @return
 	 */
 	Integer editUserHeadImg(Map resMap);
+
+	/**
+	 * 后台用户列表
+	 * @param query
+	 * @return
+	 */
+	List<User_normal> queryList(BopsUserQuery query);
+
+	Integer queryListCount(BopsUserQuery query);
 }

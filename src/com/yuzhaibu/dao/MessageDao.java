@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.yuzhaibu.entity.Message;
+import com.yuzhaibu.entity.bops.query.BopsMessageQuery;
 
 public interface MessageDao {
 
@@ -55,5 +56,14 @@ public interface MessageDao {
 	 * @return
 	 */
 	Integer deleteMesByItemid(Integer itemid);
+
+	/**
+	 * 后台评论查看
+	 * @param query
+	 * @return
+	 */
+	List<Message> queryList(BopsMessageQuery query);
+
+	Integer queryListCount(BopsMessageQuery query);
 	
 }

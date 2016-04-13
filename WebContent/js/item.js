@@ -52,7 +52,7 @@ $(function(){
 				type:"select",
 				title:"请选择举报理由",
 				nttext:["请选择举报理由："],
-				content:"<option value='1'>虚假物品</option><option value='2'>违法物品</option><option value='3'>广告、诈骗、淫秽色情、反动等内容</option><option value='4'>价格与物品不相符</option>" ,
+				content:"<option value='0'>虚假物品</option><option value='1'>违法物品</option><option value='2'>广告、诈骗、淫秽色情、反动等内容</option><option value='3'>价格与物品不相符</option>" ,
 				onOk:function(v,callback){
 					$.ajax({
 						url:"ajaxreportitem.htm",

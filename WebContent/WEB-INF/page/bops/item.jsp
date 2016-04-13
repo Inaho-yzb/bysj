@@ -115,7 +115,7 @@
 					<a href="javascript:void(0)" class="btn btn-reset">重置</a>
 				</td>
 				<td>
-					<spring:bind path="query.PageNo">
+					<spring:bind path="query.pageNo">
 					<input type="hidden" id="_cur_page" name="${status.expression}" value="${status.value}"/>
 					</spring:bind>
 				</td>
@@ -127,6 +127,7 @@
 	<table>
 		<tbody>
 		<tr class="titleth">
+			<th>物品ID</th>
 			<th>物品名称</th>
 			<th>类别</th>
 			<th>售价</th>
@@ -144,13 +145,14 @@
 				<c:when test="${!empty query.data}">
 					<c:forEach items="${query.data}" var="q">
 						<tr>
+							<td>${q.itemid}</td>
 							<td>${q.itemname}</td>
 							<td>${q.itemclass_name}</td>
 							<td>${q.sellprice}</td>
 							<td>${q.originprice}</td>
 							<td>
 								<c:choose>
-									<c:when test="${q.color}==10">
+									<c:when test="${q.color==10}">
 										全新
 									</c:when>
 									<c:otherwise>
@@ -161,7 +163,7 @@
 							<td>${q.tradeposition}</td>
 							<td>
 								<c:choose>
-									<c:when test="${q.bargain}==0">
+									<c:when test="${q.bargain==0}">
 										一口价
 									</c:when>
 									<c:otherwise>

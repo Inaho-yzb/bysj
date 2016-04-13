@@ -8,7 +8,21 @@ public class Report {
 	private Integer itemid;
 	private Integer userid;
 	private Integer reasonid;
+	private String itemname;
+	private String nickname;
 	
+	public String getItemname() {
+		return itemname;
+	}
+	public void setItemname(String itemname) {
+		this.itemname = itemname;
+	}
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
 	public Integer getId() {
 		return id;
 	}

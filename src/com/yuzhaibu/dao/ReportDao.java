@@ -1,6 +1,9 @@
 package com.yuzhaibu.dao;
 
+import java.util.List;
+
 import com.yuzhaibu.entity.Report;
+import com.yuzhaibu.entity.bops.query.BopsReportQuery;
 
 public interface ReportDao {
 
@@ -24,5 +27,15 @@ public interface ReportDao {
 	 * @return
 	 */
 	Integer deleteReportByItemid(Integer itemid);
+
+	
+	Integer queryListCount(BopsReportQuery query);
+
+	/**
+	 * 后天查找举报
+	 * @param query
+	 * @return
+	 */
+	List<Report> queryList(BopsReportQuery query);
 
 }

@@ -4,6 +4,16 @@
           "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
 
 <mapper namespace="com.yuzhaibu.dao.ReportDao">
+	
+	<resultMap type="com.yuzhaibu.entity.Report" id="ReportMap">
+		<result property="id" column="id"/>
+		<result property="itemid" column="itemid"/>
+		<result property="userid" column="userid"/>
+		<result property="reasonid" column="reasonid"/>
+		<result property="itemname" column="itemname"/>
+		<result property="nickname" column="nickname"/>
+	</resultMap>
+	
 	<select id="isInRep" parameterType="com.yuzhaibu.entity.Report" resultType="int">
 		select id from report where userid = #{userid} and itemid = #{itemid}
 	</select>
@@ -16,5 +26,40 @@
 	<delete id="deleteReportByItemid" parameterType="int">
 		delete from report where itemid = #{itemid}
 	</delete>
+	
+	<select id="queryList" parameterType="com.yuzhaibu.entity.bops.query.BopsReportQuery" resultMap="ReportMap">
+		select
+		r.id,
+		r.itemid,
+		i.itemname,
+		r.userid,
+		r.reasonid,
+		u.nickname
+		from report r left join item i on r.itemid = i.itemid 
+		left join user_normal u on r.userid = u.usernormal_id
+		where r.id!=0
+		<if test="ItemId!=null and ItemId!=''">
+			and i.itemid = #{ItemId}
+		</if>
+		<if test="UserNickName!=null and UserNickName!=''">
+			and u.usernickname = #{UserNickName}
+		</if>
+		order by r.id desc
+		limit #{beginIndex},#{pageSize};
+	</select>
+	
+	<select id="queryListCount" parameterType="com.yuzhaibu.entity.bops.query.BopsReportQuery" resultType="int">
+		select
+		count(*)
+		from report r left join item i on r.itemid = i.itemid 
+		left join user_normal u on r.userid = u.usernormal_id
+		where r.id!=0
+		<if test="ItemId!=null and ItemId!=''">
+			and i.itemid = #{ItemId}
+		</if>
+		<if test="UserNickName!=null and UserNickName!=''">
+			and u.usernickname = #{UserNickName}
+		</if>
+	</select>
 	
 </mapper>

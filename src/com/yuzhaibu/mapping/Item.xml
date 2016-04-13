@@ -339,6 +339,7 @@
 		<if test="SellStatus!=null and SellStatus!=''">
 			and i.sellstatus = #{SellStatus}
 		</if>
+		order by i.itemcreatime desc
 		limit #{beginIndex},#{pageSize};
 	</select>
 	
