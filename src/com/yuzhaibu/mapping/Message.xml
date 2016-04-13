@@ -80,13 +80,13 @@
 			and m.mes_itemid = #{Itemid}
 		</if>
 		<if test="LevUserid!=null and LevUserid!=''">
-			and m.mes_levuserid <![CDATA[>=#{LevUserid}]]>
+			and m.mes_levuserid =#{LevUserid}
 		</if>
 		<if test="Content!=null and Content!=''">
-			and m.mes_content <![CDATA[<=#{Content}]]>
+			and m.mes_content = #{Content}
 		</if>
 		<if test="Status!=null and Status!=''">
-			and m.mes_status <![CDATA[>=#{Status}]]>
+			and m.mes_statu s= #{Status}
 		</if>
 		<if test="StartCreateTime!=null and StartCreateTime!=''">
 			and m.createime <![CDATA[>=date_format(#{StartCreateTime},'%Y-%m-%d')]]>
@@ -106,13 +106,13 @@
 			and m.mes_itemid = #{Itemid}
 		</if>
 		<if test="LevUserid!=null and LevUserid!=''">
-			and m.mes_levuserid <![CDATA[>=#{LevUserid}]]>
+			and m.mes_levuserid =#{LevUserid}
 		</if>
 		<if test="Content!=null and Content!=''">
-			and m.mes_content <![CDATA[<=#{Content}]]>
+			and m.mes_content =#{Content}
 		</if>
 		<if test="Status!=null and Status!=''">
-			and m.mes_status <![CDATA[>=#{Status}]]>
+			and m.mes_status =#{Status}
 		</if>
 		<if test="StartCreateTime!=null and StartCreateTime!=''">
 			and m.createime <![CDATA[>=date_format(#{StartCreateTime},'%Y-%m-%d')]]>

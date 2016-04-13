@@ -4,6 +4,20 @@
           "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
 <mapper namespace="com.yuzhaibu.dao.AuthenDao"> 
 	
+	<resultMap type="com.yuzhaibu.entity.UserAuthen" id="AuthenMap">
+		<result property="ID" column="ID"/>
+		<result property="AuthenName" column="AuthenName"/>
+		<result property="IdCode" column="IdCode"/>
+		<result property="Image" column="Image"/>
+		<result property="CreateTime" column="CreateTime"/>
+		<result property="AuditTime" column="AuditTime"/>
+		<result property="AuditSysUser" column="AuditSysUser"/>
+		<result property="AuditSysUserName" column="AuditSysUserName"/>
+		<result property="Status" column="Status"/>
+		<result property="UserId" column="UserId"/>
+		<result property="UserNickName" column="UserNickName"/>
+	</resultMap>
+	
 	<select id="findUserIsAuthen" parameterType="int" resultType="int">
 		select count(1) from userauthen
 		where UserId = #{userid} and
@@ -14,5 +28,56 @@
 		insert into userauthen(AuthenName,IdCode,Image,CreateTime,Status,UserId)
 		values(#{AuthenName},#{IdCode},#{Image},now(),0,#{UserId})
 	</insert>
+	
+	<select id="queryList" parameterType="com.yuzhaibu.entity.bops.query.BopsAuthenQuery" resultMap="AuthenMap">
+		select 
+		a.ID,
+		a.AuthenName,
+		a.IdCode,
+		a.Image,
+		a.CreateTime,
+		a.AuditTime,
+		a.AuditSysUser,
+		(select su.LoginName from sysuser su where su.ID = a.AuditSysUser) as AuditSysUserName,
+		a.Status,
+		a.UserId,
+		(select u.nickname from user_normal u where u.usernormal_id = a.UserId) as UserNickName
+		from userauthen a
+		where a.ID!=0
+		<if test="UserId!=null and UserId!=''">
+			and a.UserId = #{UserId}
+		</if>
+		<if test="Status!=null and Status!=''">
+			and a.Status =#{Status}
+		</if>
+		<if test="StartCreateTime!=null and StartCreateTime!=''">
+			and a.CreateTime <![CDATA[>=date_format(#{StartCreateTime},'%Y-%m-%d')]]>
+		</if>
+		<if test="EndCreateTime!=null and EndCreateTime!=''">
+			and a.CreateTime <![CDATA[<=date_format(#{EndCreateTime},'%Y-%m-%d')]]>
+		</if>
+		order by Status asc
+		limit #{beginIndex},#{pageSize}
+	</select>
+	
+	<select id="queryListCount" parameterType="com.yuzhaibu.entity.bops.query.BopsAuthenQuery" resultType="int">
+		select 
+		count(1)
+		from userauthen a
+		where a.ID!=0
+		<if test="UserId!=null and UserId!=''">
+			and a.UserId = #{UserId}
+		</if>
+		<if test="Status!=null and Status!=''">
+			and a.Status =#{Status}
+		</if>
+		<if test="StartCreateTime!=null and StartCreateTime!=''">
+			and a.CreateTime <![CDATA[>=date_format(#{StartCreateTime},'%Y-%m-%d')]]>
+		</if>
+		<if test="EndCreateTime!=null and EndCreateTime!=''">
+			and a.CreateTime <![CDATA[<=date_format(#{EndCreateTime},'%Y-%m-%d')]]>
+		</if>
+		
+	</select>
 	
 </mapper>

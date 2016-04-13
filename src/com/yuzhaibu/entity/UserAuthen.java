@@ -17,7 +17,21 @@ public class UserAuthen {
 	private Integer AuditSysUser;
 	private Integer Status;
 	private Integer UserId;
+	private String UserNickName;
+	private String AuditSysUserName;
 	
+	public String getUserNickName() {
+		return UserNickName;
+	}
+	public void setUserNickName(String userNickName) {
+		UserNickName = userNickName;
+	}
+	public String getAuditSysUserName() {
+		return AuditSysUserName;
+	}
+	public void setAuditSysUserName(String auditSysUserName) {
+		AuditSysUserName = auditSysUserName;
+	}
 	public Integer getStatus() {
 		return Status;
 	}

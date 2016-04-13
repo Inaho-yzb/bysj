@@ -14,20 +14,12 @@ public class BaseEntity implements Serializable{
 	
 	// PK
 	private Integer ID;
-	// 创建时间
-	private Date CreateTime;
 	
 	public Integer getID() {
 		return ID;
 	}
 	public void setID(Integer iD) {
 		ID = iD;
-	}
-	public Date getCreateTime() {
-		return CreateTime;
-	}
-	public void setCreateTime(Date createTime) {
-		CreateTime = createTime;
 	}
 	
 	public String toString() {

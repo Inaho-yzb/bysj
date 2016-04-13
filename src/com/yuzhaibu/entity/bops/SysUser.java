@@ -1,5 +1,7 @@
 package com.yuzhaibu.entity.bops;
 
+import java.util.Date;
+
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -9,7 +11,7 @@ public class SysUser extends BaseEntity {
 	
 	private String LoginName;
 	private String Password;
-	
+	private Date CreateTime;
 	private String error;
 	
 	public String getLoginName() {
@@ -29,6 +31,12 @@ public class SysUser extends BaseEntity {
 	}
 	public void setError(String error) {
 		this.error = error;
+	}
+	public Date getCreateTime() {
+		return CreateTime;
+	}
+	public void setCreateTime(Date createTime) {
+		CreateTime = createTime;
 	}
 	
 	
