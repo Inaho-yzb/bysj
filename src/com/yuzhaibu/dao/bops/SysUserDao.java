@@ -16,4 +16,8 @@ public interface SysUserDao {
 
 	Integer queryListCount(BopsAdminQuery query);
 
+	Integer addNewAdmin(SysUser sysUser);
+
+	Integer deleteAdmin(Integer sysid);
+
 }

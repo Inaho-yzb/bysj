@@ -26,5 +26,15 @@ public class BopsAdminServiceImpl implements BopsAdminService {
 			query.setTotalCount(pageCount);
 		}
 	}
+
+	@Override
+	public Integer addNewAdmin(SysUser sysUser) {
+		return sysUserDao.addNewAdmin(sysUser);
+	}
+
+	@Override
+	public Integer deleteAdmin(Integer sysid) {
+		return sysUserDao.deleteAdmin(sysid);
+	}
 	
 }

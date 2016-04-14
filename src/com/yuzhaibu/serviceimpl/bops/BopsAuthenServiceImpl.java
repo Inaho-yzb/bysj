@@ -49,7 +49,14 @@ public class BopsAuthenServiceImpl implements BopsAuthenService {
 					map.put("sysuerid", sysuserid);
 					map.put("userid", userid);
 					authenDao.authenUser(map);
-					userDao.updateAuthen(map);
+					if(statuss==1){
+						map.put("authen",2);
+						userDao.updateAuthen(map);
+					}else{
+						map.put("authen",0);
+						userDao.updateAuthen(map);
+					}
+					
 					return 1;
 				}catch(Exception e){
 					status.setRollbackOnly(); 

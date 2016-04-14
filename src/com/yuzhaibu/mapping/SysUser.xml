@@ -42,5 +42,14 @@
 			and LoginName = #{LoginName}
 		</if>
 	</select>
+	
+	<insert id="addNewAdmin" parameterType="com.yuzhaibu.dao.bops.SysUserDao">
+		insert into sysuser(LoginName,Password,CreateTime) values(#{LoginName},#{Password},now())
+	</insert>
+	
+	<delete id="deleteAdmin" parameterType="int">
+		delete from sysuser
+		where ID = #{sysid}
+	</delete>
 
 </mapper>

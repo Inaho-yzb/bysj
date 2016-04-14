@@ -4,7 +4,36 @@
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
 <%@include file="header.jsp" %>
-
+<<script type="text/javascript">
+function deleteSysuser(id){
+	hrHuTui.popout({
+		type:"info",
+		title:"删除",
+		content:"确定删除?",
+		onOk:function(callback){
+			$.ajax({
+				url:"/bops/deleteadmin.htm",
+				type:"POST",
+				data:{"id":id},
+				success:function(res){
+					if(res.errorCode==0){
+						alert("删除成功！");
+						location.reload();
+						return true;
+					}else{
+						alert("删除失败！");
+						return true;
+					}
+				},
+				error:function(xhr){
+					alert("服务器连接失败！");
+					return true;
+				}
+			});
+		}
+	});
+}
+</script>
 <div class="searchForm">
 	<form action="/bops/admin.htm" method="post" id="scform">
 		<table>
@@ -43,7 +72,11 @@
 							<td>${q.loginName}</td>
 							<td><fmt:formatDate value="${q.createTime}"
 									pattern="yyyy-MM-dd  HH:mm:ss" /></td>
-							<td><a href="javascript:void(0)" id="deleteitem"onclick="deleteSysuser(${q.ID})">删除</a></td>
+							<td>
+								<c:if test="${sessionScope.sysuser.ID==1 && q.ID!=1}">
+								<a href="javascript:void(0)" id="deleteitem"onclick="deleteSysuser(${q.ID})">删除</a>
+								</c:if>
+							</td>
 						</tr>
 					</c:forEach>
 				</c:when>

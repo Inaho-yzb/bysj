@@ -117,16 +117,19 @@
 								<div class="bui-menu-title" id="bk">
 									<s></s><span class="bui-menu-title-text">后台管理</span>
 								</div>
+								<c:if test="${sessionScope.sysuser.ID==1}">
 								<ul class="bui-menu" aria-disabled="false" aria-pressed="false"
 									id="bk-sys">
 									<li
 										class="bui-menu-item menu-leaf <c:if test="${fn:contains(us,'/bops/admin')}"> bui-menu-item-selected</c:if>"
 										aria-disabled="false" data-id="4" aria-pressed="false"><a
 										href="/bops/admin.htm"><em>管理员管理</em></a></li>
+									
 									<li
 										class="bui-menu-item menu-leaf <c:if test="${fn:contains(us,'/bops/addnewadmin')}"> bui-menu-item-selected</c:if>"
 										aria-disabled="false" data-id="4" aria-pressed="false"><a
 										href="/bops/addnewadmin.htm"><em>新增管理员</em></a></li>
+									</c:if>
 								</ul>
 							</li>
 						</ul>

@@ -4,4 +4,8 @@
  
 <%@include file="header.jsp"%>
 
+<div>
+	欢迎登录后台管理系统！
+</div>
+
 <%@include file="footer.jsp"%>

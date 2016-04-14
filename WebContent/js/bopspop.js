@@ -103,7 +103,7 @@
 		var itop;
 		var iheight;
 		if(options.height == "auto"){
-			itop =((document.body.clientHeight- $dialog.height())/2)/document.body.clientHeight*100+"%";
+			itop =(($(window).height()- $dialog.height())/2)/$(window).height()*100+"%";
 			iheight = "auto";
 		}else{
 			itop = (($(window).height()- parseInt(options.height))/2)/$(window).height()*100+"%";
