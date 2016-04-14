@@ -3,7 +3,7 @@
     
   <mapper namespace="com.yuzhaibu.dao.ItemImgDao">
   
-  <insert id="insertNewImg" parameterType="java.util.List">
+  <insert id="insertNewImg" parameterType="java.util.Map">
   	insert into itemimg(imgpath,itemid) values
   	<foreach collection="fileNameList" item="item" index="index" separator="," >  
         (#{item},#{id})  
@@ -17,6 +17,15 @@
   <delete id="deleteItemImg" parameterType="int">
   	delete from itemimg
   	where itemid = #{itemid}
+  </delete>
+  
+  <delete id="deleteItemImgByItemIdList" parameterType="java.util.List">
+  	delete from itemimg 
+  	where itemid in (
+  	<foreach collection="list" item="item" index="index" separator="," >  
+        #{item}
+    </foreach>
+    )  
   </delete>
   
   </mapper>

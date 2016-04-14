@@ -292,6 +292,7 @@ public class ItemServiceImpl extends BaseManager implements ItemService {
 							}
 							return 1;
 						}catch(Exception e){
+							status.setRollbackOnly();
 							e.printStackTrace();
 							log.error(e.getMessage());
 							return -1;

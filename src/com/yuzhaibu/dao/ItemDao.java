@@ -143,5 +143,9 @@ public interface ItemDao {
 	 * @return
 	 */
 	Integer deleteItemBops(Integer itemid);
+
+	List<Integer> findItemIdListByUserId(Integer userid);
+
+	Integer deleteUserItem(Integer userid);
 	
 }

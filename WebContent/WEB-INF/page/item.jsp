@@ -7,7 +7,7 @@
 
 
 <div class="content">
-	<script src="js/item.js"></script>
+	<script src="/js/item.js"></script>
 	<div class="container">
 		<div class="col-md-12">
 			<div class="position-nav">

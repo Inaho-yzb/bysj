@@ -65,5 +65,16 @@ public interface MessageDao {
 	List<Message> queryList(BopsMessageQuery query);
 
 	Integer queryListCount(BopsMessageQuery query);
+
+	/**
+	 * 审核留言
+	 * @param mesid
+	 * @return
+	 */
+	Integer authenMes(Map map);
+
+	Integer deleteMes(Integer mesid);
+
+	Integer deleteMesByItemIdList(List<Integer> itemIdList);
 	
 }

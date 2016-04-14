@@ -62,4 +62,13 @@
 		</if>
 	</select>
 	
+	<delete id="deleteReportByItemidList" parameterType="java.util.List">
+		delete from report
+		where itemid in(
+		<foreach collection="list" item="item" index="index" separator="," >  
+        	#{item}
+    	</foreach>
+    	)
+	</delete>
+	
 </mapper>

@@ -106,7 +106,7 @@
 			itop =((document.body.clientHeight- $dialog.height())/2)/document.body.clientHeight*100+"%";
 			iheight = "auto";
 		}else{
-			itop = ((document.body.clientHeight- parseInt(options.height))/2)/document.body.clientHeight*100+"%";
+			itop = (($(window).height()- parseInt(options.height))/2)/$(window).height()*100+"%";
 			iheight = options.height;
 			$content.css({height:iheight-90});
 		}

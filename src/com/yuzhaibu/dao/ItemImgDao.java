@@ -12,4 +12,6 @@ public interface ItemImgDao {
 	List<ItemImg> findItemImagesByItemId(int itemid);
 
 	Integer deleteItemImg(Integer itemid);
+
+	Integer deleteItemImgByItemIdList(List<Integer> itemIdList);
 }

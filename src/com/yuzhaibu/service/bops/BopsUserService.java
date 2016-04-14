@@ -6,4 +6,6 @@ public interface BopsUserService {
 
 	void queryList(BopsUserQuery query);
 
+	Integer deleteUser(Integer userid);
+
 }

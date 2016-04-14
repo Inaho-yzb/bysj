@@ -6,4 +6,8 @@ public interface BopsMessageService {
 
 	void queryList(BopsMessageQuery query);
 
+	Integer authenMes(Integer mesid,Integer status);
+
+	Integer deleteMes(Integer mesid);
+
 }

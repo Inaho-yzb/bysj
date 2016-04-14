@@ -389,4 +389,14 @@
 		where itemid = #{itemid}
 	</delete>
 	
+	 <select id="findItemIdListByUserId" parameterType="int" resultType="int">
+    	select itemid from item
+    	where sellerid = #{userid}
+    </select>
+	
+	<delete id="deleteUserItem" parameterType="int">
+		delete from item
+		where sellerid = #{userid}
+	</delete>
+	
 </mapper>

@@ -389,7 +389,7 @@ public class User_normalController implements Serializable {
 				
 				String date = DateUtils.dateToStrLong(new Date(), "yyyyMMdd");
 				
-				String savePath = request.getServletContext().getRealPath("WEB-INF/upload/userauthen/"+date);
+				String savePath = request.getServletContext().getRealPath("/uploads/userauthen/"+date);
 				
 				String authenName = multipartHttpServletRequest.getParameter("authenname");
 				String idCode = multipartHttpServletRequest.getParameter("idcode");
@@ -447,7 +447,7 @@ public class User_normalController implements Serializable {
 
 		String date = DateUtils.dateToStrLong(new Date(), "yyyyMMdd");
 
-		String savePath = request.getServletContext().getRealPath("uploads/userheadimg/" + date);
+		String savePath = request.getServletContext().getRealPath("/uploads/userheadimg/" + date);
 
 		Map map = new HashMap();
 		map.put("images", list);

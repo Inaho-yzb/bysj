@@ -80,4 +80,13 @@
 		
 	</select>
 	
+	<update id="authenUser" parameterType="java.util.Map">
+		update userauthen
+		set Status = #{authen},
+		AuditSysUser = #{sysuserid},
+		AuditTime = now()
+		where 
+		ID = ${id}
+	</update>
+	
 </mapper>

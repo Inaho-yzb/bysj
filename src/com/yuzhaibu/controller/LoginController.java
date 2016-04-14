@@ -118,6 +118,8 @@ public class LoginController implements Serializable{
 		user.setEmail(email);
 		
 		if(user_normalService.regUser(user)>0){
+			User_normal us = user_normalService.findUserByUsername(username);
+			session.setAttribute("userid", us.getUsernormal_id());
 			session.setAttribute("username", username);
 			model.put("tt","注册成功" );
 			return "regsuccess";

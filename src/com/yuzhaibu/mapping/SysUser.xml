@@ -18,5 +18,29 @@
 	<select id="findSysUserByLoginNameAndPassword" parameterType="java.util.Map" resultMap="SysUserMap">
 		select ID,LoginName,Password,CreateTime from sysuser where LoginName = #{username} and Password = #{password}
 	</select>
+	
+	<select id="queryList" parameterType="com.yuzhaibu.entity.bops.query.BopsAdminQuery" resultMap="SysUserMap">
+		select 
+		ID,
+		LoginName,
+		Password,
+		CreateTime
+		from sysuser 
+		where ID != 0
+		<if test="LoginName!=null and LoginName!=''">
+			and LoginName = #{LoginName}
+		</if>
+		order by ID asc
+		limit #{beginIndex},#{pageSize}
+	</select>
+	
+	<select id="queryListCount" parameterType="com.yuzhaibu.entity.bops.query.BopsAdminQuery" resultType="int">
+		select count(1)
+		from sysuser 
+		where ID != 0
+		<if test="LoginName!=null and LoginName!=''">
+			and LoginName = #{LoginName}
+		</if>
+	</select>
 
 </mapper>

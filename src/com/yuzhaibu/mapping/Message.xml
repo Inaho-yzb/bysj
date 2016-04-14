@@ -121,4 +121,27 @@
 			and m.createime <![CDATA[<=date_format(#{EndCreateTime},'%Y-%m-%d')]]>
 		</if>
 	</select>
+	
+	<update id="authenMes" parameterType="java.util.Map">
+		update message
+		set 
+		mes_status = #{status},
+		audittime = now()
+		where 
+		mes_id = #{mesid}
+	</update>
+	
+	<delete id="deleteMes" parameterType="int">
+		delete from message
+		where mes_id = #{mesid}
+	</delete>
+	
+	<delete id="deleteMesByItemIdList" parameterType="java.util.List" >
+		delete from message
+		where mes_itemid in (
+		<foreach collection="list" item="item" index="index" separator="," >  
+        	#{item}
+    	</foreach>
+		)
+	</delete>
 </mapper>

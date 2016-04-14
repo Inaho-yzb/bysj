@@ -72,4 +72,13 @@
 		delete from fav where item_id = #{itemid} and setfavuserid = #{favUserId}
 	</delete>
 	
+	 <delete id="deleteFavByItemidList" parameterType="java.util.List">
+  	 	delete from fav 
+  	 	where item_id in(
+  	 	<foreach collection="list" item="item" index="index" separator="," >  
+        	#{item}
+    	</foreach>
+  	 	)
+  	 </delete>
+	
 </mapper>

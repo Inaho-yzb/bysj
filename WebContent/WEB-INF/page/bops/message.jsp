@@ -2,8 +2,9 @@
     pageEncoding="utf-8"%>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
  <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+ <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@include file="header.jsp" %>
-
+<script type="text/javascript" src="/js/bops/message.js"></script>
 <div class="searchForm">
 	<form action="/bops/message.htm" method="post" id="scform">
 		<table>
@@ -112,9 +113,16 @@
 										未通过
 									</c:otherwise>
 								</c:choose></td>
-							<td>${q.createtime}</td>
-							<td>${q.audittime}</td>
-							<td><a href="javascript:void(0)" id="deleteitem"onclick="deleteuser(${q.mes_id})">删除</a></td>
+							<td><fmt:formatDate value="${q.createtime}"
+									pattern="yyyy-MM-dd  HH:mm:ss" /></td>
+							<td><fmt:formatDate value="${q.audittime}"
+									pattern="yyyy-MM-dd  HH:mm:ss" /></td>
+							<td>
+								<a href="javascript:void(0)" id="deleteitem"onclick="deletemessage(${q.mes_id})">删除</a>
+									<c:if test="${q.mes_status==0}">
+										<a href="javascript:void(0)" id="deleteitem"onclick="authen(${q.mes_id})">审核</a>
+									</c:if>
+							</td>
 						</tr>
 					</c:forEach>
 				</c:when>
@@ -127,6 +135,7 @@
 		</tbody>
 	</table>
 </div>
+
 <%@include file="pg.jsp" %>
 
 

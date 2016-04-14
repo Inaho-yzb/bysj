@@ -3,7 +3,7 @@ $(function(){
 		
 		$("#addtofav").bind("click",function(){
 			$.ajax({
-				url:"ajaxaddtofav.htm",
+				url:"/ajaxaddtofav.htm",
 				type:"POST",
 				data:{"itemid":$("#itemid").val()},
 				success:function(data){

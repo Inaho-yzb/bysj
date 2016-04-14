@@ -2,7 +2,7 @@
     pageEncoding="utf-8"%>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
  <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
- 
+ <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@include file="header.jsp" %>
 	<script type="text/javascript" src="/js/bops/item.js" ></script>
 	<div class="searchForm">
@@ -173,7 +173,8 @@
 							</td>
 							<td>${q.nickname}</td>
 							<td>${q.discreption}</td>
-							<td>${q.itemcreatime}</td>
+							<td><fmt:formatDate value="${q.itemcreatime}"
+									pattern="yyyy-MM-dd  HH:mm:ss" /></td>
 							<td>
 								<c:choose>
 									<c:when test="${q.sellstatus==0}">

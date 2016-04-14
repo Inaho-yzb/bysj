@@ -139,4 +139,11 @@
 			and u.authen = #{Authen}
 		</if>
     </select>
+    
+    <delete id="deleteUser" parameterType="int">
+    	delete from user_normal
+    	where usernormal_id = #{userid}
+    </delete>
+    
+   
  </mapper>  

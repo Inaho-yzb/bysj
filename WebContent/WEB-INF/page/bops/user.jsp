@@ -2,6 +2,7 @@
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@include file="header.jsp"%>
 
 <script type="text/javascript" src="/js/bops/user.js"></script>
@@ -132,7 +133,8 @@
 								</c:choose></td>
 							<td>${q.levexp}</td>
 							<td>${q.itemcount}</td>
-							<td>${q.usernormalcreatime}</td>
+							<td><fmt:formatDate value="${q.usernormalcreatime}"
+									pattern="yyyy-MM-dd  HH:mm:ss" /></td>
 							<td><a href="javascript:void(0)" id="deleteitem"onclick="deleteuser(${q.usernormal_id})">删除</a></td>
 						</tr>
 					</c:forEach>

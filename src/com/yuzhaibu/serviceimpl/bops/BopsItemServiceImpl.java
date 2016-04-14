@@ -69,6 +69,7 @@ public class BopsItemServiceImpl extends BaseService implements BopsItemService 
 					return 1;
 				}catch(Exception e){
 					e.printStackTrace();
+					status.setRollbackOnly();
 					log.error(e.getMessage());
 					return -1;
 				}

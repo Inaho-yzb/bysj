@@ -38,4 +38,6 @@ public interface ReportDao {
 	 */
 	List<Report> queryList(BopsReportQuery query);
 
+	Integer deleteReportByItemidList(List<Integer> itemIdList);
+
 }

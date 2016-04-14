@@ -1,6 +1,8 @@
 package com.yuzhaibu.serviceimpl.bops;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +25,17 @@ public class BopsMessageServiceImpl implements BopsMessageService {
 			query.setData(itemList);
 			query.setTotalCount(pageCount);
 		}
+	}
+	@Override
+	public Integer authenMes(Integer mesid,Integer status) {
+		Map map = new HashMap();
+		map.put("mesid", mesid);
+		map.put("status", status);
+		return messageDao.authenMes(map);
+	}
+	@Override
+	public Integer deleteMes(Integer mesid) {
+		return messageDao.deleteMes(mesid);
 	}
 	
 }

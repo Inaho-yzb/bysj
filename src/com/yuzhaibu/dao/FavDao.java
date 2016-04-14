@@ -49,4 +49,11 @@ public interface FavDao {
 	 */
 	Integer deleteFav(Fav fav);
 
+	/**
+	 *	批量删除物品收藏
+	 * @param itemIdList
+	 * @return
+	 */
+	Integer deleteFavByItemidList(List<Integer> itemIdList);
+
 }

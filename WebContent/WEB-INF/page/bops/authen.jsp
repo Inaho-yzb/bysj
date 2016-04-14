@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-  <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@include file="header.jsp" %>
 
+<script type="text/javascript" src="/js/bops/authen.js"></script>
 <div class="searchForm">
 	<form action="/bops/authen.htm" method="post" id="scform">
 		<table>
@@ -81,10 +83,11 @@
 							<td>${q.ID}</td>
 							<td>${q.authenName}</td>
 							<td>${q.idCode}</td>
-							<td>查看</td>
+							<td><a href="javascript:void(0)" onclick="checkauthenimg(${q.ID})">查看</a></td>
 							<td>${q.userId}</td>
 							<td>${q.userNickName}</td>
-							<td>${q.createTime}</td>
+							<td><fmt:formatDate value="${q.createTime}"
+									pattern="yyyy-MM-dd  HH:mm:ss" /></td>
 							<td><c:choose>
 									<c:when test="${q.status==0}">
 										待审核
@@ -96,9 +99,15 @@
 										未通过
 									</c:otherwise>
 								</c:choose></td>
-							<td>${q.auditTime}</td>
+							<td><fmt:formatDate value="${q.auditTime}"
+									pattern="yyyy-MM-dd  HH:mm:ss" /></td>
 							<td>${q.auditSysUserName}</td>
-							<td><a href="javascript:void(0)" id="deleteitem"onclick="deleteAuthen(${q.ID})">删除</a></td>
+							<td>
+							<c:if test="${q.status==0}">
+								<a href="javascript:void(0)" id="deleteitem" onclick="auditUser(${q.ID},${q.userId})">审核</a>
+							</c:if>
+								<a href="javascript:void(0)" id="deleteitem" onclick="deleteAuthen(${q.ID})">删除</a></td>
+							<td style="display:none"><div style="width:500px;height:500px;margin-left:auto;margin-right:auto;line-height:500px"><img id="au${q.ID}" src="${q.image}" width="500" height="500" ></div></td>
 						</tr>
 					</c:forEach>
 				</c:when>

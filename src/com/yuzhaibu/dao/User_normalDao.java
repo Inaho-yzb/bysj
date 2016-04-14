@@ -73,4 +73,11 @@ public interface User_normalDao {
 	List<User_normal> queryList(BopsUserQuery query);
 
 	Integer queryListCount(BopsUserQuery query);
+
+	/**
+	 * 删除用户
+	 * @param userid
+	 * @return
+	 */
+	Integer deleteUser(Integer userid);
 }
