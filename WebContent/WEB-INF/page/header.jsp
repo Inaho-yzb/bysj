@@ -48,14 +48,14 @@
 
 		<div class="navbar-custop2">
 			<div class="container">
-
-
+				<div style="float:left">
+					<img alt="logo" src="/images/logo.png">
+				</div>
+					
 				<nav class="navbar navbar-default navbar-custom navbar-custom2">
 					<ul class="nav navbar-nav">
 						<li><a href="${pageContext.request.contextPath}/index.htm">首页</a></li>
-						<li><a href="1.htm">随便逛逛</a></li>
-						<li><a href="2.htm">低价商品</a></li>
-						<li><a href="3.htm">热门物品</a></li>
+						<li><a href="/random.htm">随便逛逛</a></li>
 					</ul>
 
 

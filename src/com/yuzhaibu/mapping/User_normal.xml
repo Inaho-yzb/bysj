@@ -145,5 +145,9 @@
     	where usernormal_id = #{userid}
     </delete>
     
+    <insert id="addForget" parameterType="java.util.Map">
+    	insert into forgetpwd(UserId,VCode,CreateTime) 
+    	values(#{id},#{str},now())
+    </insert>
    
  </mapper>  

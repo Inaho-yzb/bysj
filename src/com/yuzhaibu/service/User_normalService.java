@@ -42,4 +42,7 @@ public interface User_normalService {
 	 * @return
 	 */
 	Integer editHeadImg(Map map);
+
+	
+	Integer addForget(Integer id, String str);
 }

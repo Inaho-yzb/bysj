@@ -147,5 +147,7 @@ public interface ItemDao {
 	List<Integer> findItemIdListByUserId(Integer userid);
 
 	Integer deleteUserItem(Integer userid);
+
+	List<Integer> findAllItemCount();
 	
 }

@@ -311,4 +311,9 @@ public class ItemServiceImpl extends BaseManager implements ItemService {
 		return itemDao.changeItemStatus(map);
 	}
 
+	@Override
+	public List<Integer> findAllItemCount() {
+		return itemDao.findAllItemCount();
+	}
+
 }

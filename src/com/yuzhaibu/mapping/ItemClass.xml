@@ -35,4 +35,22 @@
 		select * from itemclass where itemclass_fatherid !=0;
 	</select>
 	
+	<select id="findAllItemClass" resultType="com.yuzhaibu.entity.ItemClass">
+		select 
+		c1.itemclass_id,
+		c1.itemclass_name,
+		c1.itemclass_fatherid,
+		(select c2.itemclass_name FROM itemclass c2 where c2.itemclass_id = c1.itemclass_fatherid)as fatherclass
+		from itemclass c1 
+	</select>
+	
+	<update id="updateClass" parameterType="java.util.Map">
+		update itemclass
+		set
+		itemclass_name = #{className},
+		itemclass_fatherid = #{fid}
+		where
+		itemclass_id = #{id}
+	</update>
+	
 </mapper>

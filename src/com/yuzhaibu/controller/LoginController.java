@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.yuzhaibu.entity.Mail;
 import com.yuzhaibu.entity.User_normal;
 import com.yuzhaibu.service.User_normalService;
 import com.yuzhaibu.util.AjaxResult;
+import com.yuzhaibu.util.MailUtil;
 import com.yuzhaibu.util.StringUtils;
 
 @Controller
@@ -44,7 +46,7 @@ public class LoginController implements Serializable{
 	
 	@RequestMapping("/login/checkLogin")
 	public String login(String username,String pwd,HttpSession session,HttpServletRequest request,ModelMap model){
-		User_normal user = user_normalService.findUserByUsernameAndPwd(username, pwd);
+		User_normal user = user_normalService.findUserByUsernameAndPwd(username, StringUtils.string2MD5(pwd));
 		
 		if(user!=null){
 			session.setAttribute("username", username);
@@ -114,8 +116,9 @@ public class LoginController implements Serializable{
 		User_normal user = new User_normal();
 		user.setUsername(username);
 		user.setNickname(nickname);
-		user.setPwd(pwd);
+		user.setPwd(StringUtils.string2MD5(pwd));
 		user.setEmail(email);
+		user.setHeadimg("/images/defualthead.jpg");
 		
 		if(user_normalService.regUser(user)>0){
 			User_normal us = user_normalService.findUserByUsername(username);
@@ -140,6 +143,49 @@ public class LoginController implements Serializable{
 			result.setErrorCode(0);
 		}
 		return result;
+	}
+	
+	@RequestMapping(value=("/login/forgotpassword"),method=RequestMethod.GET)
+	public String toForget(HttpServletRequest request){
+		return "forgetpassword";
+	}
+	
+	@RequestMapping(value=("/login/forgotpassword"),method=RequestMethod.POST)
+	public String forget(HttpServletRequest request,ModelMap model){
+		String username = request.getParameter("username");
+		if(username!=null){
+			User_normal user = user_normalService.findUserByUsername(username);
+			if(user!=null){
+				Integer id = user.getUsernormal_id();
+				String str = StringUtils.getRandomMD5Str();
+				user_normalService.addForget(id,str);
+				Mail mail = new Mail();
+				mail.setReceiver(user.getEmail());
+				mail.setMessage("您的重置密码链接：http://localhost/login/resetpwd.htm?vcode="+str+"&uid="+id);
+				if(MailUtil.send(mail)){
+					model.put("successMes","已发送重置邮件！");
+					model.put("returnurl", "/index.htm");
+					model.put("returnname", "首页");
+					return "success";
+				}else{
+					model.put("errorMes", "服务器出错！");
+					model.put("returnurl", "/login/forgotpassword");
+					model.put("returnname", "忘记密码");
+					return "fail";
+				}
+			}else{
+				model.put("errorMes", "用户名不存在");
+				model.put("returnurl", "/login/forgotpassword");
+				model.put("returnname", "忘记密码");
+				return "fail";
+			}
+		}else{
+			model.put("errorMes", "用户名不能为空");
+			model.put("returnurl", "/login/forgotpassword");
+			model.put("returnname", "忘记密码");
+			return "fail";
+		}
+		
 	}
 	
 }

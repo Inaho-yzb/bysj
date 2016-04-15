@@ -399,4 +399,8 @@
 		where sellerid = #{userid}
 	</delete>
 	
+	<select id="findAllItemCount" resultType="int">
+		select itemid from item
+	</select>
+	
 </mapper>

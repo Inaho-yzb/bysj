@@ -106,5 +106,7 @@ public interface ItemService {
 	 * @return
 	 */
 	int changeItemStatus(Integer itemid, Integer status, Integer userid);
+
+	List<Integer> findAllItemCount();
 	
 }

@@ -145,7 +145,6 @@
 	}
 	
 	function doOk(){
-		var $o = $(this);
 		var v;
 		if(options.type=="input"){
 			v = $.trim($("#popinput").val());
@@ -154,7 +153,7 @@
 		}
 		
 		var r = true;
-		res = options.onOk(v,$o);
+		res = options.onOk(v);
 		if(res!=undefined){
 			r = res;
 		}

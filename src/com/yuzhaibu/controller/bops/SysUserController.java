@@ -41,7 +41,7 @@ public class SysUserController {
 			if(code.equals(verify.toUpperCase())){
 				String username = request.getParameter("username");
 				String password = request.getParameter("password");
-				SysUser user = sysUserService.loginSysUser(username,password);
+				SysUser user = sysUserService.loginSysUser(username,StringUtils.string2MD5(password));
 				if(user.getError()==null){
 					session.setAttribute("sysuser", user);
 					return "redirect:../bops/main.htm";
@@ -134,7 +134,7 @@ public class SysUserController {
 		if(!StringUtils.isBlank(username)&&!StringUtils.isBlank(password)&&user.getID()==1){
 			SysUser sysUser = new SysUser();
 			sysUser.setLoginName(username);
-			sysUser.setPassword(password);
+			sysUser.setPassword(StringUtils.string2MD5(password));
 			if(bopsAdminService.addNewAdmin(sysUser)!=0){
 				result.setErrorCode(0);
 			}else{

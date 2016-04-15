@@ -1,6 +1,7 @@
 package com.yuzhaibu.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.yuzhaibu.entity.ItemClass;
 
@@ -46,5 +47,13 @@ public interface ItemClassDao {
 	 * @return
 	 */
 	List<ItemClass> finAllChildClass();
+
+	/**
+	 * 查找所有类别
+	 * @return
+	 */
+	List<ItemClass> findAllItemClass();
+
+	Integer updateClass(Map map);
 	
 }

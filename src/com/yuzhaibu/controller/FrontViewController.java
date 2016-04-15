@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -91,6 +92,14 @@ public class FrontViewController implements Serializable{
 		model.put("keyword", keyword);
 		model.put("order", order);
 		return "search";
+	}
+	
+	@RequestMapping(value=("/random"))
+	public String random(HttpServletRequest request){
+		List<Integer> itemlist = itemService.findAllItemCount();
+		int count = new Random().nextInt(itemlist.size());
+		Integer id = itemlist.get(count);
+		return "redirect:/item.htm?id="+id;
 	}
 
 }

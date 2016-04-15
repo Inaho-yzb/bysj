@@ -52,7 +52,7 @@ $(function(){
 	});
 	
 	$(".btn-ok").click(function(){
-		if($("#nameerror").text()=="" && $("#pwderror").text()==""){
+		if($("#nameerror").text()=="" && $("#pwderror").text()=="" && $("#loginname").val()!="" && $("#password").val()!="" && $("#repassword").val()!=""){
 			$.ajax({
 				url:"/bops/addnewadmin.htm",
 				type:"POST",
@@ -72,4 +72,9 @@ $(function(){
 		
 	});
 	
+	$(".btn-reset").click(function(){
+		$("#loginname").val("");
+		$("#password").val("");
+		$("#repassword").val("");
+	});
 });

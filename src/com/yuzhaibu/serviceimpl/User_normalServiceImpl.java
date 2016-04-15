@@ -128,6 +128,15 @@ public class User_normalServiceImpl extends BaseManager implements User_normalSe
 		return user_normalDao.editUserHeadImg(resMap);
 		
 	}
+
+
+	@Override
+	public Integer addForget(Integer id, String str) {
+		Map map = new HashMap();
+		map.put("id", id);
+		map.put("str", str);
+		return user_normalDao.addForget(map);
+	}
 	
 	
 	

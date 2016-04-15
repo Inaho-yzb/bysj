@@ -327,7 +327,6 @@
 								<div>您已经认证！</div>
 							</c:when>
 							<c:when test="${usernormal.authen==0 }">
-							<a href="" class="btn btn-primary btn-lg">身份认证</a>
 							<div id="authenframe">
 								<table style="margin-top:20px;border-collapse:separate; border-spacing:10px;">
 									<tbody>

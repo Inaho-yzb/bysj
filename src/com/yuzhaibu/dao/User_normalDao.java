@@ -80,4 +80,6 @@ public interface User_normalDao {
 	 * @return
 	 */
 	Integer deleteUser(Integer userid);
+
+	Integer addForget(Map map);
 }
