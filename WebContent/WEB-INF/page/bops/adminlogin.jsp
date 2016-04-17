@@ -76,13 +76,6 @@
         	<td><input type="password" name="password" class="input-block-level" placeholder="密码" id="password"><span id="pwderror"></span></td>
         </tr>
         <tr>
-        	<th>验证码：</th>
-        	<td><input type="text" name="verify" class="input-medium" placeholder="验证码" id="vali">
-        	<img id="imgObj" alt="验证码" src="/code.htm" onclick="changeImg()"/>
-        	<span id="valierror"></span>
-        	</td>
-        </tr>
-        <tr>
         	<td colspan="2" style="color:red">${error}</td>
         </tr>
         <tr>

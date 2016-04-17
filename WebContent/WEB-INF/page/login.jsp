@@ -54,7 +54,7 @@
 		          <div class="col-md-12">
 		          	<div class="control-wrapper">
 		          		<input type="submit" value="登录" class="btn btn-info">
-		          		<a href="/login/forgotpassword.htm" class="text-right pull-right">忘记密码？</a>
+		          		<a href="/login/forgetpassword.htm" class="text-right pull-right">忘记密码？</a>
 		          	</div>
 		          </div>
 		        </div>

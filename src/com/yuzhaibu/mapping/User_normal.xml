@@ -149,5 +149,26 @@
     	insert into forgetpwd(UserId,VCode,CreateTime) 
     	values(#{id},#{str},now())
     </insert>
+    
+    <select id="findForget" parameterType="java.util.Map" resultType="int">
+    	select ID from forgetpwd
+    	where UserId = #{uid} and VCode = #{vcode}
+    </select>
+    
+    <update id="updatePwd" parameterType="java.util.Map">
+    	update user_normal
+    	set pwd = #{pwd}
+    	where usernormal_id = #{uid}
+    </update>
+    
+    <delete id="deleteForget" parameterType="java.util.Map">
+    	delete from forgetpwd
+    	where UserId = #{uid} and VCode = #{vcode}
+    </delete>
+    
+    <delete id="deleteForgetById" parameterType="int">
+    	delete from forgetpwd
+    	where UserId = #{id}
+    </delete>
    
  </mapper>  

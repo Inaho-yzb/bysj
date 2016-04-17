@@ -192,14 +192,14 @@ public class ItemServiceImpl extends BaseManager implements ItemService {
 						}
 						String changeName = StringUtils.changeImgFileName(multipartFile.getOriginalFilename(),
 								multipartFile.hashCode());
-						String destPath = "\\uploads\\itemimages\\" + DateUtils.dateToStrLong(new Date(), "yyyyMMdd") + "\\"
+						String destPath = "/uploads/itemimages/" + DateUtils.dateToStrLong(new Date(), "yyyyMMdd") + "/"
 								+ changeName;
 						try {
 							// 获取item中的上传输入流
 							BufferedInputStream bis = new BufferedInputStream(multipartFile.getInputStream());
 							// 创建一个文件输出流
 							BufferedOutputStream bos = new BufferedOutputStream(
-									new FileOutputStream(savePath + "\\" + changeName));
+									new FileOutputStream(savePath + "/" + changeName));
 							// 创建一个缓冲区
 							byte[] buffer = new byte[1024 * 8];
 							// 循环将缓冲输入流读入到缓冲区当中

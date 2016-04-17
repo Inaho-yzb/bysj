@@ -18,7 +18,7 @@ public class Mail implements Serializable {
 	  
 	    private String username = "wangkeweihutui@126.com"; // 账号  
 	  
-	    private String password = "w123456"; // 密码  
+	    private String password = "wangkewei123"; // 密码  
 	  
 	    private String subject = "重置密码";// 主题  
 	  

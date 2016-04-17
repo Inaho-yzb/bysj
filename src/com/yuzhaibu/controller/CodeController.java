@@ -28,6 +28,10 @@ public class CodeController {
             'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W',
             'X', 'Y', 'Z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
  
+    static{
+        System.setProperty("java.awt.headless", "true");
+    }
+    
     @RequestMapping("/code")
     public void getCode(HttpServletRequest req, HttpServletResponse resp)
             throws IOException {
@@ -45,7 +49,7 @@ public class CodeController {
         gd.fillRect(0, 0, width, height);
  
         // 创建字体，字体的大小应该根据图片的高度来定。
-        Font font = new Font("Fixedsys", Font.BOLD, fontHeight);
+        Font font = new Font("DejaVu Sans", Font.BOLD, fontHeight);
         // 设置字体。
         gd.setFont(font);
  
@@ -85,7 +89,6 @@ public class CodeController {
         }
         // 将四位数字的验证码保存到Session中。
         HttpSession session = req.getSession();
-        System.out.print(randomCode);
         session.setAttribute("code", randomCode.toString());
  
         // 禁止图像缓存。

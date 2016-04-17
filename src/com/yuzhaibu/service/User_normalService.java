@@ -45,4 +45,12 @@ public interface User_normalService {
 
 	
 	Integer addForget(Integer id, String str);
+
+	boolean findForget(String vCode, Integer uid);
+
+	Integer updatePwd(String pwd, Integer uid);
+
+	Integer deleteForget(String vcode, Integer uid);
+
+	Integer deleteForgetById(Integer id);
 }

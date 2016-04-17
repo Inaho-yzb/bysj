@@ -8,7 +8,7 @@
 <!DOCTYPE>
 <html>
 <head>
-	<title>登录-校园跳蚤街</title>
+	<title>忘记密码-校园跳蚤街</title>
 	<link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css">
 	<link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css">
 	<link href="../css/bootstrap-theme.min.css" rel="stylesheet" type="text/css">
@@ -21,7 +21,7 @@
 	<div class="container">
 		<div class="col-md-12">
 			<h1 class="margin-bottom-15">找回密码</h1>
-			<form class="form-horizontal templatemo-container templatemo-login-form-1 margin-bottom-30" role="form" action="forgetpassword.htm" method="post">				
+			<form class="form-horizontal templatemo-container templatemo-login-form-1 margin-bottom-30" role="form" action="/login/forgetpassword.htm" method="post">				
 		        <div class="form-group">
 		          <div class="col-xs-12">		            
 		            <div class="control-wrapper">

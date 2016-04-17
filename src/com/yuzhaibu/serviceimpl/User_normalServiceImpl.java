@@ -85,14 +85,14 @@ public class User_normalServiceImpl extends BaseManager implements User_normalSe
 				}
 				String changeName = StringUtils.changeHeadImgFileName(multipartFile.getOriginalFilename(),
 						multipartFile.hashCode());
-				String destPath = "uploads\\userheadimg\\" + DateUtils.dateToStrLong(new Date(), "yyyyMMdd") + "\\"
+				String destPath = "/uploads/userheadimg/" + DateUtils.dateToStrLong(new Date(), "yyyyMMdd") + "/"
 						+ changeName;
 				try {
 					// 获取item中的上传输入流
 					BufferedInputStream bis = new BufferedInputStream(multipartFile.getInputStream());
 					// 创建一个文件输出流
 					BufferedOutputStream bos = new BufferedOutputStream(
-							new FileOutputStream(savePath + "\\" + changeName));
+							new FileOutputStream(savePath + "/" + changeName));
 					// 创建一个缓冲区
 					byte[] buffer = new byte[1024 * 8];
 					// 循环将缓冲输入流读入到缓冲区当中
@@ -136,6 +136,43 @@ public class User_normalServiceImpl extends BaseManager implements User_normalSe
 		map.put("id", id);
 		map.put("str", str);
 		return user_normalDao.addForget(map);
+	}
+
+
+	@Override
+	public boolean findForget(String vCode, Integer uid) {
+		Map map = new HashMap();
+		map.put("vcode", vCode);
+		map.put("uid", uid);
+		if(user_normalDao.findForget(map)!=0){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+
+	@Override
+	public Integer updatePwd(String pwd, Integer uid) {
+		Map map = new HashMap();
+		map.put("pwd", StringUtils.string2MD5(pwd));
+		map.put("uid", uid);
+		return user_normalDao.updatePwd(map);
+	}
+
+
+	@Override
+	public Integer deleteForget(String vcode, Integer uid) {
+		Map map = new HashMap();
+		map.put("vcode", vcode);
+		map.put("uid", uid);
+		return user_normalDao.deleteForget(map);
+	}
+
+
+	@Override
+	public Integer deleteForgetById(Integer id) {
+		return user_normalDao.deleteForgetById(id);
 	}
 	
 	

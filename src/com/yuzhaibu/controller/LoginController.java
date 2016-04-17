@@ -145,12 +145,12 @@ public class LoginController implements Serializable{
 		return result;
 	}
 	
-	@RequestMapping(value=("/login/forgotpassword"),method=RequestMethod.GET)
+	@RequestMapping(value=("/login/forgetpassword"),method=RequestMethod.GET)
 	public String toForget(HttpServletRequest request){
 		return "forgetpassword";
 	}
 	
-	@RequestMapping(value=("/login/forgotpassword"),method=RequestMethod.POST)
+	@RequestMapping(value=("/login/forgetpassword"),method=RequestMethod.POST)
 	public String forget(HttpServletRequest request,ModelMap model){
 		String username = request.getParameter("username");
 		if(username!=null){
@@ -158,10 +158,11 @@ public class LoginController implements Serializable{
 			if(user!=null){
 				Integer id = user.getUsernormal_id();
 				String str = StringUtils.getRandomMD5Str();
+				user_normalService.deleteForgetById(id);
 				user_normalService.addForget(id,str);
 				Mail mail = new Mail();
 				mail.setReceiver(user.getEmail());
-				mail.setMessage("您的重置密码链接：http://localhost/login/resetpwd.htm?vcode="+str+"&uid="+id);
+				mail.setMessage("您的重置密码链接：http://bysj.yuzhaibu.com/login/resetpwd.htm?vcode="+str+"&uid="+id);
 				if(MailUtil.send(mail)){
 					model.put("successMes","已发送重置邮件！");
 					model.put("returnurl", "/index.htm");
@@ -169,20 +170,67 @@ public class LoginController implements Serializable{
 					return "success";
 				}else{
 					model.put("errorMes", "服务器出错！");
-					model.put("returnurl", "/login/forgotpassword");
+					model.put("returnurl", "/login/forgetpassword.htm");
 					model.put("returnname", "忘记密码");
 					return "fail";
 				}
 			}else{
 				model.put("errorMes", "用户名不存在");
-				model.put("returnurl", "/login/forgotpassword");
+				model.put("returnurl", "/login/forgetpassword.htm");
 				model.put("returnname", "忘记密码");
 				return "fail";
 			}
 		}else{
 			model.put("errorMes", "用户名不能为空");
-			model.put("returnurl", "/login/forgotpassword");
+			model.put("returnurl", "/login/forgetpassword.htm");
 			model.put("returnname", "忘记密码");
+			return "fail";
+		}
+		
+	}
+	
+	@RequestMapping(value=("/login/resetpwd"),method=RequestMethod.GET)
+	public String toResetPwd(HttpServletRequest request,ModelMap model){
+		String vCode = request.getParameter("vcode");
+		Integer uid = Integer.valueOf(request.getParameter("uid"));
+		
+		if(user_normalService.findForget(vCode,uid)){
+			model.put("vcode", vCode);
+			model.put("uid", uid);
+			return "resetpwd";
+		}else{
+			model.put("errorMes", "系统错误");
+			model.put("returnurl", "/index.htm");
+			model.put("returnname", "首页");
+			return "fail";
+		}
+		
+	}
+	
+	@RequestMapping(value=("/login/resetpwd"),method=RequestMethod.POST)
+	public String resetPwd(HttpServletRequest request,ModelMap model){
+		String pwd = request.getParameter("pwd");
+		String repwd = request.getParameter("repwd");
+		String vcode = request.getParameter("vcode");
+		Integer uid = Integer.valueOf(request.getParameter("uid"));
+		if(pwd!=null && repwd!=null && (pwd.equals(repwd))){
+			if(user_normalService.updatePwd(pwd,uid)!=0){
+				user_normalService.deleteForget(vcode,uid);
+				model.put("successMes","密码修改成功！");
+				model.put("returnurl", "/login/toLogin.htm");
+				model.put("returnname", "登录");
+				return "success";
+			}else{
+				model.put("errorMes", "系统错误！");
+				model.put("returnurl", "/index.htm");
+				model.put("returnname", "首页");
+				return "fail";
+			}
+			
+		}else{
+			model.put("errorMes", "请填写正确密码！");
+			model.put("returnurl", "/login/resetpwd.htm?vcode="+vcode+"&uid="+uid);
+			model.put("returnname", "重置密码");
 			return "fail";
 		}
 		

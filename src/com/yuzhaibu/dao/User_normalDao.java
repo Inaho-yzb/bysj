@@ -82,4 +82,12 @@ public interface User_normalDao {
 	Integer deleteUser(Integer userid);
 
 	Integer addForget(Map map);
+
+	int findForget(Map map);
+
+	Integer updatePwd(Map map);
+
+	Integer deleteForget(Map map);
+
+	Integer deleteForgetById(Integer id);
 }

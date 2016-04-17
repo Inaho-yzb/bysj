@@ -36,9 +36,6 @@ public class SysUserController {
 	@RequestMapping(value=("/bops/adminlogin"),method=RequestMethod.POST)
 	public String Login(HttpServletRequest request,HttpSession session,ModelMap model){
 		if(session.getAttribute("sysuser")==null){
-			String verify = request.getParameter("verify");
-			String code = (String) session.getAttribute("code");
-			if(code.equals(verify.toUpperCase())){
 				String username = request.getParameter("username");
 				String password = request.getParameter("password");
 				SysUser user = sysUserService.loginSysUser(username,StringUtils.string2MD5(password));
@@ -49,10 +46,6 @@ public class SysUserController {
 					model.put("error", user.getError());
 					return "/bops/adminlogin";
 				}
-			}else{
-				model.put("error", "验证码错误");
-				return "/bops/adminlogin";
-			}
 		}else{
 			return "redirect:../bops/main.htm";
 		}

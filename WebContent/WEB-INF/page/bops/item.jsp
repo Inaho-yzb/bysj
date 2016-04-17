@@ -152,7 +152,7 @@
 							<td>${q.originprice}</td>
 							<td>
 								<c:choose>
-									<c:when test="${q.color==10}">
+									<c:when test="${q.color=='10'}">
 										全新
 									</c:when>
 									<c:otherwise>
