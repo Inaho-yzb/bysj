@@ -22,7 +22,7 @@
 		mes_id,
 		mes_itemid,
 		itemname as mes_itemname,
-		itemmainimg as mes_itemmmainimg,
+		itemmainimg as mes_itemmainimg,
 		mes_levuserid,
 		u.username as mes_levusername,
 		mes_content 

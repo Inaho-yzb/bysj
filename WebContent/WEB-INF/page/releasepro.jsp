@@ -106,7 +106,6 @@
 							<div class="input-group">
 								 <select class="form-control" id="itemuse">
 								 	<option value="10">全新</option>
-         							<option value="9.9">9.9</option>
          							<option value="9">9</option>
          							<option value="8">8</option>
          							<option value="7">7</option>

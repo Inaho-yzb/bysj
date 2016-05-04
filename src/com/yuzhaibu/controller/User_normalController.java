@@ -1,25 +1,16 @@
 package com.yuzhaibu.controller;
 
-import java.awt.event.ItemListener;
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.fileupload.FileUploadException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,10 +19,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.yuzhaibu.entity.Fav;
 import com.yuzhaibu.entity.Item;
 import com.yuzhaibu.entity.ItemClass;
-import com.yuzhaibu.entity.Message;
 import com.yuzhaibu.entity.UserAuthen;
 import com.yuzhaibu.entity.User_normal;
 import com.yuzhaibu.service.AuthenService;
@@ -44,7 +33,6 @@ import com.yuzhaibu.util.AjaxResult;
 import com.yuzhaibu.util.DateUtils;
 import com.yuzhaibu.util.StringUtils;
 
-import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 @Controller

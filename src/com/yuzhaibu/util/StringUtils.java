@@ -71,6 +71,7 @@ public class StringUtils {
 	    }
 
 	public static String getRandomMD5Str() {
+		//26个大小写英文字符数组
 		char[] chararray = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',
 				's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
 				'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '0', '1', '2', '3', '4', '5', '6', '7',
@@ -80,7 +81,9 @@ public class StringUtils {
 			Random random = new Random();
 			int it = random.nextInt(62);
 			byteArray[i] = (byte) chararray[it];
-		}
+		}//生成20个随机字符
+		
+		//MD5加密算法
 		MessageDigest md5 = null;
 		try {
 			md5 = MessageDigest.getInstance("MD5");
